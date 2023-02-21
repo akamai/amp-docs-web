@@ -4,4 +4,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum lectu
 
 Aenean quis urna vitae sem ultricies fermentum. Suspendisse ante tellus, auctor nec molestie ac, facilisis et lacus. Donec finibus id dui eget fringilla. Duis lectus nisi, pellentesque non magna sit amet, posuere imperdiet ligula. Proin non dignissim nunc. Ut at ultricies diam. Nunc mollis elementum nibh, non ornare justo euismod ac. Quisque eget viverra lacus. Phasellus sollicitudin sem vel odio semper, eget malesuada tellus tincidunt.
 
-image::home-o.svg[align="center"]
+image::home.png[align="center"]
