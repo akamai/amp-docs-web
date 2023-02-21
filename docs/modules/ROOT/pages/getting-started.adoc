@@ -1,0 +1,25 @@
+= Get Started
+
+Akamai AMP SKDs make it easy to add video playback functionality to your iOS and tvOS projects. With an out-of-the-box solution, you can have playback in your app in no time. We also support many of the playback add ons on the market, such as analytics, advertaisement (both client-side and server-side), VR, and more.
+
+== Features
+
+* [*] Support of multiple player instances
+* [*] Support for DVR and seeking
+* [*] Support of fullscreen mode and auto rotation in such mode
+* [*] AES content encryption
+* [*] Token authentication support
+* [*] Adaptive bitrate
+* [*] Hardware-accelerated playback
+* [*] Support of Media Analytics from Akamai Media Player configuration files
+* [*] Support for WebVTT closed captions
+* [*] Support for progressive media downloads (MP4 format) for advertisement
+* [*] Support for Apple Airplay
+* [*] Support fo ChromeCast
+
+== Third party plugins
+
+* [*] Google DoubleClick for Published (DFP) – Advertisement
+* [*] Google ChromeCast device
+* [*] Supports almost any iOS device in the market running iOS 7.0 minimum
+* [*] Supports closed captioning in compliance with the rules set by the Federal Communications Commission (FCC) for Internet video.
