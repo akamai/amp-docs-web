@@ -1,0 +1,96 @@
+---
+layout: techdocs-web
+title: Handling Errors
+categories: [core]
+position: 14
+---
+
+This tutorial will show you the ways you can go about handling AMP errors.
+
+You can handle AMP error in two main ways:
+
+* Using the <a href='https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/akamai.amp.TransformType.html'>akamai.amp.TransformType.ERROR</a> transform *(Recomended)*
+* Using the <a href='https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/akamai.amp.Events.html'>akamai.amp.Events.ERROR</a> event
+</br>
+<br>
+
+To handle AMP errors using transforms, you need to add a transform to amp with type `TransformType.ERROR`:
+
+<pre class='prettyprint'>
+akamai.amp.AMP.create("amp", config)
+    .then(function (player) {
+        amp = player;
+        amp.addTransform(akamai.amp.TransformType.ERROR, function (error) {
+            console.log("An error just happened")
+            return error;
+        });
+    });
+</pre>
+
+By using the addTransform method we have access to the argument error. The argument error can be used to identify the source of the error and react accordingly. The next example handles an error occured when the player doesn't support the provided media file.
+
+<pre class='prettyprint'>
+akamai.amp.AMP.create("amp", config)
+    .then(function (player) {
+        amp = player;
+        amp.addTransform(akamai.amp.TransformType.ERROR, function (error) {
+            if (error.code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED) {
+                var media = Object.assign({}, amp.media);
+                media.src = "https://mdtp-a.akamaihd.net/customers/akamai/video/VfE.mp4"; // A fallback video for this example.
+                amp.media = media;
+                return; // By returning null we let the player know the error was handled.
+            }
+            return error;
+        });
+    });
+</pre>
+
+The possible values for `error.code` can be known by printing the object `error`. In the next example `error.code` is 4 what means that the error is a `MEDIA_ERR_SRC_NOT_SUPPORTED`.
+
+<pre class='prettyprint'>
+[object Error] {
+  code: 4,
+  message: "Error",
+  metadata: [object MediaError] {
+    code: 4,
+    MEDIA_ERR_ABORTED: 1,
+    MEDIA_ERR_DECODE: 3,
+    MEDIA_ERR_ENCRYPTED: 5,
+    MEDIA_ERR_NETWORK: 2,
+    MEDIA_ERR_SRC_NOT_SUPPORTED: 4
+  }
+}
+</pre>
+
+A seccond way that AMP errors can be handled is by listening for the player event ERROR. Notice that we're accessing the `player` attribute `error`. The attribute `error` holds the last error occurred.
+
+<pre class='prettyprint'>
+akamai.amp.AMP.create("amp", config, (event) => {
+        amp = event.player;
+        amp.addEventListener(akamai.amp.Events.ERROR, (event) => {
+            console.log("An error just happened.");
+            console.log( amp.error );
+        });
+    });
+</pre>
+
+Even though it is possible to handle errors by adding a listener for the Events.ERROR event, take in consideration the execution order of both the transform and the listener for Events.ERROR. The transform will be executed first and if the error is not handled by the transform, then the listener for Events.ERROR will be called. In the next example this interaction is shown. In the example the message "*Oh no we have no video.*" will never be printed instead the message "*Don't worry. I can fix it!*" will be printed since we have properly managed the error using a transform.
+
+<pre class='prettyprint'>
+akamai.amp.AMP.create("amp", config, (event) => {
+        amp = event.player;
+        amp.addEventListener(akamai.amp.Events.ERROR, (event) => {
+            console.log('Oh no we have no video.');
+        });
+        amp.addTransform(akamai.amp.TransformType.ERROR, function (error) {
+            if (error.code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED) {
+                console.log('Don\'t worry. I can fix it!')
+                var media = Object.assign({}, amp.media);
+                media.src = "https://mdtp-a.akamaihd.net/customers/akamai/video/VfE.mp4"; // A fallback video for this example.
+                amp.media = media;
+                return; // By returning null we let the player know the error was handled.
+            }
+            return error;
+        });
+    });
+</pre>

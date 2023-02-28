@@ -1,0 +1,59 @@
+= Autoplay
+:categories: ["core"]
+:page-layout: techdocs-web
+:position: 4
+
+Basic autoplay functionality can be enabled via the player configuration object:
+
+[,javascript]
+----
+var config = {
+	autoplay: true
+};
+var amp = akamai.amp.AMP.create("amp", config);
+----
+
+In this configuration the player will autoplay the media only on platforms that support unmuted playback.
+If the player encounters a platform that cannot autoplay, but an `autoplay` value of `true` is present in the
+config, an `autoplayblocked` event is dispatched:
+
+[,javascript]
+----
+amp.addEventListener("autoplayblocked", function (event) {
+	var mode = event.detail.mode;
+	var threshold = event.detail.threshold;
+	console.log("Attemted autoplay '" + mode + "', but the browser's threshold is '" + threshold + "'")
+})
+----
+
+The player can be configured to attempt muted, or muted inline, playback by providing an `autoplayPolicy`:
+
+[,javascript]
+----
+var config = {
+	autoplay: true,
+	autoplayPolicy: "muted"
+};
+var amp = akamai.amp.AMP.create("amp", config);
+----
+
+The values for `autoplayPolicy` are defined in the {@link akamai.amp.AutoplayPolicy} class and their values
+represent the following functionality:
+
+* `"default"`: The default `autoplayPolicy`. The player will emulate the browser's default behavior
+for autoplay, i.e. the player will only autoplay on platforms that support unrestricted playback.
+* `"muted"`: Player will mute on platforms that only allow muted playback.
+* `"none"`: The player will not attempt to detect autoplay.
+
+By default the player will run its autoplay detection routine the first time a player is created
+if the `autoplayPolicy` value is not `none`. In certain scenarios it may be beneficial to
+run the detection before creating the player. This can be achieved by explicitly calling
+{@link akamai.amp.AutoplayThreshold#init}:
+
+[,javascript]
+----
+akamai.amp.AutoplayThreshold.init()
+	.then(function (threshold) {
+		console.log("The browser's autoplay threshold is", threshold);
+	});
+----

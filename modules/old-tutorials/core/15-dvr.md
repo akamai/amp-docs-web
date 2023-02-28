@@ -1,0 +1,58 @@
+
+This tutorial shows how to properly configure DVR playback on AMP.
+
+1. Pre-requisites
+2. Enabling DVR mode
+3. Media Temporal Types
+4. Calculating UTC timecode
+
+#### 1. Pre-requisites
+In order to leverage player's API the stream must have a valid sliding window regardless the format HLS or Dash, most of the live streams do not have this feature enabled by default and may depend on the CDN capabilities.    
+
+#### 2. Enabling DVR mode
+AMP does provide a player API to properly handle the DVR stream playback, progress on the sliding window and a featured player UI. 
+
+In order to enable DVR mode on AMP the `"temporalType"` attribute on the media configuration object should be set to `"dvr"` as follow.
+
+```javascript
+var config = {
+  media: {
+	    guid: "Video 1",
+		title: "Windowed DVR",
+		temporalType: "dvr",
+		source: [{
+			src: "http://mcqalivesmdvr1-f.akamaihd.net/i/mav001_1@22121/index_800_av-p.m3u8?sd=10&dw=600&rebase=on",
+			type: "application/x-mpegURL"
+		}]
+};
+```
+
+#### 3. Media Temporal Types
+
+The values for `temporalType` represent the following functionality:
+- `"vod"`: Used for most of finite streams, i.e. clips, movies, series.
+- `"live"`: Stream will be set on the edge and most of the player controls will be prohibited, i.e seeking, rewind, and forward jumping.
+- `"dvr"`: Allows users to move through the sliding window during live streaming.
+
+Note: If the temporal type is not provided, the player will detect and choose between live and vod, but not for dvr.
+
+#### 4. Calculating UTC timecode
+
+UTC timecode can be determined using `toUTC` player helper, this function 
+
+```javascript
+akamai.amp.AMP.create("amp", config, function(event) {
+    amp = event.player;
+    amp.addEventListener("timeupdate", function(event){
+        const utc= amp.toUTC(event.detail)
+    })
+});
+```
+
+If required the UTC timecode can be adjusted using startDate property, only for for browser native playback
+
+```javascript
+config = {
+	autoplay: true, 
+	startDate: Date.now()
+}

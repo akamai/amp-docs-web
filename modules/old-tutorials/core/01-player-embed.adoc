@@ -1,0 +1,33 @@
+= Embedding AMP
+:categories: ["core"]
+:page-layout: techdocs-web
+:position: 1
+
+Embedding AMP in a HTML page is a three-step process:
+
+. Include the AMP JS script
+. Provide embed-time configuration (set the media to play and/or configure any features)
+. Instantiate the AMP object, associating it with a div on the page. The player will take on the size of the div in a responsive manner
+
+[,javascript]
+----
+<html>
+	<head>
+		<script src="amp.js"></script>
+	</head>
+	<body>
+		<div id="amp"></div>
+		<script>
+			var config = {
+				autoplay: true,
+				media: {
+					src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
+					type: "video/mp4"
+				}
+			};
+
+			var amp = akamai.amp.AMP.create("amp", config);
+		</script>
+	</body>
+</html>
+----
