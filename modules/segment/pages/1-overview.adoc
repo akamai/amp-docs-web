@@ -1,0 +1,21 @@
+This tutorial shows how to properly use Segment.io alongside AMP.
+
+The topics covered in this page are:
+
+. How to include Segment.io into AMP
+
+. Available Tracking options
+
+. Loading a Previouly Obtained Analytics.js
+
+==== 1. How to include Segment.io into AMP
+
+To properly include Segment.io so AMP can use it, copy the loading script provided by Segment as indicated in their https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/quickstart/#step-2-copy-the-segment-snippet[documentation] into the page `head`, then load the amp `Segment.js` plugin by including it as https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/akamai.amp.PlayerResource.html[resource] in the plugin configuration as shown below.
+
+==== 2. Available Tracking options
+
+Segment.io can be configured by providing the `segment` object as part of the player configuration object. The available configuration options are shown in the example below.
+
+==== 3. Loading a Previouly Obtained Analytics.js
+
+In some scenarios it might be useful to obtain the `analytics.js` script (Segment plugin) and host it instead of using the loading script provided by Segment. In those scenarios, this can be achieved by loading the `analytics.js` by adding it as a https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/akamai.amp.PlayerResource.html[resource] inside the `segment` object in the player configuration as shown below.

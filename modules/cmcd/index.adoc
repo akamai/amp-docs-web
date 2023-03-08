@@ -1,0 +1,8 @@
+== Common Media Client Data Reporting (CMCD)
+
+Implementation of Common Media Client Data Reporting (CMCD - CTA 5005) with AMP.
+
+[discrete]
+==== Getting Started
+
+* {@tutorial 1-overview}

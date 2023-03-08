@@ -1,0 +1,3 @@
+React plugin displays informative text about specific player buttons when hovering over them. This feature can be toggle enabled or disabled through player configuration if preferred.
+
+if adding components to react UI i.e buttons, the property `data-rh` can be used to indicate the tooltip message for the element to be shown.

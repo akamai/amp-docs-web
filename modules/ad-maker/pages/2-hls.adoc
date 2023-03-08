@@ -1,0 +1,27 @@
+Ad Marker plugin allows user to get ad avail information from their HLS manifest.
+
+=== Supported ad tags
+
+Plugin only supports the following ad tags:
+
+* EXT-X-CUE
+* EXT-X-CUE-OUT
+* EXT-X-CUE-IN
+* EXT-X-CUE-OUT-CONT
+* EXT-OATCLS-SCTE35
+
+=== Ad Marker Tagging
+
+This section demonstrates how to implement the ad marker plugin for ad tagging depending on the style of the HLS manifest
+
+==== CUE-IN CUE-OUT Ad Tags
+
+Whether `EXT-X-CUE-OUT` or `EXT-X-CUE-IN` is detected within the HLS live manifest, player fires an event containing the ad avail information along the companion tags.
+
+==== Continuation Ad Tag
+
+In some cases the HLS manifest only provides a continuation tag `EXT-X-CUE-OUT-CONT` indicating that an ad break is in progress.
+
+==== SCTE35 Markers
+
+As an alternative, Ad marker plugin supports base64 encoded SCT35 messages alongside the EXT-OATCLS-SCTE35 tag. If found, plugin will throw a `scte35` event along the decoded scte35 message.

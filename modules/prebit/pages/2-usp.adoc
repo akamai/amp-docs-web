@@ -1,0 +1,9 @@
+Using Consent Management Module in AMP
+
+For US Privacy `prebid.js` supports http://prebid.org/dev-docs/modules/consentManagementUsp.html[Consent Management Module] which could be used on Prebid plugin for AMP by passing the following configuration through Prebid's `options` as follow&quot;:
+
+== Implementation of US Privacy Prebid in AMP.
+
+* Notice that `uspString` must be provided by whether customer or application level. AMP does not do any cookie or browser setting pick up.
+
+* Customer needs to make sure that Consent Management Module exists on your prebid.js file.

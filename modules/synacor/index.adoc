@@ -1,0 +1,7 @@
+== Synacor
+
+Implementation of Synacor MVPD Picker authentication into AMP.
+
+==== Getting Started
+
+* {@tutorial 1-overview}

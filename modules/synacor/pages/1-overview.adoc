@@ -1,0 +1,12 @@
+Implementation of Synacor authentication into AMP. The plugin can be implemented by providing a `synacor` object in the player config:
+
+=== Auth Events
+
+Application can perform further actions when by mapping Auth events such as reporting, fallbacking or error handling
+
+=== Logout
+
+Further Synacor bridge API actions can be perform through `synacor` plugin by providing
+<pre>
+ amp.synacor.logout(idp.id)
+</pre>

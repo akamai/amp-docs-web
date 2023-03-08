@@ -1,0 +1,14 @@
+This tutorial shows how to implement chapters based on WebVTT spec.
+
+==== How to add chapter markers using WebVTT
+
+Adding navigation markers for the video timeline can be done using a WebVTT file.
+A WebVTT file can consist in chapters that are plain text typically just a single line whose text is interpreted as a chapter title that describes the chapter as a navigation target.
+https://www.w3.org/TR/webvtt1/#introduction-chapters[See Chapter]
+
+To add chapter markers in AMP a `track` object must be passed along the `media` object, indicating the file location, language and kind.
+Please refer to {@link akamai.amp.Media} and {@link akamai.amp.Track} to know more about the media and track interfaces.
+
+==== Multi-language chapter markers
+
+Alternatively, different languages tracks can be provided into a single `media` object, making the timeline UI to match the user's preferred language.

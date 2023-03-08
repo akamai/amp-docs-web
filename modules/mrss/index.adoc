@@ -1,0 +1,7 @@
+== MRSS
+
+Media RSS feed utility plugin for Akamai Adaptive Media Player (http://www.rssboard.org/media-rss).
+
+==== Getting Started
+
+* {@tutorial 1-overview}

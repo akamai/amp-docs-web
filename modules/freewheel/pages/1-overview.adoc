@@ -1,0 +1,18 @@
+This tutorial shows how to integrate FreeWheel ads with AMP.
+
+This page covers:
+* Providing AMP with a configuration object for FreeWheel.
+* Providing AMP with the FreeWheel SDK and FreeWheel AMP plugin resource objects.
+* Providing AMP with your FreeWheel Ads configuration.
+
+==== 1. Providing AMP with a configuration object for FreeWheel
+
+As a first step to include any of AMP plugins, it is needed to include a {@link akamai.amp.PluginConfig} for the desired plugin. In the case of FreeWheel is needed to include the `freewheel` object (see {@link akamai.amp.freewheel.FreewheelConfig}) as part of the plugin configurations.
+
+==== 2. Providing AMP with the FreeWheel SDK and FreeWheel AMP plugin resource objects
+
+A {@link akamai.amp.Resource} must be included inside the FreeWheel configuration for both the FreeWheel SDK and the FreeWheel Plugin. If you have a custom version of the FreeWheel SDK you can use its url instead of the standard version by replacing the `src`.
+
+==== 3. Providing AMP with your FreeWheel Ads configuration
+
+As a final step it is needed to provide any required FreeWheel configuration as part of the `freewheel` configuration object.

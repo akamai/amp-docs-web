@@ -1,0 +1,146 @@
+This tutorial shows how to integrate IMA ads with AMP.
+
+This page covers:
+
+* Providing AMP with a configuration object for IMA.
+* Providing AMP with the IMA SDK and IMA AMP plugin resource objects.
+* Providing an AdTagUrl.
+ ** Using the AdTagUrl object.
+* Providing further configuration.
+
+==== 1. Providing AMP with a configuration object for IMA
+
+As a first step to include any of AMP plugins, it is needed to include a {@link akamai.amp.PluginConfig} for the desired plugin. In the case of IMA is needed to include the `ima` object (see {@link akamai.amp.ima.IMAConfig}) as part of the plugin configurations.
+
+[,nt]
+----
+
+var config = {
+  plugins: {
+    ima: {
+      // Your IMA configuration goes here
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----
+
+{blank} +
+
+==== 2. Providing AMP with the IMA SDK and IMA AMP plugin resource objects
+
+A {@link akamai.amp.Resource} must be included inside the IMA configuration for both the IMA SDK and the IMA Plugin. If you have a custom version of the IMA SDK you can use its url instead of google's version by replacing the `src`.
+
+[,nt]
+----
+
+var config = {
+  plugins: {
+    ima: {
+      resources: [
+        {src: "//imasdk.googleapis.com/js/sdkloader/ima3.js", debug: "//imasdk.googleapis.com/js/sdkloader/ima3_debug.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}ima/Ima.min.js", debug: "${paths.plugins}ima/Ima.js", type: "text/javascript", async: true}
+      ]
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----
+
+{blank} +
+
+==== 3. Providing an AdTagURL
+
+After providing the required resouce objects, the next step is to include the `adTagUrl` into the `ima` configuration.
+
+[,nt]
+----
+
+var config = {
+  plugins: {
+    ima: {
+      resources: [
+        {src: "//imasdk.googleapis.com/js/sdkloader/ima3.js", debug: "//imasdk.googleapis.com/js/sdkloader/ima3_debug.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}ima/Ima.min.js", debug: "${paths.plugins}ima/Ima.js", type: "text/javascript", async: true}
+      ],
+      adTagUrl: '//pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&cust_params=sample_ar%3Dpremidpostpod&cmsid=496&vid=short_onecue&correlator=1608588488752',
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----
+
+{blank} +
+
+===== 3.1. Using the AdTagUrl object
+
+In some scenarios it could be worthwile to add the `adTagUrl` to the configuration as an object so the `adTagUrl` arguments are easier to modify.
+
+[,nt]
+----
+
+var config = {
+  plugins: {
+    ima: {
+      resources: [
+        {src: "//imasdk.googleapis.com/js/sdkloader/ima3.js", debug: "//imasdk.googleapis.com/js/sdkloader/ima3_debug.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}ima/Ima.min.js", debug: "${paths.plugins}ima/Ima.js", type: "text/javascript", async: true}
+      ],
+      adTagUrl: {
+        params: {
+          sz: "640x480",
+          iu: "/124319096/external/ad_rule_samples",
+          ciu_szs: "300x250",
+          ad_rule: 1,
+          impl: "s",
+          gdfp_req: 1,
+          env: "vp",
+          output: "xml_vmap1",
+          unviewed_position_start: 1,
+          cust_params: {
+            sample_ar: "premidpostpod"
+          },
+          cmsid: 496,
+          vid: "short_onecue",
+          correlator: "#{now}"
+        }
+      }
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----
+
+{blank} +
+
+==== 4. Providing further configuration
+
+Finally, other configurations like companion ads, ads rendering settings, vpaid, etc; can be used by adding them to the `ima` configuration object.
+
+[,nt]
+----
+
+var config = {
+  plugins: {
+    ima: {
+      resources: [
+        {src: "//imasdk.googleapis.com/js/sdkloader/ima3.js", debug: "//imasdk.googleapis.com/js/sdkloader/ima3_debug.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}ima/Ima.min.js", debug: "${paths.plugins}ima/Ima.js", type: "text/javascript", async: true}
+      ],
+      adTagUrl: '//pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&cust_params=sample_ar%3Dpremidpostpod&cmsid=496&vid=short_onecue&correlator=1608588488752',
+      disableCompanionAds: false,
+      ppid: "ABCDE123456789012345678901234567",
+      vpaidMode: "enabled",
+      disableFlashAds: true,
+      companions: [
+        {
+          id: "companion-container",
+          width: 300,
+          height: 250
+        }
+      ]
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----

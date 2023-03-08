@@ -1,0 +1,40 @@
+=== Getting started
+
+On IOS 13 `a-frame` may not work unless you grant access to device's gyroscope and motion sensors.
+
+Please see the following link for more information regarding device motion permissions on IOS 13 https://github.com/aframevr/aframe/issues/4287
+
+==== 1.Using deviceMotion permissions.
+
+[,nt]
+----
+
+
+function loadHandler(event) {
+  if (window.DeviceMotionEvent && typeof window.DeviceMotionEvent.requestPermission === 'function') {
+    const dialog = document.createElement('div')
+    dialog.innerHTML = `<div style="z-index: 1;width: 100%;background-color: #22262c;color: #fff;text-align: center;cursor: pointer;">Click here to enable DeviceMotion Sensor</div>`
+    dialog.onclick = clickHandler
+    document.querySelector('#akamai-media-player').appendChild(dialog)
+  }
+  else {
+    akamai.amp.AMP.create("#akamai-media-player", config);
+  }
+}
+
+function clickHandler() {
+    window.DeviceMotionEvent.requestPermission()
+      .then(response => {
+        if (response === 'granted') {
+          if (typeof amp === 'undefined') {
+            createPlayer(config)
+          }
+        } else {
+          console.log('Permission not granted.')
+        }
+      })
+      .catch(error => {
+        console.error(error)
+      })
+  }
+----

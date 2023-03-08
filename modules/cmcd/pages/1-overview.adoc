@@ -1,0 +1,18 @@
+Implementation of CMCD into AMP. The plugin can be implemented by providing a `cmcd` object in the player config:
+
+[,nt]
+----
+
+var config = {
+  plugins: {
+          cmcd: {
+            resources: [
+              { src: "${paths.plugins}cmcd/libs/cmcdlib.js", type: "text/javascript" },
+              { src: "${paths.plugins}cmcd/Cmcd.js", type: "text/javascript" } ],
+            contentId: "#{media.guid}",
+            sessionId: "b248658d-1d1a-4039-91d0-8c08ba597da5"
+          }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----

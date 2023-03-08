@@ -1,0 +1,1 @@
+Implementation of Mux analytics into AMP. The plugin can be implemented by providing a `mux` object in the player config:

@@ -1,0 +1,2 @@
+Implementation of Ad marker detection into AMP.
+The plugin can be implemented by providing an `admarker` object in the player config:

@@ -1,0 +1,7 @@
+== Chartbeat Analytics
+
+Chartbeat Analytics plugin for Akamai Adaptive Media Player http://support.chartbeat.com/docs/video.html, http://support.chartbeat.com/docs/api.html#video.
+
+==== Getting Started
+
+* {@tutorial 1-overview}

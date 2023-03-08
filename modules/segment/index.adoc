@@ -1,0 +1,3 @@
+== Segment
+
+Segment IO Analytics for Akamai Adaptive Media Player.

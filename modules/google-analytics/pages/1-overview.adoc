@@ -1,0 +1,1 @@
+Implementation of Google Analytics into AMP. The plugin can be implemented by providing a `googleanalytics` object in the player config:

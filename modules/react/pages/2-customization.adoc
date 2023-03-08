@@ -1,0 +1,88 @@
+This tutorial shows:
+
+. CSS classes quick reference.
+. Color customization using the `theme` configuration.
+. Color customization using CSS.
+. Hidding UI components using CSS.
+. Creating and Adding new UI components.
+
+==== 1. CSS classes quick reference.
+
+Here is a non-exhaustive list of the class names used in the player UI. This list can be used to quickly and easlily modify the look and feel of most relevant UI components.
+
+_Base Classes_
+- `.amp-ui`: The top level class. Use to override player wide text styles.
+- `.amp-bg`: Background color of the control bar, floating buttons and menus.
+- `.amp-hover:hover`: Hover color of floating buttons and menu items.
+- `.amp-icon`: The icons used in the control bar and menus.
+- `.amp-slider`: The base slider class.
+ - `.amp-slider .amp-handle`: The draggable slider handle button.
+ - `.amp-slider .amp-track`: The background of the slider track.
+ - `.amp-slider .amp-range`: The available range of the slider. (i.e. loaded video content)
+ - `.amp-slider .amp-value`: The fill of the slider.
+- `.amp-menu`: The menu base class used for the settings and context menus.
+ - `.amp-menu-title`: The menu title. Serves as a back button for nested menus.
+ - `.amp-menu-item`: The class for menu items.
+- `.amp-hint-container`: The hints base class for setting the element position (desktop only)
+ - `.amp-hint`: The class to customize UI tooltips (i.e background and font)
+
+_Controls_
+- `.amp-controls`: The control bar.
+- `.amp-playpause`: The play/pause button.
+- `.amp-pause-overlay`: The large pause button.
+- `.amp-jump-back`: Jump back button.
+- `.amp-jump-forward`: Jump forward button.
+- `.amp-icon`: The icons used in the control bar and menus.
+- `.amp-time-display`: The time display container.
+ - `.amp-current-time`: The current time display.
+ - `.amp-time-separator`: The time separator.
+ - `.amp-duration`: The duration display.
+ - `amp-live-label`: The live indicator.
+- `.amp-mute`: The mute button connected to the volume slider.
+- `.amp-volume`: The volume slider.
+- `.amp-share`: The share button.
+- `.amp-cc`: The closed caption toggle button.
+- `.amp-settings`: The settings menu toggle button.
+- `.amp-pip`: The picture in picture button. (Safari only)
+- `.amp-airplay`: The airplay button. (Safari only)
+- `.amp-chromecast`: The chromecast button. (Chrome only)
+- `.amp-fullscreen`: The fullscreen button.
+
+==== 2. Color customization using the `theme` configuration.
+
+For simple colorization of the player, the theme api can be used by passing a `theme` object through the `config` object:
+
+Themes can also be set at runtime:
+<pre class="prettyprint">
+amp.react.theme = {
+ text: "#746A3C",
+ foreground: "#C2B49B",
+ background: "#2E3D33"
+};
+</pre>
+
+Here is a simple example using the theme API:
+
+You can play arround and create your own themes using our https://player.akamai.com/designer/[web designer] tool.
+
+==== 3. Color customization using CSS.
+
+For modifications beyond simple colorization, CSS can be used to override the styles of the UI components:
+
+Building on our previous example we will use the CSS classes to add a nice yellow to our play button only and also add a slightly stronger brown to all controls when the cursor hover over them.
+
+Notice that this can also be done by passing the CSS to `amp.react.style` as shown below:
+
+==== 4. Hidding UI components using CSS.
+
+To hide components using CSS it is as simple as setting their display mode to none:
+
+Building on our example, we'll remove both the settings and the share button since they are not required in our application:
+
+==== 5. Creating and Adding new UI components.
+
+More advanced customizations can be made using JS. AMP react API, provides the `React.createElement` method. `React.createElement`, can be used to easily create new UI elements to be used by the player.
+
+Notice that the component template for the button we're creating has the attribute `onClick`. The `onClick` attributte can be used to set a function to be called when the button is pressed.
+
+Our complete example looks like this:

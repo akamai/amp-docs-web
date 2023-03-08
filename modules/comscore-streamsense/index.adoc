@@ -1,0 +1,7 @@
+== Comscore Streamsense
+
+Comscore Streamsense plugin for Akamai Adaptive Media Player https://www.comscore.com.
+
+==== Getting Started
+
+* {@tutorial 1-overview}

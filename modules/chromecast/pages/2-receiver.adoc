@@ -1,0 +1,45 @@
+This tutorial shows how create a custom CAF Receiver using AmpCaf.
+
+This tutorial shows:
+1. Creating a basic HTML.
+2. Including the Cast Receiver framework.
+3. Including AMP &amp; AmpCaf in your receiver.
+4. Creating a Config Object.
+5. Creating an AmpCaf instance.
+6. Customizing the Receiver UI.
+7. Using CafAds to serve client side Ads.
+8. Hosting your Custom Receiver
+<br>
+<br>
+
+==== 1. Creating a basic HTML
+
+Create a basic HTML page.
+
+==== 2. Including the Cast Receiver framework
+
+Load the Cast Receiver Framework using a `script` tag in your `head` section and include the `cast-media-player` tag into the body of the HTML page.
+
+==== 3. Including AMP &amp; AmpCaf in your receiver
+
+Load AMP using a `script` tag in your `head` section and then add a `scrip` tag in your page `body`. In this second `script` use the `type` `&quot;module&quot;` and import AmpCaf from `AmpCafReceiver.js`.
+
+==== 4. Creating a Config Object
+
+As with regular AMP, AmpCaf uses a {@link akamai.amp.PlayerConfig} object. So, declare a `const` for the `config` object and add any required configuration.
+
+==== 5. Creating an AmpCaf instance
+
+To create an AmpCaf instance call the AmpCaf constructor passing the `config` object and an event listener function as arguments.
+
+==== 6. Customizing the Receiver UI
+
+To customize the receiver UI include a `style` tag at the end of the page `body` and add any desired `css`. For further information on UI styling please refer to https://developers.google.com/cast/docs/web_receiver/customize_ui[google's documentation].
+
+==== 7. Using CafAds to serve client side Ads.
+
+To serve client side ads, include a `cafads` section in the `config` object. The `cafads` section should specify the `provider` of the ads and the `vmapAdsRequest`.
+
+==== 8. Hosting your Custom Receiver
+
+The custom receiver can be hosted anywhere. To link your custom receiver to a sender application, login into your https://developers.google.com/cast[Google Cast SDK Developer Console] and follow the `Add New Application` wizard.
