@@ -2,6 +2,4 @@
 
 Implementation of Adobe Pass authentication into AMP.
 
-==== Getting Started
-
-* {@tutorial 1-overview}
+- xref:pages/1-overview.adoc[Getting Started]

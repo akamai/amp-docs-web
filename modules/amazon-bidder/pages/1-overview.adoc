@@ -3,3 +3,24 @@ Implementation of Amazon Header Bidding in AMP.
 The plugin can be implemented by providing an `amazonbidder` object to the player config:
 
 Integrating Amazon bidder and Prebid through Ad Server implementation. This could be done by providing `amazonbidder` and `prebid` plugin with `transformEnabled` flag disabled, then the ad request transform must be added into player's readyHandler as follows.
+
+[source, javascript]
+----
+var config = {
+  plugins: {
+    amazonbidder: {
+      resources: [
+        { src: "//c.amazon-adsystem.com/aax2/apstag.js", type: "text/javascript" },
+        { src: "${paths.plugins}amazonbidder/Amazonbidder.js", debug: "${paths.plugins}amazonbidder/Amazonbidder.js", type: "text/javascript" }
+      ],
+      pubID: 1234,
+      adServer: "DFP",
+      slots: [{
+        slotID: 'preroll',
+        mediaType: 'video'
+      }]
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----

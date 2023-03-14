@@ -2,14 +2,8 @@
 
 Implementation of HLS and Dash Ad Marker detection with AMP.
 
-==== Getting Started
+- xref:pages/1-overview.adoc[Getting Started]
 
-* {@tutorial 1-overview}
+- xref:pages/2-hls.adoc[Using HLS Ad Markers with AMP]
 
-==== HLS Manifest
-
-* {@tutorial 2-hls}
-
-==== MPEG-DASH
-
-* {@tutorial 3-dash}
+- xref:pages/3-dash.adoc[Using MPEG-DASH Ad Markers with AMP]

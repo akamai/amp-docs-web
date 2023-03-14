@@ -1,1 +1,25 @@
 The `params` config property may be used for setting up custom params to every bid request
+
+[source, javascript]
+----
+var config = {
+  plugins: {
+    amazonbidder: {
+      resources: [
+        { src: "//c.amazon-adsystem.com/aax2/apstag.js", type: "text/javascript" },
+        { src: "${paths.plugins}amazonbidder/Amazonbidder.js", debug: "${paths.plugins}amazonbidder/Amazonbidder.js", type: "text/javascript" }
+      ],
+      pubID: 1234,
+      adServer: "DFP",
+      slots: [{
+        slotID: 'preroll',
+        mediaType: 'video'
+      }],
+      params: {
+        test: 1234
+      }
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----

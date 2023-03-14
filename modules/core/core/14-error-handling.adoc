@@ -9,8 +9,7 @@ You can handle AMP error in two main ways:
 
 * Using the https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/akamai.amp.TransformType.html[akamai.amp.TransformType.ERROR] transform _(Recomended)_
 * Using the https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/akamai.amp.Events.html[akamai.amp.Events.ERROR] event
-</br>
- +
+
 
 To handle AMP errors using transforms, you need to add a transform to amp with type `TransformType.ERROR`:
 

@@ -4,5 +4,4 @@ Implementation of Chromecast into AMP.
 
 ==== Getting Started
 
-* {@tutorial 1-overview}
-* {@tutorial 2-receiver}
+- xref:pages/1-overview.adoc[Getting Started]

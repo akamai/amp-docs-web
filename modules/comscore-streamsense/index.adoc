@@ -4,4 +4,4 @@ Comscore Streamsense plugin for Akamai Adaptive Media Player https://www.comscor
 
 ==== Getting Started
 
-* {@tutorial 1-overview}
+- xref:pages/1-overview.adoc[Getting Started]
