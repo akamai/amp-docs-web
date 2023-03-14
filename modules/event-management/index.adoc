@@ -1,3 +1,5 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
 == Event Management
 
 Implementation of Event Management into AMP.
@@ -5,3 +7,7 @@ Implementation of Event Management into AMP.
 ==== Getting Started
 
 - xref:pages/1-overview.adoc[Getting Started]
+
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

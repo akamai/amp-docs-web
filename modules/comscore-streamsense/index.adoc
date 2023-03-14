@@ -1,3 +1,5 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
 == Comscore Streamsense
 
 Comscore Streamsense plugin for Akamai Adaptive Media Player https://www.comscore.com.
@@ -5,3 +7,7 @@ Comscore Streamsense plugin for Akamai Adaptive Media Player https://www.comscor
 ==== Getting Started
 
 - xref:pages/1-overview.adoc[Getting Started]
+
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

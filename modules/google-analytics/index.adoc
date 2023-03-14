@@ -1,3 +1,5 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
 == Google Analytics
 
 Implementation of Google Analytics into AMP.
@@ -7,3 +9,7 @@ Implementation of Google Analytics into AMP.
 - xref:pages/2-custom.adoc[Custom Events Tracking]
 
 - xref:pages/3-gtag.adoc[Google Analytics 4]
+
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]
