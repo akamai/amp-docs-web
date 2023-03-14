@@ -18,10 +18,59 @@ This section demonstrates how to implement the ad marker plugin for ad tagging d
 
 Whether `EXT-X-CUE-OUT` or `EXT-X-CUE-IN` is detected within the HLS live manifest, player fires an event containing the ad avail information along the companion tags.
 
+[source, javascript]
+----
+var config = {
+  playbackOrder: ["hls", "dash", "default"],
+  plugins: {
+    admarker: {
+      resources: [
+          { src: "${paths.plugins}admarker/libs/scte35.js", type: "text/javascript" },
+          { src: "${paths.plugins}admarker/Admarker.min.js", debug: "${paths.plugins}admarker/Admarker.js", type: "text/javascript" }
+        ]
+      }
+  }
+};
+akamai.amp.AMP.create("amp", config, function(event) {
+  var amp = event.player;
+
+  amp.admarker.addEventListener('cueout', function(e) {
+    //ad break started
+  })
+
+  amp.admarker.addEventListener('cuein', function(e) {
+    //ad break ended
+  })
+});
+----
+
 ==== Continuation Ad Tag
 
 In some cases the HLS manifest only provides a continuation tag `EXT-X-CUE-OUT-CONT` indicating that an ad break is in progress.
 
+[source, javascript]
+----
+akamai.amp.AMP.create("amp", config, function(event) {
+  var amp = event.player;
+
+  amp.admarker.addEventListener('continuation', function(e) {
+    //do something
+  })
+});
+----
+
 ==== SCTE35 Markers
 
 As an alternative, Ad marker plugin supports base64 encoded SCT35 messages alongside the EXT-OATCLS-SCTE35 tag. If found, plugin will throw a `scte35` event along the decoded scte35 message.
+
+[source, javascript]
+----
+akamai.amp.AMP.create("amp", config, function(event) {
+  var amp = event.player;
+
+  amp.admarker.addEventListener('scte35', function(e) {
+    var message = e.details // decoded base64 scte35 message
+    //do something
+  })
+});
+----

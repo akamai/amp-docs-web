@@ -1,1 +1,57 @@
 Implementation of Google Analytics into AMP. The plugin can be implemented by providing a `googleanalytics` object in the player config:
+
+[source, javascript]
+----
+var config = {
+  plugins: {
+    googleanalytics: {
+      resources: [
+        {src: "//www.google-analytics.com/analytics.js", type: "text/javascript"},
+        {src: "#{paths.plugins}googleanalytics/Googleanalytics.js", type: "text/javascript"}
+      ],
+      trackingId: "UA-82788715-3",
+      nonInteraction: false,
+      disablePageView: false,
+      events: {
+        video: [{
+          type: "started",
+          data: {
+            eventCategory: "video",
+            eventAction: "videoStart",
+            customDimension : {
+              metric1: "viewDuration",
+              dimension1: "#{media.title}",
+              metric2: "#{media.duration}"
+            }
+          }
+        }, {
+          type: "ended",
+          data: {
+            eventCategory: "video",
+            eventAction: "videoEnded",
+            customDimension : {
+              metric1: "viewDuration",
+              dimension1: "#{media.title}",
+              metric2: "#{media.duration}"
+            }
+          }
+        }],
+        ads: [{
+          type: "adstarted",
+          data: {
+            eventCategory: "ad",
+            eventAction: "adStarted"
+          }
+        }, {
+          type: "adended",
+          data: {
+            eventCategory: "ad",
+            eventAction: "adsEnded"
+          }
+        }]
+      }
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----

@@ -13,4 +13,25 @@ Ad marker plugin supports base64 encoded SCT35 and XML ad avail messages. The pl
 
 In order to setup Dash Ad tagging with AMP users must provide the event stream `schemeIdUri` as part of the plugin config or the media config.
 
+[source, javascript]
+----
+var config = {
+  plugins: {
+    admarker: {
+      resources: [
+          { src: "${paths.plugins}admarker/libs/scte35.js", type: "text/javascript" },
+          { src: "${paths.plugins}admarker/admarker.js", type: "text/javascript" }]
+      },
+      schemeIdUri: "urn:scte:scte35:2013:xml"
+  }
+};
+akamai.amp.AMP.create("amp", config, function(event) {
+  var amp = event.player;
+
+  amp.admarker.addEventListener('scte35', function(e) {
+    var marker = e.details
+    //do something
+  })
+});
+----
 Alternatively, `schemeIdUri` can be provided through media config object for individual content, this setup will override `schemeIdUri` config property on plugin root config object.

@@ -1,18 +1,17 @@
 Implementation of CMCD into AMP. The plugin can be implemented by providing a `cmcd` object in the player config:
+Starting in version `9.1.8` this plugin comes as a built-in core feature in AMP Web SDK. 
 
-[,nt]
+[source, javascript]
 ----
 
 var config = {
-  plugins: {
-          cmcd: {
-            resources: [
-              { src: "${paths.plugins}cmcd/libs/cmcdlib.js", type: "text/javascript" },
-              { src: "${paths.plugins}cmcd/Cmcd.js", type: "text/javascript" } ],
-            contentId: "#{media.guid}",
-            sessionId: "b248658d-1d1a-4039-91d0-8c08ba597da5"
-          }
-  }
+      cmcd: {
+          enabled: true,
+          contentId: "#{media.guid}",
+          sessionId: "b248658d-1d1a-4039-91d0-8c08ba597da5",
+          deviceId: "21cf726cfe3d937b5f974f72bb5bd06a"
+      }
 };
+
 akamai.amp.AMP.create("amp", config);
 ----

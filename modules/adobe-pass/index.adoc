@@ -1,7 +1,11 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
 == Adobe Pass
 
 Implementation of Adobe Pass authentication into AMP.
 
-==== Getting Started
+- xref:pages/1-overview.adoc[Getting Started]
 
-* {@tutorial 1-overview}
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

@@ -4,7 +4,7 @@ In order to add custom 3-D elements you will need to use `aframe` API in order t
 
 ==== 1.Create player
 
-[,nt]
+[source, javascript]
 ----
 
 var config = {
@@ -31,7 +31,7 @@ akamai.amp.AMP.create("#akamai-media-player", config);
 
 ==== 2.Create an aframe entity and its `handle-events` component
 
-[,nt]
+[source, javascript]
 ----
 
 var thebox = document.createElement('a-box');
@@ -40,14 +40,17 @@ thebox.innerHTML = `<a-box position='1.5 0.25 5.5' color='#00B5B5' width='2' hei
 
 ==== 3.Append it to aframe's scene within the player
 
-[,nt]
+[source, javascript]
 ----
 
 var scene = document.getElementsByTagName("a-scene");
 scene[0].appendChild(thebox);
-
+----
 
 #### 4. Register `handle-events` custom component
+
+[source, javascript]
+----
 
 AFRAME.registerComponent('handle-events', {
   init: function () {
@@ -68,13 +71,14 @@ AFRAME.registerComponent('handle-events', {
     });
   }
 });
-</pre>
+
+----
 
 #### 5. Put everything in place.
 Once the player is being created you can now create and register custom components. See the following full sample.
 
-
-
+[source, javascript]
+----
 var config = {
   plugins: {
     aframe: {

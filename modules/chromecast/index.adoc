@@ -1,8 +1,13 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
 == Chromecast
 
 Implementation of Chromecast into AMP.
 
 ==== Getting Started
 
-* {@tutorial 1-overview}
-* {@tutorial 2-receiver}
+- xref:pages/1-overview.adoc[Getting Started]
+
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

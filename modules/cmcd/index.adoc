@@ -1,3 +1,5 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
 == Common Media Client Data Reporting (CMCD)
 
 Implementation of Common Media Client Data Reporting (CMCD - CTA 5005) with AMP.
@@ -5,4 +7,8 @@ Implementation of Common Media Client Data Reporting (CMCD - CTA 5005) with AMP.
 [discrete]
 ==== Getting Started
 
-* {@tutorial 1-overview}
+- xref:pages/1-overview.adoc[Getting Started]
+
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

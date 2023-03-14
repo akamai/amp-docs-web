@@ -1,2 +1,24 @@
 Implementation of Ad marker detection into AMP.
 The plugin can be implemented by providing an `admarker` object in the player config:
+
+[source,javascript]
+----
+var config = {
+    plugins: {
+        admarker: {
+            resources: [{
+                    src: "${paths.plugins}admarker/libs/scte35.js",
+                    type: "text/javascript"
+                },
+                {
+                    src: "${paths.plugins}admarker/Admarker.min.js",
+                    debug: "${paths.plugins}admarker/Admarker.js",
+                    type: "text/javascript"
+                }
+            ]
+        }
+    }
+};
+
+akamai.amp.AMP.create("amp", config);
+----

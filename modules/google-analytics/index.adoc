@@ -1,15 +1,15 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
 == Google Analytics
 
 Implementation of Google Analytics into AMP.
 
-==== Getting Started
+- xref:pages/1-overview.adoc[Getting Started]
 
-* {@tutorial 1-overview}
+- xref:pages/2-custom.adoc[Custom Events Tracking]
 
-==== Custom Events Tracking
+- xref:pages/3-gtag.adoc[Google Analytics 4]
 
-* {@tutorial 2-custom}
-
-==== Google Analytics 4
-
-* {@tutorial 3-gtag}
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

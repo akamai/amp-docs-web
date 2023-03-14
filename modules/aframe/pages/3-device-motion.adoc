@@ -6,7 +6,7 @@ Please see the following link for more information regarding device motion permi
 
 ==== 1.Using deviceMotion permissions.
 
-[,nt]
+[source, javascript]
 ----
 
 
