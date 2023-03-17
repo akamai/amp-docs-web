@@ -1,5 +1,17 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
 = Get Started
 
 image::html.png[align="center"]
 
-Akamai AMP SKDs make it easy to add video playback functionality to your iOS and tvOS projects. With an out-of-the-box solution, you can have playback in your app in no time. We also support many of the playback add ons on the market, such as analytics, advertaisement (both client-side and server-side), VR, and more.
+The Akamai Adaptive Media Player (AMP) was designed from the ground up to alleviate the complexity of a media player implementation and provide a high quality streaming experience regardless of the use case or user device. The Media Player from the Online Content Experts AMP provides an excellent foundation for a truly high quality media playback experience optimized for multiple device viewing. Leveraging AMP enables a simplified media player approach for content providers, while enabling an improved video quality experience. AMP also makes it easier and faster to deploy advanced video delivery and quality techniques - such as adaptive bitrate streaming technology and HTTP protocols.
+
+Akamai Media Player provides a turnkey media playback experience for online media consumption in a web page. This document provides an overview for how to install, configure, and deploy the player.
+
+Demo site: https://player.akamai.com/demos/
+
+:date: 17/03/2023
+:last-revision: 17/03/2023
+include::ROOT:partial$amp-additional-info.adoc[]
+
+

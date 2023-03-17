@@ -1,0 +1,102 @@
+= Custom Events
+
+Google Analytics Plugin for AMP supports a wide variarity of events, those events need to be mapped into `googleanalytics` config object, next you will need to fire such event by using `trackEvent` API.
+
+The following sample shows a basic implementation of a custom event.
+
+== 1. Mapping
+
+First, Add the custom event in the `googleanalytics` config, under `events` section. The custom event for this sample will be ads `skipped`, which should be fired everytime the user clicks on IMA skip button.
+[source,javascript]
+----
+var config = {
+  plugins: {
+    googleanalytics: {
+      resources: [
+        {src: "//www.amp-google-analytics.com/analytics.js", type: "text/javascript"},
+        {src: "#{paths.plugins}googleanalytics/Googleanalytics.js", type: "text/javascript"}
+      ],
+      trackingId: "UA-82788715-3",
+      nonInteraction: false,
+      disablePageView: false,
+      events: {
+        video: [{
+          type: "started",
+          data: {
+            eventCategory: "video",
+            eventAction: "videoStart",
+            customDimension : {
+              metric1: "viewDuration",
+              dimension1: "#{media.title}",
+              metric2: "#{media.duration}"
+            }
+          }
+        }, {
+          type: "ended",
+          data: {
+            eventCategory: "video",
+            eventAction: "videoEnded",
+            customDimension : {
+              metric1: "viewDuration",
+              dimension1: "#{media.title}",
+              metric2: "#{media.duration}"
+            }
+          }
+        }],
+        ads: [{
+          type: "adstarted",
+          data: {
+            eventCategory: "ad",
+            eventAction: "adStarted"
+          }
+        }, {
+          type: "adended",
+          data: {
+            eventCategory: "ad",
+            eventAction: "adsEnded"
+          }
+        }, {
+          type: "skipped",
+          data: {
+            eventCategory: "ad",
+            eventAction: "adSkipped"
+          }
+        }
+        ]
+      }
+    }
+  }
+};
+----
+== 2. Tracking
+
+Once you have added the `skipped` event, you must bind it to player's events listener.
+[source, javascript]
+----
+akamai.amp.AMP.create("amp", config).then(function (amp) {
+  amp.addEventListener('skipped', function() { amp.googleanalytics.trackEvent("skipped"); });
+});
+----
+== 3. Verify
+
+Finally, you should be able to see this events coming through the Google Analytics dashboard.
+
+== Custom Dimmensions (Universal Analytics)
+
+Custom dimmensions can be added through the `googleanalytics` configuration as follows.
+[source, javascript]
+----
+{
+  type: "started",
+  data: {
+    eventCategory: "video",
+    eventAction: "videoStart",
+    customDimension : {
+      metric1: "viewDuration",
+      dimension1: "#{media.title}",
+      metric2: "#{window.MY_VALUE}"
+    }
+  }
+}
+----
+You are all set once this was added in the events you want to track, supposing that the `googleanalytics` custom dimension exists or is defined on customer's google analytics account.

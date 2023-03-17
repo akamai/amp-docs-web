@@ -1,0 +1,6 @@
+= Using data bindings
+
+[source,javascript]
+----
+"${player.mode} Player"
+----

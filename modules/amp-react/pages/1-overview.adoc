@@ -1,0 +1,22 @@
+= Overview
+
+Implementation of React UI into AMP. The plugin can be implemented by providing a `react` object to the player config:
+
+[source,javascript]
+----
+var config = {
+  var config = {
+    plugins: {
+      react: {
+        resources: [
+          {src: "#{paths.plugins}amp-react/libs/amp-react.min.js", debug: "#{paths.plugins}amp-react/libs/amp-react.js", type: "text/javascript"},
+          {src: "#{paths.plugins}amp-react/React.min.css", debug: "#{paths.plugins}amp-react/React.css", type: "text/css"},
+          {src: "#{paths.plugins}amp-react/React.js", debug: "#{paths.plugins}amp-react/React.js", type: "text/javascript"}
+        ],
+        autoHide: 3
+      }
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----

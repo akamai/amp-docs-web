@@ -1,0 +1,499 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
+= Omniture analytics
+
+Implementation of Omniture / Heartbeat analytics into AMP. The plugin can be implemented by providing an `omniture` object to the player config.
+Omniture can be configured with or without Heartbeat, and for both live and VOD content:
+
+== 1. Standard Omniture
+
+[source,javascript]
+----
+var config = {
+		plugins: {
+	        omniture: {
+	          resources: [
+	            {src: "{{var 'amp-omniture.path'}}", type: "text/javascript", async: true},
+	            {src: "#{paths.plugins}amp-omniture/Omniture.min.js", debug: "#{paths.plugins}amp-omniture/Omniture.js", type: "text/javascript", async: true}
+	          ],
+	          visitor: {
+	            marketingCloudOrgId: "sample-id",
+	            trackingServer: "sample.com"
+	          },
+	          sdk: [
+	            {src: "{{var 'amp-omniture.path'}}", type: "text/javascript"}
+	          ],
+	          main: "{{var 'amp-omniture.main'}}",
+	          account: "customer",
+	          playerName: "Player",
+	          debugTracking: true,
+	          autoTrack: true,
+	          trackLocal: true,
+	          trackingServer: "customer",
+	          trackingServerSecure: "customer",
+	          trackWhilePlaying: true,
+	          visitorNamespace: "customer",
+	          currencyCode: "USD",
+	          Media: {
+	            trackVars: "prop14,prop15,prop51,prop53,eVar27",
+	            trackEvents: "event21,event22,event23,event24,event37",
+	            trackSecondIntervals: "60:300,300",
+	            trackMilestones: [
+	              {
+	                percent: 25,
+	                events: "event21"
+	              }, {
+	                percent: 50,
+	                events: "event22"
+	              }, {
+	                percent: 75,
+	                events: "event23"
+	              }, {
+	                percent: 100,
+	                events: "event24"
+	              }
+	            ],
+	            segmentByMilestones: true,
+	            trackUsingContextData: false,
+	            contextDataMapping: {
+	              "a.media.name": "eVar19,prop14",
+	              "a.media.segment": "eVar24",
+	              "a.contentType": "eVar61",
+	              "a.media.timePlayed": "event16",
+	              "a.media.view": "event37",
+	              "a.media.segmentView": "event36",
+	              "a.media.complete": "event24",
+	              "a.media.milestones": [
+	                {
+	                  percent: 25,
+	                  events: "event21"
+	                }, {
+	                  percent: 50,
+	                  events: "event22"
+	                }, {
+	                  percent: 75,
+	                  events: "event23"
+	                }
+	              ]
+	            }
+	          },
+	          customLinkTracking: {
+	            videoStart: {
+	              linkName: "video start",
+	              events: "event4",
+	              eVar3: "vidShow:vidSeason:vidTitle:vidFormat",
+	              eVar15: "vidType",
+	              eVar28: "vidPlaylist or vidSort",
+	              eVar30: "vidFormat",
+	              eVar31: "FSID",
+	              eVar32: "vidSource",
+	              eVar33: "vidNetworkName",
+	              eVar34: "vidPlayerID",
+	              eVar36: "vidID",
+	              eVar41: "vidTitle | vidTotalTime",
+	              eVar47: "vidShow",
+	              eVar48: "vidSeason",
+	              eVar49: "vidEpisodeNumber",
+	              eVar50: "vidEmbeddedHost",
+	              eVar60: "vidMVDP",
+	              eVar61: "vidContentSubscriptionType",
+	              eVar62: "vidSportsType",
+	              eVar63: "vidHomeClub",
+	              eVar64: "vidVisitingClub",
+	              prop3: "D=v3",
+	              prop15: "D=v15",
+	              prop28: "D=v28",
+	              prop30: "D=v30",
+	              prop31: "D=v31",
+	              prop32: "D=v32",
+	              prop33: "D=v33",
+	              prop34: "D=v34",
+	              prop36: "D=v36",
+	              prop41: "D=v41",
+	              prop47: "D=v47",
+	              prop48: "D=v48",
+	              prop49: "D=v49",
+	              prop50: "D=v50",
+	              prop56: "D=v56",
+	              prop60: "D=v60",
+	              prop61: "D=v61",
+	              prop62: "D=v62",
+	              prop63: "D=v63",
+	              prop64: "D=v64"
+	            },
+	            videoComplete: {
+	              linkName: "video complete",
+	              events: "event5,event72",
+	              eVar3: "vidShow:vidSeason:vidTitle:vidFormat",
+	              eVar15: "vidType",
+	              eVar28: "vidPlaylist or vidSort",
+	              eVar30: "vidFormat",
+	              eVar31: "FSID",
+	              eVar32: "vidSource",
+	              eVar33: "vidNetworkName",
+	              eVar34: "vidPlayerID",
+	              eVar36: "vidID",
+	              eVar41: "vidTitle | vidTotalTime",
+	              eVar47: "vidShow",
+	              eVar48: "vidSeason",
+	              eVar49: "vidEpisodeNumber",
+	              eVar50: "vidEmbeddedHost",
+	              eVar60: "vidMVDP",
+	              eVar61: "vidContentSubscriptionType",
+	              eVar62: "vidSportsType",
+	              eVar63: "vidHomeClub",
+	              eVar64: "vidVisitingClub"
+	            },
+	            videoPause: {
+	              linkName: "video pause",
+	              events: "event72",
+	              eVar3: "vidShow:vidSeason:vidTitle:vidFormat",
+	              eVar15: "vidType",
+	              eVar28: "vidPlaylist or vidSort",
+	              eVar30: "vidFormat",
+	              eVar31: "FSID",
+	              eVar32: "vidSource",
+	              eVar33: "vidNetworkName",
+	              eVar34: "vidPlayerID",
+	              eVar36: "vidID",
+	              eVar41: "vidTitle | vidTotalTime",
+	              eVar47: "vidShow",
+	              eVar48: "vidSeason",
+	              eVar49: "vidEpisodeNumber",
+	              eVar50: "vidEmbeddedHost",
+	              eVar60: "vidMVDP",
+	              eVar61: "vidContentSubscriptionType",
+	              eVar62: "vidSportsType",
+	              eVar63: "vidHomeClub",
+	              eVar64: "vidVisitingClub"
+	            },
+	            adStart: {
+	              linkName: "ad start",
+	              events: "event6",
+	              eVar3: "vidShow:vidSeason:vidTitle:vidFormat",
+	              eVar15: "vidType",
+	              eVar28: "vidPlaylist or vidSort",
+	              eVar30: "vidFormat",
+	              eVar31: "FSID",
+	              eVar32: "vidSource",
+	              eVar33: "vidNetworkName",
+	              eVar34: "vidPlayerID",
+	              eVar36: "vidID",
+	              eVar41: "vidTitle | vidTotalTime",
+	              eVar47: "vidShow",
+	              eVar48: "vidSeason",
+	              eVar49: "vidEpisodeNumber",
+	              eVar50: "vidEmbeddedHost",
+	              eVar60: "vidMVDP",
+	              eVar61: "vidContentSubscriptionType",
+	              eVar62: "vidSportsType",
+	              eVar63: "vidHomeClub",
+	              eVar64: "vidVisitingClub",
+	              eVar29: "vidAdvertiser",
+	              eVar57: "vidAdvertisementTitle",
+	              eVar58: "vidAdvertisementType",
+	              eVar46: "vidAdvertisementPositionInPod",
+	              prop29: "vidAdvertiser",
+	              prop57: "vidAdvertisementTitle",
+	              prop58: "vidAdvertisementPodPosition",
+	              prop46: "vidAdvertisementPositionInPod"
+	            },
+	            adComplete: {
+	              linkName: "ad complete",
+	              events: "event7",
+	              eVar3: "vidShow:vidSeason:vidTitle:vidFormat",
+	              eVar15: "vidType",
+	              eVar28: "vidPlaylist or vidSort",
+	              eVar30: "vidFormat",
+	              eVar31: "FSID",
+	              eVar32: "vidSource",
+	              eVar33: "vidNetworkName",
+	              eVar34: "vidPlayerID",
+	              eVar36: "vidID",
+	              eVar41: "vidTitle | vidTotalTime",
+	              eVar47: "vidShow",
+	              eVar48: "vidSeason",
+	              eVar49: "vidEpisodeNumber",
+	              eVar50: "vidEmbeddedHost",
+	              eVar60: "vidMVDP",
+	              eVar61: "vidContentSubscriptionType",
+	              eVar62: "vidSportsType",
+	              eVar63: "vidHomeClub",
+	              eVar64: "vidVisitingClub",
+	              eVar29: "vidAdvertiser",
+	              eVar57: "vidAdvertisementTitle",
+	              eVar58: "vidAdvertisementPodPosition",
+	              eVar46: "vidAdvertisementPositionInPod"
+	            },
+	            intervalReached: [{
+	              interval: "60",
+	              linkName: "video 1 min amp-segment",
+	              events: "event77,event72",
+	              eVar3: "vidShow:vidSeason:vidTitle:vidFormat",
+	              eVar15: "vidType",
+	              eVar28: "vidPlaylist or vidSort",
+	              eVar30: "vidFormat",
+	              eVar31: "FSID",
+	              eVar32: "vidSource",
+	              eVar33: "vidNetworkName",
+	              eVar34: "vidPlayerID",
+	              eVar36: "vidID",
+	              eVar41: "vidTitle | vidTotalTime",
+	              eVar47: "vidShow",
+	              eVar48: "vidSeason",
+	              eVar49: "vidEpisodeNumber",
+	              eVar50: "vidEmbeddedHost",
+	              eVar60: "vidMVDP",
+	              eVar61: "vidContentSubscriptionType",
+	              eVar62: "vidSportsType",
+	              eVar63: "vidHomeClub",
+	              eVar64: "vidVisitingClub",
+	              eVar29: "vidAdvertiser",
+	              eVar57: "vidAdvertisementTitle",
+	              eVar58: "vidAdvertisementPodPosition",
+	              eVar46: "vidAdvertisementPositionInPod"
+	            }, {
+	              interval: "300",
+	              linkName: "video 5 min amp-segment",
+	              events: "event78,event72",
+	              eVar3: "vidShow:vidSeason:vidTitle:vidFormat",
+	              eVar15: "vidType",
+	              eVar28: "vidPlaylist or vidSort",
+	              eVar30: "vidFormat",
+	              eVar31: "FSID",
+	              eVar32: "vidSource",
+	              eVar33: "vidNetworkName",
+	              eVar34: "vidPlayerID",
+	              eVar36: "vidID",
+	              eVar41: "vidTitle | vidTotalTime",
+	              eVar47: "vidShow",
+	              eVar48: "vidSeason",
+	              eVar49: "vidEpisodeNumber",
+	              eVar50: "vidEmbeddedHost",
+	              eVar60: "vidMVDP",
+	              eVar61: "vidContentSubscriptionType",
+	              eVar62: "vidSportsType",
+	              eVar63: "vidHomeClub",
+	              eVar64: "vidVisitingClub",
+	              eVar29: "vidAdvertiser",
+	              eVar57: "vidAdvertisementTitle",
+	              eVar58: "vidAdvertisementPodPosition",
+	              eVar46: "vidAdvertisementPositionInPod"
+	            }]
+	          },
+	          events: {
+	            video: [{
+	              type: "started",
+	              data: {
+	                events: "event37",
+	                prop14: "Esquire: #{media.title}",
+	                prop15: "Esquire",
+	                prop51: "#{media.link}",
+	                prop53: "VDO: Esquire: #{media.itle}",
+	                eVar27: "#{player.name}"
+	              }
+	            }]
+	          }
+	        }
+	      }
+	};
+var amp = akamai.amp.AMP.create("amp", config);
+----
+
+== 2. Heartbeat SDK
+
+[source,javascript]
+----
+var config = {
+        plugins: {
+          heartbeat: {
+            enabled: true,
+            resources: [
+              {
+                src: "#{paths.plugins}/amp-omniture/libs/MediaSDK.min.js",
+                type: "text/javascript",
+                async: true
+              },
+              {
+                src: "#{paths.plugins}/amp-omniture/libs/VisitorAPI.js",
+                type: "text/javascript",
+                async: true
+              },
+              {
+                src: "#{paths.plugins}/amp-omniture/libs/AppMeasurement.js",
+                type: "text/javascript",
+                async: true
+              },
+              {
+                src: "#{paths.plugins}/amp-omniture/Omniture.js",
+                type: "text/javascript"
+              }
+            ],
+			appMeasurement: {
+				account: "INSERT-RSID-HERE",
+				trackingServer: "INSERT-TRACKING-SERVER-HERE",
+				trackingServerSecure: "INSERT-TRACKING-SERVER-HERE"
+			},
+            visitor: {
+              marketingCloudOrgId: "MARKETING_CLOUD_ID@AdobeOrg",
+              trackingServer: "tracking.server.com",
+              trackingServerSecure: "strack.go.com",
+              marketingCloudServer: "track.go.com",
+              marketingCloudServerSecure: "strack.go.com"
+            },
+            publisher: "MARKETING_CLOUD_ID@AdobeOrg",
+            trackingServer: "track.hb.omtrdc.net",
+            channel: "sample channel",
+            ovp: "Akamai AMP",
+            playerName: "AMP Test player"
+          },
+        }
+      };
+
+      akamai.amp.AMP.create("akamai-media-player", config, function (event) {
+        amp = event.player;
+      });
+----
+
+== 3. Live linear Tracking - Heartbeat
+
+[source,javascript]
+----
+var config = {
+        plugins: {
+          heartbeat: {
+            resources: [
+              {
+                src: "#{paths.plugins}/amp-omniture/libs/MediaSDK.min.js",
+                type: "text/javascript",
+                async: true
+              },
+              {
+                src: "#{paths.plugins}/amp-omniture/libs/VisitorAPI.js",
+                type: "text/javascript",
+                async: true,
+              },
+              {
+                src: "#{paths.plugins}/amp-omniture/libs/AppMeasurement.js",
+                type: "text/javascript",
+                async: true,
+              },
+              {
+                src: "#{paths.plugins}/amp-omniture/Omniture.js",
+                type: "text/javascript"
+              }
+            ],
+            liveLinear:{
+              enabled: true,
+              timezone: "-05:00"
+            },
+			appMeasurement: {
+				account: "INSERT-RSID-HERE",
+				trackingServer: "INSERT-TRACKING-SERVER-HERE",
+				trackingServerSecure: "INSERT-TRACKING-SERVER-HERE"
+			},
+            visitor: {
+              marketingCloudOrgId: "MARKETING_CLOUD_ID@AdobeOrg",
+              trackingServer: "tracking.server.com",
+              trackingServerSecure: "strack.go.com",
+              marketingCloudServer: "track.go.com",
+              marketingCloudServerSecure: "strack.go.com"
+            },
+            publisher: "MARKETING_CLOUD_ID@AdobeOrg",
+            trackingServer: "track.hb.omtrdc.net",
+            channel: "sample channel",
+            ovp: "Akamai AMP",
+            playerName: "AMP Test player",
+			metadata: {
+              video: {
+                test: "foo",
+              },
+			  ad: {
+				  advertiser:"advertise"
+			  }
+            },
+            contextData:{
+              programmer: "Sample programmer"
+            }
+          },
+        }
+      };
+
+      akamai.amp.AMP.create("akamai-media-player", config, function (event) {
+        amp = event.player;
+      });
+----
+
+== 4. Using Adobe Launch
+
+=== 4.1. Reference Your Adobe Launch Script
+
+To use Media SDK alongside Adobe Launch, first you need to add a reference to your Adobe Launch script as described in Adobe's documentation:
+
+[source,javascript]
+----
+<script src="//assets.adobedtm.com/XXXXXXXXXXXX/XXXXXXXXXXXX/launch-XXXXXXXXXXXX.js" async></script>
+----
+
+=== 4.2. Properly Configure The AMP Omniture Plugin
+
+The sample below shows how to configure the AMP Omniture Plugin to be used alongside Adobe Launch.
+
+[source,javascript]
+----
+	var config = {
+		plugins: {
+			heartbeat: {
+				enabled: true,
+				resources: [
+					{
+						// Be sure to add the Omniture Plugin
+						src: "#{paths.plugins}/amp-omniture/Omniture.js",
+						type: "text/javascript"
+					}
+				],
+				// The launch.variableName atribute must be added
+				// and match the one set on the adobe experience platform
+				launch: {
+					variableName: 'ADB'
+				},
+				// A full list of metadata keys can be found as part of ADB.Media.VideoMetadataKeys
+				metadata: {
+					"video": {
+						"test": "foo",
+						"brand": 'amp_player_hb_test',
+						ADB.Media.VideoMetadataKeys.show: "myShow",
+						ADB.Media.VideoMetadataKeys.season: "mySeason",
+						ADB.Media.VideoMetadataKeys.episode: "myEpisode",
+						ADB.Media.VideoMetadataKeys.assetId: "myAssetId",
+						ADB.Media.VideoMetadataKeys.genre: "myGenre"
+					},
+					ad:{
+						advertiser:"test ADVERTISER"
+					}
+				}
+			}
+		}
+	};
+----
+
+=== 4.3 Setting Temporal Type and Duration
+
+When using Adobe Launch it is required to specify the `temporal type` and `duration` of the assets, since these values are required by the MediaSDK at initialization time. This values can be passed along the media configuration.
+
+[source,javascript]
+----
+	var config = {
+		media: {
+			temporalType: "vod",
+			duration: 108,
+			source: [{
+				src: "https://mym3u8.m3u8", type: "application/x-mpegURL"
+			}]
+    	},
+	}
+----
+
+:date: 16/03/2023
+:last-revision: 16/03/2023
+include::ROOT:partial$amp-additional-info.adoc[]

@@ -1,0 +1,35 @@
+= Implementation of A-Frame 360 VR into AMP.
+AMP uses Aframe https://aframe.io/ WebVR Framework as main VR mechanism. This AMP plug-in allows the following video formats
+
+* `video/mp4`
+* `application/x-mpegURL` (HLS)
+* `application/dash+xml` (Dash)
+* `video/webm`
+
+NOTE: VR experience is limited to the following devices and browsers please check here for more information https://webvr.rocks/
+
+The plugin can be implemented by providing a `aframe` object in the player config:
+
+[source, javascript]
+----
+
+var config = {
+  plugins: {
+    aframe: {
+      resources: [
+        {src: "//amp-aframe.io/releases/1.0.4/amp-aframe.min.js",debug:"//amp-aframe.io/releases/1.0.4/amp-aframe.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}amp-aframe/Aframe.min.js", debug: "${paths.plugins}amp-aframe/Aframe.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}amp-aframe/Aframe.min.css", debug: "${paths.plugins}amp-aframe/Aframe.css", type: "text/css", async: true}
+      ],
+      data: {
+        rotation: "0 270 0",
+        strict: true
+      },
+      mouse: {
+        speed: 2
+      }
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----

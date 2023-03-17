@@ -1,0 +1,50 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
+== Yospace Analytics
+
+This tutorial shows how to integrate Yospace ads with AMP.
+
+This page covers:
+* Providing AMP with a configuration object for Yospace.
+* Providing AMP with the Yospace SDK and Yospace AMP plugin resource objects.
+
+== 1. Providing AMP with a configuration object for Yospace
+
+As a first step to include any of AMP plugins, it is needed to include a {@link akamai.amp.PluginConfig} for the desired plugin. In the case of Yospace is needed to include the `yospace` object (see {@link akamai.amp.yospace.YospaceConfig}) as part of the plugin configurations.
+
+[source, javascript]
+----
+var config = {
+  plugins: {
+    yospace: {
+      // Your Yospace configuration goes here
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----
+
+== 2. Providing AMP with the Yospace SDK and Yospace AMP plugin resource objects
+
+A {@link akamai.amp.Resource} must be included inside the Yospace configuration for both the Yospace SDK and the Yospace Plugin. If you have a custom version of the Yospace SDK you can use its url instead of the standard version by replacing the `src`.
+
+[source, javascript]
+----
+var config = {
+  plugins: {
+    yospace: {
+        debug: false,
+        resources: [
+          {src: "yo-ad-management.min.js", type: "text/javascript"},
+          {src: "../akamai/amp/amp-yospace/Yospace.js", type: "text/javascript"}
+        ]
+      }
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----
+
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

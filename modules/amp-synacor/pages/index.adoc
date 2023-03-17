@@ -1,0 +1,83 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
+= Synacor
+
+Implementation of Synacor authentication into AMP. The plugin can be implemented by providing a `synacor` object in the player config:
+
+[source, javascript]
+----
+var config = {
+  plugins: {
+    synacor: {
+      resources: [
+          { src: "#{paths.plugins}amp-synacor/Synacor.min.js", debug: "#{paths.plugins}amp-synacor/Synacor.js", type: "text/javascript" }
+      ],
+      mvpd: {
+          url: "//service-provider-endpoint",
+          featured: [270, 268, 273],
+      },
+      passive: false,
+      service: "xyz",
+      partner: "eyJlbnZpcm9ubWVudCI6Im1hdiJ9",
+      display: {
+          method: "redirect",
+          heigth: 100,
+          width: 200
+      },
+      transform: false
+    }
+  }
+};
+
+  akamai.amp.AMP.create("#akamai-media-player", config, function (event) {
+      amp = event.player;
+      amp.addTransform(akamai.amp.TransformType.MEDIA, {
+          transform: function (media) {
+            // Provide a base64 encoded AuthN
+            return amp.synacor.authenticate(data)
+                  .then(function (identity) {
+                      // request to service provider endpoint
+                      return authz(identity.response)
+                  })
+                  .then(function (data) {
+                      // Authorize AuthZ response
+                      return amp.synacor.authorize(data)
+                  })
+                  .then(function (authorization) {
+                      // Authorize content by passing the playback token
+                      media.authorization = { key: "hdnea", token: authorization.securityToken }
+                      return media
+                  })
+                  .catch(function () {
+                      amp.synacor.chooser()
+                  })
+          },
+          priority: 1
+      })
+  });
+----
+
+== Auth Events
+
+Application can perform further actions when by mapping Auth events such as reporting, fallbacking or error handling
+
+[source, javascript]
+----
+    amp.addEventListener(akamai.amp.AuthEvents.AUTHENTICATION_FAILED, console.log.bind(this));
+    amp.addEventListener(akamai.amp.AuthEvents.CHOOSE_PROVIDER, console.log.bind(this));
+    amp.addEventListener(akamai.amp.AuthEvents.AUTHORIZED, console.log.bind(this));
+    amp.addEventListener(akamai.amp.AuthEvents.AUTHORIZATION_FAILED, console.log.bind(this));
+    amp.addEventListener(akamai.amp.AuthEvents.AUTHENTICATED, console.log.bind(this));
+----
+
+== Logout
+
+Further Synacor bridge API actions can be perform through `synacor` plugin by providing
+[source, javascript]
+----
+ amp.synacor.logout(idp.id)
+----
+
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

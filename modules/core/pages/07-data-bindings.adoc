@@ -1,9 +1,0 @@
-= Using data bindings
-:categories: ["core"]
-:page-layout: techdocs-web
-:position: 7
-
-[,javascript]
-----
-"${player.mode} Player"
-----

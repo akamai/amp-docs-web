@@ -1,0 +1,90 @@
+= Localization
+
+All of the text that appears in the player's UI is localized. The player provides three language sets: English, Spanish, and French.
+By default the player will use the browser's language setting to determine which strings to display, but this can be overridden by
+passing a `language` value in the config (using ISO 639-1 language codes):
+
+[,javascript]
+----
+var config = {
+	language: "es"
+};
+----
+
+If the player can not find a matching language set, or a specific message string, it will default to English language set. This too can be overridden in the config:
+
+[,javascript]
+----
+var config = {
+	defaults: {
+		language: "es"
+	}
+};
+----
+
+Additional language sets, as well as overrides to existing language sets, can be provided using the config's `locales` property:
+
+[,javascript]
+----
+// override an existing message string
+var config = {
+	locales: {
+		en: {
+			MSG_STREAM_NOT_FOUND: "Sorry, we couldn't find the stream you requested"
+		}
+	}
+};
+----
+
+[,javascript]
+----
+// provide an additional language set
+var config = {
+	locales: {
+		pt: {
+			MSG_STREAM_NOT_FOUND: "Erro de Vídeo"
+		}
+	}
+};
+----
+
+The locales object can also be used to provide region specific overrides/language sets ([BCP 47|https://tools.ietf.org/rfc/bcp/bcp47.txt]):
+
+[,javascript]
+----
+// provide country specific overrides
+var config = {
+	locales: {
+		"en-US": {
+			MSG_OPTION_FONT_COLOR: "Font Color"
+		},
+		"en-GB": {
+			MSG_OPTION_FONT_COLOR: "Font Colour"
+		}
+	}
+};
+----
+
+It is sometimes useful to see which message keys are associated with the player's on screen text. To do this simply provide a [falsy|https://developer.mozilla.org/en-US/docs/Glossary/Falsy]
+value for the config's `language` property:
+
+[,javascript]
+----
+var config = {
+	language: ""
+};
+----
+
+A full list of available message keys can be found by querying the player's `l10n` property:
+
+[,javascript]
+----
+console.log(amp.l10n);
+----
+
+The current list of localized text is also available to data bindings:
+
+[,javascript]
+----
+amp.evaluateBindings("#{l10n.MSG_OF}");
+----

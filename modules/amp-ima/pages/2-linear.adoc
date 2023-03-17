@@ -1,0 +1,99 @@
+= Linear and Non Linear ads.
+
+Implementation of linear and non linear ads relies on the ad tag url provided. That being said there is no custom or any special configuration on player side which allows you to play pre, mid, post or non linear ads such as banners because everything depends on the ad tag url specified.
+
+== Companions
+
+On the other hand, a companion ad which is an ad that goes outside player scope will require certain input on player configuration. Even though the ad response contains companion ads this won't show up unless it is configured on player's configuration.
+
+[source,javascript]
+----
+var config = {
+  plugins: {
+    ima: {
+      resources: [
+        {src: "//imasdk.googleapis.com/js/sdkloader/ima3.js", debug: "//imasdk.googleapis.com/js/sdkloader/ima3_debug.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}amp-ima/Ima.min.js", debug: "${paths.plugins}amp-ima/Ima.js", type: "text/javascript", async: true}
+      ],
+      adTagUrl: {
+        params: {
+          sz: "640x480",
+          iu: "/124319096/external/ad_rule_samples",
+          ciu_szs: "300x250",
+          ad_rule: 1,
+          impl: "s",
+          gdfp_req: 1,
+          env: "vp",
+          output: "xml_vmap1",
+          unviewed_position_start: 1,
+          cust_params: {
+          sample_ar: "premidpostpod"
+        },
+          cmsid: 496,
+          vid: "short_onecue",
+          correlator: "#{now}"
+        }
+      },
+      companions: [
+        {
+          id: "companion-container",
+          width: 300,
+          height: 250
+        }
+      ]
+    }
+  }
+};
+
+akamai.amp.AMP.create("amp", config);
+
+<body>
+  <div id="amp"></div>
+  <div id="companion-container"></div>
+</body>
+----
+
+As you can see the `companions` array section includes as many companions you want to display, this sample only has 1 companion in which the `id` matches the div container in which you want to show up the companion with the following boundaries (300x250).
+
+== VPAID
+
+IMA SDK supports VPAID 2.0 specs, some VPAID ads won't play due to security reasons, depending on the security factor you can configure this through {@link akamai.amp.ima.IMAConfig.vpaidMode} player's configuration as follows.
+
+[source,javascript]
+----
+var config = {
+  plugins: {
+    ima: {
+      resources: [
+        {src: "//imasdk.googleapis.com/js/sdkloader/ima3.js", debug: "//imasdk.googleapis.com/js/sdkloader/ima3_debug.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}amp-ima/Ima.min.js", debug: "${paths.plugins}amp-ima/Ima.js", type: "text/javascript", async: true}
+      ],
+      adTagUrl: {
+        params: {
+          sz: "640x480",
+          iu: "/124319096/external/ad_rule_samples",
+          ciu_szs: "300x250",
+          ad_rule: 1,
+          impl: "s",
+          gdfp_req: 1,
+          env: "vp",
+          output: "xml_vmap1",
+          unviewed_position_start: 1,
+          cust_params: {
+            sample_ar: "premidpostpod"
+          },
+          cmsid: 496,
+          vid: "short_onecue",
+          correlator: "#{now}"
+        }
+      },
+      vpaidMode: "enabled",
+    }
+  }
+};
+
+akamai.amp.AMP.create("amp", config);
+----
+
+For questions related VPAID 2.0 please visit
+{@link https://developers.google.com/interactive-media-ads/docs/sdks/html5/vpaid2js}

@@ -1,0 +1,30 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
+= Datazoom
+
+Implementation of Datazoom into AMP. The plugin can be implemented by providing a `datazoom` object in the player config:
+
+Custom metadata can be passed by adding each key-value pair in `metadata` object, these could either be an existing variable in DOM, static value or an exposed DOM function/method. Player and media data are accessible as well through player data binding. i.e
+
+[source, javascript]
+----
+var config = {
+  plugins: {
+    datazoom: {
+        resources: [
+            { src: "../akamai/amp/amp-datazoom/Datazoom.min.js", debug: "../akamai/amp/amp-datazoom/Datazoom.js", type: "text/javascript" }
+        ],
+        config: "https://stagingplatform.datazoom.io/beacon/v1/config?configuration_id=81971cf0-e1bc-4213-96a7-2ceac3f9dcb7",
+        metadata: {
+            platform: "html5",
+            width: "#{player.width}",
+            height: "#{player.height}"
+        }
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

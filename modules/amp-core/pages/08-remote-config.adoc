@@ -1,0 +1,96 @@
+= Loading remote configurations
+
+There are some scenarios where there is a need to load a player configuration from a remote location. Here are a few methods to achieve this goal:
+
+. Load the configuration client side using XMLHttpRequest:
+** config.json:
+
+[source,javascript]
+----
+    {"autoplay":true}
+----
+
+** html page:
+
+[source,javascript]
+----
+ var xhr = new XMLHttpRequest();
+ xhr.open("GET", "config.json");
+ xhr.onload = function (event) {
+     var config = JSON.parse(xhr.responseText);
+     // override page specific values
+     config.media = {
+         src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
+         type: "video/mp4"
+     };
+     var amp = akamai.amp.AMP.create("amp", config);
+ };
+ xhr.onerror = function (event) {
+     console.log("Could not load player config", event.error);
+ };
+----
+
+** Using AMP's Promise based request functionality:
+
+[source,javascript]
+----
+ akamai.amp.AMP.requestJson("config.json")
+     .then(function (config) {
+         // override page specific values
+         config.media = {
+             src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
+             type: "video/mp4"
+         };
+         var amp = akamai.amp.AMP.create("amp", config);
+     })
+     .catch(function (error) {
+         console.log("Could not load player config", event.error);
+     });
+----
+
+. Load the configuration client side using JSONP:
+** config.json:
+
+[source,javascript]
+----
+ jsonp({autoplay:true});
+----
+
+** html page:
+
+[source,javascript]
+----
+<script>
+ function jsonp(config) {
+     // override page specific values
+     config.media = {
+         src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
+         type: "video/mp4"
+     };
+     var amp = akamai.amp.AMP.create("amp", config);
+ }
+ </script>
+ <script src="config.js"></script>
+----
+
+. Embed the configuration statically in the page using server side script:
+
+** config.json:
+
+[source,javascript]
+----
+ {"autoplay":true}
+----
+
+** html page:
+
+[source,javascript]
+----
+ var config = <?php include("config.json"); ?>;
+ // override page specific values
+ config.media = {
+     src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
+     type: "video/mp4"
+ };
+ var amp = akamai.amp.AMP.create("amp", config);
+----

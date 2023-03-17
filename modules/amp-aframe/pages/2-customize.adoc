@@ -1,0 +1,144 @@
+= Customize
+In order to add custom 3-D elements you will need to use `aframe` API in order to bind callbacks to the player as follows.
+
+== 1.Create player
+
+[source, javascript]
+----
+
+var config = {
+  plugins: {
+    aframe: {
+      resources: [
+        {src: "//amp-aframe.io/releases/1.0.4/amp-aframe.min.js",debug:"//amp-aframe.io/releases/1.0.4/amp-aframe.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}amp-aframe/Aframe.min.js", debug: "${paths.plugins}amp-aframe/Aframe.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}amp-aframe/Aframe.min.css", debug: "${paths.plugins}amp-aframe/Aframe.css", type: "text/css", async: true}
+      ],
+      data: {
+        rotation: "0 270 0",
+        strict: true
+      },
+      mouse: {
+        speed: 2
+      }
+    }
+  }
+};
+
+akamai.amp.AMP.create("#akamai-media-player", config);
+----
+
+== 2.Create an aframe entity and its `handle-events` component
+
+[source, javascript]
+----
+
+var thebox = document.createElement('a-box');
+thebox.innerHTML = `<a-box position='1.5 0.25 5.5' color='#00B5B5' width='2' height='2' depth='2' src = 'play.jpg' handle-events> <a-animation attribute='rotation' begin='click' repeat='0' to='0 360 0'></a-animation></a-box>`
+----
+
+== 3.Append it to aframe's scene within the player
+
+[source, javascript]
+----
+
+var scene = document.getElementsByTagName("a-scene");
+scene[0].appendChild(thebox);
+----
+
+== 4. Register `handle-events` custom component
+
+[source, javascript]
+----
+
+AFRAME.registerComponent('handle-events', {
+  init: function () {
+    var el = this.el;  //
+    el.addEventListener("mouseenter", function () {
+      el.setAttribute("color", "#24CAFF");
+    });
+    el.addEventListener("mouseleave", function () {
+      el.setAttribute("color", "#EF2D5E");
+    });
+    el.addEventListener("click", function () {
+      if (!amp.getPaused()) { // amp is player instance
+        amp.pause()
+      }
+      else {
+        amp.play()
+      }
+    });
+  }
+});
+
+----
+
+== 5. Put everything in place.
+Once the player is being created you can now create and register custom components. See the following full sample.
+
+[source, javascript]
+----
+var config = {
+  plugins: {
+    aframe: {
+      resources: [
+        {src: "//amp-aframe.io/releases/1.0.4/amp-aframe.min.js",debug:"//amp-aframe.io/releases/1.0.4/amp-aframe.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}amp-aframe/Aframe.min.js", debug: "${paths.plugins}amp-aframe/Aframe.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}amp-aframe/Aframe.min.css", debug: "${paths.plugins}amp-aframe/Aframe.css", type: "text/css", async: true}
+      ],
+      data: {
+        rotation: "0 270 0",
+        strict: true
+      },
+      mouse: {
+        speed: 2
+      }
+    }
+  }
+};
+
+var amp;
+akamai.amp.AMP.create("#akamai-media-player", config).then(function (player) {
+  amp = player;
+  amp.once("canplaythrough",addCustomElement);
+});
+
+function addCustomElement(){
+  var scene = document.getElementsByTagName("a-scene");
+
+  AFRAME.registerComponent("handle-events", {
+    init: function () {
+      var el = this.el;  // <a-box>
+      el.addEventListener("mouseenter", function () {
+        el.setAttribute("color", "#24CAFF");
+      });
+      el.addEventListener("mouseleave", function () {
+        el.setAttribute("color", "#EF2D5E");
+      });
+      el.addEventListener("click", function () {
+        if (!amp.getPaused()) { // amp is player instance
+          amp.pause()
+        }
+        else {
+          amp.play()
+        }
+      });
+    }
+  });
+
+  var text = document.createElement("a-text");
+  text.setAttribute("value", "Move the camera sight at the figure to pause/play");
+  text.setAttribute("rotation", "0 15 0");
+  text.setAttribute("width", "8");
+
+  var camera = document.createElement("a-camera");
+  camera.innerHTML = "<a-cursor id='cursor' material='color: cyan; shader: flat' geometry='primitive: ring; radiusInner: 0.09; radiusOuter: 0.11'> </a-cursor>;
+
+  var thebox = document.createElement("a-box");
+  thebox.innerHTML = `<a-box position='1.5 0.25 5.5' color='#00B5B5' width='2' height='2' depth='2' src = 'play.jpg' handle-events> <a-animation attribute='rotation' begin='click' repeat='0' to='0 360 0'></a-animation></a-box>`
+
+  scene[0].appendChild(text);
+  scene[0].appendChild(thebox);
+  scene[0].appendChild(camera);
+}
+----
