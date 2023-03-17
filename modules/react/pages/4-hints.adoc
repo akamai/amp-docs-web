@@ -1,3 +1,49 @@
+= Hints
+
 React plugin displays informative text about specific player buttons when hovering over them. This feature can be toggle enabled or disabled through player configuration if preferred.
 
+[source,javascript]
+----
+var config = {
+  var config = {
+    plugins: {
+      react: {
+        resources: [
+          {src: "#{paths.plugins}react/libs/react.min.js", debug: "#{paths.plugins}react/libs/react.js", type: "text/javascript"},
+          {src: "#{paths.plugins}react/React.min.css", debug: "#{paths.plugins}react/React.css", type: "text/css"},
+          {src: "#{paths.plugins}react/React.js", debug: "#{paths.plugins}react/React.js", type: "text/javascript"}
+        ],
+        hint: {
+          enabled: true,
+          mode: "fixed"
+        }
+      }
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----
+
 if adding components to react UI i.e buttons, the property `data-rh` can be used to indicate the tooltip message for the element to be shown.
+
+[source,javascript]
+----
+akamai.amp.AMP.create("amp", config).then(function (player) {
+  var amp = player;
+  var component = React.createElement("button", {
+    className: "amp-icon amp-fullscreen",
+    id: "component",
+    'data-rh':'Hint',
+    key: "fs",
+    onClick: function () {
+      console.log("Custom Control");
+    }
+  });
+  amp.react.controls.addComponent(component);
+  // amp.react.controls.removeComponent(component);
+
+  var element = document.createElement("div");
+  amp.react.container.appendChild(element);
+  // amp.react.container.removeChild(element);
+});
+----

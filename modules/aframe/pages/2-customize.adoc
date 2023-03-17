@@ -1,8 +1,7 @@
-=== Getting started
-
+= Customize
 In order to add custom 3-D elements you will need to use `aframe` API in order to bind callbacks to the player as follows.
 
-==== 1.Create player
+== 1.Create player
 
 [source, javascript]
 ----

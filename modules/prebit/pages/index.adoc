@@ -1,10 +1,11 @@
 include::ROOT:partial$amp-gobal-attributes.adoc[]
 
-== Yospaceanalytics
+= Prebid
 
-Implementation of Yospace into AMP.
+Prebid Header Bidding for Akamai Adaptive Media Player.
 
 * xref:1-overview.adoc[Overview]
+* xref:2-usp.adoc[Using Consent Management Module]
 
 :date: 20/2/2023
 :last-revision: 20/3/2023

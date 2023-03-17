@@ -12,10 +12,178 @@ The topics covered in this page are:
 
 To properly include Segment.io so AMP can use it, copy the loading script provided by Segment as indicated in their https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/quickstart/#step-2-copy-the-segment-snippet[documentation] into the page `head`, then load the amp `Segment.js` plugin by including it as https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/akamai.amp.PlayerResource.html[resource] in the plugin configuration as shown below.
 
+[source, javascript]
+----
+var config = {
+  plugins: {
+    segment: {
+      resources: [
+        { src: "${paths.plugins}segment/Segment.js", type: "text/javascript" }
+      ]
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----
+
 ==== 2. Available Tracking options
 
 Segment.io can be configured by providing the `segment` object as part of the player configuration object. The available configuration options are shown in the example below.
 
+[source,javascript]
+----
+var config = {
+  plugins: {
+    segment: {
+      resources: [
+        { src: "${paths.plugins}segment/Segment.js", type: "text/javascript" }
+      ],
+      properties: {
+        all: {
+          session_id: "#{segment_session}",
+          position: 0,
+          total_length: "#{media.isLive ? 86400 : parseInt(media.duration) }",
+          video_content_type: "#{media.isLive ? 'live' : 'vod'}",
+          video_ad_supported: "#{segment_has_ads}",
+          video_is_livestream: "#{media.isLive}",
+          video_player_state: "no player state",
+          video_player_content_type: "no player content type",
+          video_asset_title: "#{media.title}",
+          video_asset_id: "#{media.guid}",
+          video_channel_group_id: "no channel group id",
+          video_primary_business_unit: "no primary business unit",
+          video_secondary_business_unit: "no secondary business unit",
+          video_series_name: "no program",
+          video_series_id: "no series id",
+          video_fox_profile: false,
+          video_content_length: "#{media.isLive ? 86400 : parseInt(media.duration) }",
+          video_content_type: "#{media.isLive ? 'live' : 'vod'}",
+          video_ad_model: "no ad model",
+          video_content_length_format: "no format",
+          video_rating: "no rating",
+          video_asset_category: "no asset category",
+          video_genre: "no genre",
+          video_season_number: "no season",
+          video_episode_number: "no episode",
+          video_tms_id: "no tms id",
+          video_station_id: "no station id",
+          video_network: "no network",
+          video_affiliate_window: "no affiliate window",
+          video_authorizing_network: "no authorizing network",
+          video_player_type: "standard player",
+          video_content_channel: "no content channel",
+          video_ugc_clip: "none",
+          video_sports_type: "no sport",
+          video_sponsor: "no sponsor",
+          video_screen_layout: "no multiview",
+          video_airplay: false,
+          video_first_air_date: "no first air date",
+          video_first_digital_date: "no first digital date",
+          video_originator: "no source",
+          video_cross_device_play: false,
+          video_cast_source_name: "no cast source name",
+          video_cast_source_platform: "no cast source platform",
+          video_cast_source_version: "no cast source version",
+          video_cast_source_build: "no cast source version",
+          video_content_subscription_type: "no subscription type",
+          video_feed: "no feed",
+          video_is_resume: false,
+          video_is_continuous: false,
+          video_is_restart: false,
+          video_is_autoplay: "#{segment_autoplay}",
+          video_is_fullscreen: "#{segment_fullscreen}",
+          video_is_livestream: "#{media.isLive}",
+          video_volume: "#{segment_volume}"
+        },
+        playback: {
+          ad_enabled: "#{segment_has_ads}",
+          video_player: "#{akamai.amp.AMP.VERSION}",
+          livestream: "#{media.isLive}",
+          bitrate: "no bitrate",
+          framerate: "no framerate",
+          content_pod_id: "no content pod id",
+          ad_asset_id: "no ad asset id",
+          ad_pod_id: "no ad pod id",
+          sound: "#{segment_volume}",
+          full_screen: false,
+          quality: "no quality",
+        },
+        content: {
+          asset_id: "#{media.guid}",
+          pod_id: "#{segment_ad_pod}",
+          title: "no title",
+          description: "no description",
+          publisher: "no publisher",
+          livestream: "#{media.isLive}",
+          bitrate: "no bitrate",
+          framerate: "no framerate",
+          keywords: "no keywords",
+          season: "no season",
+          episode: "no episode",
+          genre: "no genre",
+          program: "no program",
+          channel: "no channel",
+          full_episode: false,
+          airdate: "no airdate"
+        },
+        ad: {
+          asset_id: "#{ad.id}",
+          video_ad_length: "#{ad.duration}",
+          video_ad_model: "linear",
+          publisher: "no publisher",
+          title: "#{ad.title}",
+          pod_id: "#{ad.id}",
+          pod_position: "#{ad.position}",
+          pod_length: "#{ad.duration}",
+          video_ad_pod_type: "#{segment_ad_type}",
+          video_ad_pod_id: "#{ad.id}",
+          video_ad_pod_name: "#{ad.metadata.getTitle()}",
+          video_ad_pod_position: "#{ad.position}",
+          video_ad_in_pod_position: "no ad in pod position",
+          content: "no content",
+          ad_type: "#{segment_ad_type}",
+          type: "#{segment_ad_type}",
+          load_type: "no load type",
+          video_ad_name: "no ad name",
+          video_ad_id: "#{ad.id}",
+          video_fw_vcid2: "no vcid2",
+          video_fw_sitesection: "no site section",
+          video_ad_break_type: "#{segment_ad_type}",
+          video_ad_break_name: "#{ad.metadata.getTitle()}",
+          video_ad_break_position: "#{ad.position}",
+          video_ad_campaign_id: "no ad campaign id",
+          video_ad_creative_id: "no ad creative id",
+          video_ad_site_id: "no ad site id",
+          video_ad_placement_id: "no ad placement id",
+          video_ad_advertiser: "no advertiser name",
+          video_ad_creative_url: "no ad creative url"
+        },
+        custom: {
+          content_asset_ids: "no content asset ids",
+          content_pod_ids: "no content pod ids"
+        }
+      }
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----
+
 ==== 3. Loading a Previouly Obtained Analytics.js
 
 In some scenarios it might be useful to obtain the `analytics.js` script (Segment plugin) and host it instead of using the loading script provided by Segment. In those scenarios, this can be achieved by loading the `analytics.js` by adding it as a https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/akamai.amp.PlayerResource.html[resource] inside the `segment` object in the player configuration as shown below.
+
+[source,javascript]
+----
+var config = {
+  plugins: {
+    segment: {
+      resources: [
+        { src: "CUSTOM_PATH_TO/analytics.min.js", type: "text/javascript" },
+        { src: "${paths.plugins}segment/Segment.js", type: "text/javascript" }
+      ]
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----

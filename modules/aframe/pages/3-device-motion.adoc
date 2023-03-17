@@ -1,10 +1,10 @@
-=== Getting started
+= Device Motion
 
 On IOS 13 `a-frame` may not work unless you grant access to device's gyroscope and motion sensors.
 
 Please see the following link for more information regarding device motion permissions on IOS 13 https://github.com/aframevr/aframe/issues/4287
 
-==== 1.Using deviceMotion permissions.
+== 1.Using deviceMotion permissions.
 
 [source, javascript]
 ----

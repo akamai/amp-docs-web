@@ -1,7 +1,11 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
 == Synacor
 
 Implementation of Synacor MVPD Picker authentication into AMP.
 
-==== Getting Started
+* xref:1-overview.adoc[Overview]
 
-* {@tutorial 1-overview}
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

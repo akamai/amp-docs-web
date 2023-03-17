@@ -1,0 +1,38 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
+= Event Management
+
+Implementation of live event management into AMP. The plugin can be implemented by providing a `eventmanagement` object in the player config:
+
+[source, javascript]
+----
+var config = {
+  plugins: {
+    eventmanagement : {
+      resources: [
+        {src: "#{paths.plugins}eventmanagement/Eventmanagement.min.js", debug: "#{paths.plugins}eventmanagement/Eventmanagement.js", type: "text/javascript"},
+        {src: "#{paths.plugins}eventmanagement/Eventmanagement.min.css", debug: "#{paths.plugins}eventmanagement/Eventmanagement.css", type: "text/css"}
+      ],
+      url : "playerstate.txt",
+      interval : 5,
+      states : [{
+        id : "pre",
+        poster : "pre_slate.png"
+      }, {
+        id : "post",
+        poster : "post_slate.png"
+      }, {
+        id : "error",
+        poster : "error_slate.png"
+      }, {
+        id : "off",
+        poster : "off_slate.png"
+      }]
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

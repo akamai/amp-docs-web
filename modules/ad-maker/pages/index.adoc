@@ -1,0 +1,15 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
+== Ad Marker plugin for AMP
+
+Implementation of HLS and Dash Ad Marker detection with AMP.
+
+- xref:1-overview.adoc[Overview]
+
+- xref:2-hls.adoc[Using HLS Ad Markers with AMP]
+
+- xref:3-dash.adoc[Using MPEG-DASH Ad Markers with AMP]
+
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

@@ -1,3 +1,5 @@
+= Customization
+
 This tutorial shows:
 
 . CSS classes quick reference.
@@ -6,7 +8,7 @@ This tutorial shows:
 . Hidding UI components using CSS.
 . Creating and Adding new UI components.
 
-==== 1. CSS classes quick reference.
+== 1. CSS classes quick reference.
 
 Here is a non-exhaustive list of the class names used in the player UI. This list can be used to quickly and easlily modify the look and feel of most relevant UI components.
 
@@ -52,16 +54,84 @@ _Controls_
 
 For simple colorization of the player, the theme api can be used by passing a `theme` object through the `config` object:
 
-Themes can also be set at runtime:
-<pre class="prettyprint">
-amp.react.theme = {
- text: "#746A3C",
- foreground: "#C2B49B",
- background: "#2E3D33"
+[source,javascript]
+----
+ar config = {
+  var config = {
+    plugins: {
+      react: {
+        //Here is a simple theme object
+        theme: {
+          text: "#746A3C",
+          foreground: "#C2B49B",
+          background: "#2E3D33"
+        }
+      }
+    }
+  }
 };
-</pre>
+akamai.amp.AMP.create("amp", config);
+----
+
+Themes can also be set at runtime:
+
+[source,javascript]
+----
+amp.react.theme = {
+  text: "#746A3C",
+  foreground: "#C2B49B",
+  background: "#2E3D33"
+};
+----
 
 Here is a simple example using the theme API:
+
+[source,javascript]
+----
+<html>
+<head>
+    <script src="https://amp.akamaized.net/hosted/1.1/player.esi?apikey=MY_API_KEY&version=9.1.15"></script>
+</head>
+<body>
+    <div class="sample">
+        <div id="amp"></div>
+    </div>
+    <script>
+        var config = {
+            media: {
+              src: "https://my_hls_asset.m3u8",
+              type: "application/x-mpegURL"
+            },
+            plugins:{
+              react:{
+                theme: {
+                  text: "#746A3C",
+                  foreground: "#C2B49B",
+                  background: "#2E3D33"
+                }
+              }
+            }
+        };
+        akamai.amp.AMP.create("amp", config, (event) => {
+            amp = event.player;
+            // OR do it at run time using:
+            // amp.react.theme = {
+            //  text: "#746A3C",
+            //  foreground: "#C2B49B",
+            //  background: "#2E3D33"
+            // };
+        });
+    </script>
+    <style type="text/css">
+        .sample {
+            border-style: none;
+            width: 640px;
+            height: 360px;
+        }
+    </style>
+</body>
+</html>
+----
 
 You can play arround and create your own themes using our https://player.akamai.com/designer/[web designer] tool.
 
@@ -69,20 +139,235 @@ You can play arround and create your own themes using our https://player.akamai.
 
 For modifications beyond simple colorization, CSS can be used to override the styles of the UI components:
 
+[source,javascript]
+----
+<style>
+  .amp-icon:hover {
+    color: #B98853;
+  }
+  .amp-playpause {
+    color: #B18742
+  }
+</style>
+----
+
 Building on our previous example we will use the CSS classes to add a nice yellow to our play button only and also add a slightly stronger brown to all controls when the cursor hover over them.
 
+[source,javascript]
+----
+<html>
+<head>
+    <script src="https://amp.akamaized.net/hosted/1.1/player.esi?apikey=MY_API_KEY&version=9.1.15"></script>
+</head>
+<body>
+    <div class="sample">
+        <div id="amp"></div>
+    </div>
+    <script>
+        var config = {
+            media: {
+              src: "https://my_hls_asset.m3u8",
+              type: "application/x-mpegURL"
+            },
+            plugins:{
+              react:{
+                theme: {
+                  text: "#746A3C",
+                  foreground: "#C2B49B",
+                  background: "#2E3D33"
+                }
+              }
+            }
+        };
+        akamai.amp.AMP.create("amp", config, (event) => {
+            amp = event.player;
+        });
+    </script>
+    <style type="text/css">
+        .sample {
+            border-style: none;
+            width: 640px;
+            height: 360px;
+        }
+        .amp-icon:hover {
+          color: #B98853;
+        }
+        .amp-playpause {
+          color: #B18742
+        }
+    </style>
+</body>
+</html>
+----
+
 Notice that this can also be done by passing the CSS to `amp.react.style` as shown below:
+
+[source,javascript]
+----
+<script>
+  amp.react.style.innerHTML += ".amp-playpause { color: #B18742; }"
+</script>
+----
 
 ==== 4. Hidding UI components using CSS.
 
 To hide components using CSS it is as simple as setting their display mode to none:
 
+[source,javascript]
+----
+<style>
+  .amp-settings {
+    display: none !important;
+  }
+  .amp-share {
+    display: none !important;
+  }
+</style>
+----
+
 Building on our example, we'll remove both the settings and the share button since they are not required in our application:
+
+[source,javascript]
+----
+<html>
+<head>
+    <script src="https://amp.akamaized.net/hosted/1.1/player.esi?apikey=MY_API_KEY&version=9.1.15"></script>
+</head>
+<body>
+    <div class="sample">
+        <div id="amp"></div>
+    </div>
+    <script>
+        var config = {
+            media: {
+              src: "https://my_hls_asset.m3u8",
+              type: "application/x-mpegURL"
+            },
+            plugins:{
+              react:{
+                theme: {
+                  text: "#746A3C",
+                  foreground: "#C2B49B",
+                  background: "#2E3D33"
+                }
+              }
+            }
+        };
+        akamai.amp.AMP.create("amp", config, (event) => {
+            amp = event.player;
+        });
+    </script>
+    <style type="text/css">
+        .sample {
+            border-style: none;
+            width: 640px;
+            height: 360px;
+        }
+        .amp-icon:hover {
+          color: #B98853;
+        }
+        .amp-playpause {
+          color: #B18742
+        }
+        .amp-settings {
+          display: none !important;
+        }
+        .amp-share {
+          display: none !important;
+        }
+    </style>
+</body>
+</html>
+----
 
 ==== 5. Creating and Adding new UI components.
 
 More advanced customizations can be made using JS. AMP react API, provides the `React.createElement` method. `React.createElement`, can be used to easily create new UI elements to be used by the player.
 
+[source,javascript]
+----
+akamai.amp.AMP.create("amp", config).then(function (player) {
+  var amp = player;
+  var component = React.createElement("button", {
+    className: "amp-icon amp-css-sample",
+    id: "component",
+    key: "css",
+    onClick: function () {
+      window.open('https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/amp-web-react/tutorial-2-customization.html', '_blank');
+    }
+  });
+  amp.react.controls.addComponent(component);
+});
+----
+
 Notice that the component template for the button we're creating has the attribute `onClick`. The `onClick` attributte can be used to set a function to be called when the button is pressed.
 
 Our complete example looks like this:
+
+[source,javascript]
+----
+<html>
+<head>
+    <script src="https://amp.akamaized.net/hosted/1.1/player.esi?apikey=MY_API_KEY&version=9.1.15"></script>
+</head>
+<body>
+    <div class="sample">
+        <div id="amp"></div>
+    </div>
+    <script>
+        var config = {
+            media: {
+              src: "https://my_hls_asset.m3u8",
+              type: "application/x-mpegURL"
+            },
+            plugins:{
+              react:{
+                theme: {
+                  text: "#746A3C",
+                  foreground: "#C2B49B",
+                  background: "#2E3D33"
+                }
+              }
+            }
+        };
+        akamai.amp.AMP.create("amp", config, (event) => {
+            amp = event.player;
+              //Take note that "amp-css-sample" doesn't exist as an amp class but we're adding it to later modify this component in the css.
+              var component = React.createElement("button", {
+                className: "amp-icon amp-css-sample",
+                id: "component",
+                key: "css",
+                onClick: function () {
+                  window.open('https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/amp-web-react/tutorial-2-customization.html', '_blank');
+                }
+              });
+              amp.react.controls.addComponent(component);
+        });
+    </script>
+    <style type="text/css">
+        .sample {
+            border-style: none;
+            width: 640px;
+            height: 360px;
+        }
+        .amp-icon:hover {
+          color: #B98853;
+        }
+        .amp-playpause {
+          color: #B18742
+        }
+        .amp-settings {
+          display: none !important;
+        }
+        .amp-share {
+          display: none !important;
+        }
+        .amp-css-sample:before {
+          content: "DOC";
+          font-size: 10px;
+          margin: 0px !important;
+        }
+    </style>
+</body>
+</html>
+----

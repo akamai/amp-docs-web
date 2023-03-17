@@ -1,13 +1,14 @@
+= Dash
 Ad Marker plugin allows users to get ad avail information as SCTE35 markers are carried in DASH Event Messages (emsg).
 
-=== Supported SCTE35 outputs
+== Supported SCTE35 outputs
 
 Plugin supports the following Dash ad markers outputs
 
 * XML
 * Base64 encoded
 
-==== SCTE35 Markers
+=== SCTE35 Markers
 
 Ad marker plugin supports base64 encoded SCT35 and XML ad avail messages. The plugin will throw a `scte35` event along with the decoded scte35 message when they are found, if the plugin is not able to decode the scte35 this will be fired as it comes for further client-side decryption.
 

@@ -1,0 +1,24 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
+= Core
+
+* xref:01-player-embed.adoc[Embedding AMP]
+* xref:02-amp-create.adoc[Create]
+* xref:03-load-media.adoc[Load Media]
+* xref:04-autoplay.adoc[Auto Play]
+* xref:05-authorization.adoc[Authorization]
+* xref:06-media-transforms.adoc[Media Transform]
+* xref:07-data-bindings.adoc[Data Bindings]
+* xref:08-remote-config.adoc[Remote Config]
+* xref:09-custom-plugin.adoc[Custom Plugin]
+* xref:10-default-settings.adoc[Default Settings]
+* xref:11-localization.adoc[Localization]
+* xref:12-captioning.adoc[Captioning]
+* xref:13-drm.adoc[DRM]
+* xref:14-error-handling.adoc[Error Handing]
+* xref:15-dvr.adoc[DVR]
+* xref:16-fine-tuning.adoc[Fine Tuning]
+
+:date: 16/03/2023
+:last-revision: 16/03/2023
+include::ROOT:partial$amp-additional-info.adoc[]

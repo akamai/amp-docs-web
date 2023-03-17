@@ -1,7 +1,0 @@
-== Moat Analytics
-
-Implementation of MOAT Analytics into AMP.
-
-==== Getting Started
-
-* {@tutorial 1-overview}

@@ -1,3 +1,5 @@
+= Overview
+
 This tutorial shows how to integrate IMA ads with AMP.
 
 This page covers:
@@ -5,16 +7,15 @@ This page covers:
 * Providing AMP with a configuration object for IMA.
 * Providing AMP with the IMA SDK and IMA AMP plugin resource objects.
 * Providing an AdTagUrl.
- ** Using the AdTagUrl object.
+** Using the AdTagUrl object.
 * Providing further configuration.
 
-==== 1. Providing AMP with a configuration object for IMA
+== 1. Providing AMP with a configuration object for IMA
 
 As a first step to include any of AMP plugins, it is needed to include a {@link akamai.amp.PluginConfig} for the desired plugin. In the case of IMA is needed to include the `ima` object (see {@link akamai.amp.ima.IMAConfig}) as part of the plugin configurations.
 
-[,nt]
+[source,javascript]
 ----
-
 var config = {
   plugins: {
     ima: {
@@ -25,15 +26,12 @@ var config = {
 akamai.amp.AMP.create("amp", config);
 ----
 
-{blank} +
-
-==== 2. Providing AMP with the IMA SDK and IMA AMP plugin resource objects
+== 2. Providing AMP with the IMA SDK and IMA AMP plugin resource objects
 
 A {@link akamai.amp.Resource} must be included inside the IMA configuration for both the IMA SDK and the IMA Plugin. If you have a custom version of the IMA SDK you can use its url instead of google's version by replacing the `src`.
 
-[,nt]
+[source,javascript]
 ----
-
 var config = {
   plugins: {
     ima: {
@@ -47,15 +45,12 @@ var config = {
 akamai.amp.AMP.create("amp", config);
 ----
 
-{blank} +
-
-==== 3. Providing an AdTagURL
+== 3. Providing an AdTagURL
 
 After providing the required resouce objects, the next step is to include the `adTagUrl` into the `ima` configuration.
 
-[,nt]
+[source,javascript]
 ----
-
 var config = {
   plugins: {
     ima: {
@@ -70,15 +65,12 @@ var config = {
 akamai.amp.AMP.create("amp", config);
 ----
 
-{blank} +
-
-===== 3.1. Using the AdTagUrl object
+=== 3.1. Using the AdTagUrl object
 
 In some scenarios it could be worthwile to add the `adTagUrl` to the configuration as an object so the `adTagUrl` arguments are easier to modify.
 
-[,nt]
+[source,javascript]
 ----
-
 var config = {
   plugins: {
     ima: {
@@ -111,15 +103,12 @@ var config = {
 akamai.amp.AMP.create("amp", config);
 ----
 
-{blank} +
-
-==== 4. Providing further configuration
+== 4. Providing further configuration
 
 Finally, other configurations like companion ads, ads rendering settings, vpaid, etc; can be used by adding them to the `ima` configuration object.
 
-[,nt]
+[source,javascript]
 ----
-
 var config = {
   plugins: {
     ima: {

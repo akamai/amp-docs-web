@@ -1,7 +1,0 @@
-== Akamai Media Analytics
-
-Implementation of Akamai Media Analytics into AMP.
-
-==== Getting Started
-
-* {@tutorial 1-overview}

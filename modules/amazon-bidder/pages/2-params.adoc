@@ -1,3 +1,5 @@
+= Params
+
 The `params` config property may be used for setting up custom params to every bid request
 
 [source, javascript]

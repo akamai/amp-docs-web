@@ -1,10 +1,10 @@
-=== Using Global Site Tag (gtag)
+= Using Global Site Tag (gtag)
 
 If using Global Site Tag as the tagging framework for Universal Analytics and Google Analytics 4 you can instruct AMP to report data throughout gtag.js by setting the `mode` property as `&#39;gtag&#39;`
 
 The following sample shows how to turn `gtag` in `googleanalytics` plugin for AMP.
 
-==== Google Analytics 4
+== Google Analytics 4
 
 Using `gtag` as data collector for Google Analytics 4
 
@@ -65,7 +65,7 @@ var config = {
   }
 };
 ----
-==== Universal Analytics
+== Universal Analytics
 
 Using `gtag` as data collector for Universal Analytics
 [source,javascript]

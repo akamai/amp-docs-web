@@ -1,5 +1,0 @@
-Implementation of Nielsen DCR/DTVR analytics into AMP. The plugin can be implemented by providing a `nielsen` object to the player config:
-
-==== 1.Nielsen DCR configuration
-
-==== 2.Nielsen DTVR configuration

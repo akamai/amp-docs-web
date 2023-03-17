@@ -1,6 +1,49 @@
-Using Consent Management Module in AMP
+= Using Consent Management Module in AMP
 
 For US Privacy `prebid.js` supports http://prebid.org/dev-docs/modules/consentManagementUsp.html[Consent Management Module] which could be used on Prebid plugin for AMP by passing the following configuration through Prebid's `options` as follow&quot;:
+
+[source,javascript]
+----
+var config = {
+  plugins: {
+    prebid: {
+      resources: [
+        {src: "https://acdn.adnxs.com/prebid/not-for-prod/1/prebid.js", type: "text/javascript", async: true},
+        {src: "${paths.plugins}prebid/Prebid.js", type: "text/javascript", async: true}
+      ],
+      adUnits: {
+        code: 'video1',
+        mediaTypes: {
+          video: {
+            playerSize: [640, 480],
+            context: 'instream'
+          }
+        },
+        bids: [{
+          bidder: 'spotx',
+          params: {
+            channel_id: 79391
+          }
+        }]
+      },
+      options: {
+        debug:true,
+        consentManagement: {
+          usp: {
+            cmpApi: "static",
+            consentData: {
+              getUSPData: {
+                uspString: "1---"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+akamai.amp.AMP.create("amp", config);
+----
 
 == Implementation of US Privacy Prebid in AMP.
 

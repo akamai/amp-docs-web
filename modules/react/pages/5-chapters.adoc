@@ -1,14 +1,87 @@
+= Chapters
+
 This tutorial shows how to implement chapters based on WebVTT spec.
 
-==== How to add chapter markers using WebVTT
+== How to add chapter markers using WebVTT
 
 Adding navigation markers for the video timeline can be done using a WebVTT file.
 A WebVTT file can consist in chapters that are plain text typically just a single line whose text is interpreted as a chapter title that describes the chapter as a navigation target.
 https://www.w3.org/TR/webvtt1/#introduction-chapters[See Chapter]
 
+[source,javascript]
+----
+WEBVTT FILE
+
+1
+00:00:00.000 --> 00:00:10.100
+Intro slide
+
+2
+00:00:10.100 --> 00:00:20.000
+Music
+
+3
+00:00:20.000 --> 00:00:30.000
+Prologue
+----
+
 To add chapter markers in AMP a `track` object must be passed along the `media` object, indicating the file location, language and kind.
 Please refer to {@link akamai.amp.Media} and {@link akamai.amp.Track} to know more about the media and track interfaces.
 
-==== Multi-language chapter markers
+[source,javascript]
+----
+var config = {
+    autoplay: true,
+    autoplayPolicy: "muted",
+    media: {
+        src: "https://mdtp-a.akamaihd.net/customers/akamai/video/VfE.mp4",
+        track: [
+            {
+                src: "https://mdtp-a.akamaihd.net/chapters/chapters.vtt",
+                type: "text/vtt",
+                srclang: "en",
+                kind: "chapters"
+            }
+        ]
+    }
+};
+
+akamai.amp.AMP.create("amp", config);
+----
+
+== Multi-language chapter markers
 
 Alternatively, different languages tracks can be provided into a single `media` object, making the timeline UI to match the user's preferred language.
+
+[source,javascript]
+----
+var config = {
+    autoplay: true,
+    autoplayPolicy: "muted",
+    media: {
+        src: "https://mdtp-a.akamaihd.net/customers/akamai/video/VfE.mp4",
+        track: [
+            {
+                src: "../chapters/bbb-en.vtt",
+                type: "text/vtt",
+                srclang: "en",
+                kind: "chapters"
+            },
+            {
+                src: "../chapters/bbb-es.vtt",
+                type: "text/vtt",
+                srclang: "es",
+                kind: "chapters"
+            },
+            {
+                src: "../chapters/bbb-fr.vtt",
+                type: "text/vtt",
+                srclang: "fr",
+                kind: "chapters"
+            }
+        ]
+    }
+};
+
+akamai.amp.AMP.create("amp", config);
+----

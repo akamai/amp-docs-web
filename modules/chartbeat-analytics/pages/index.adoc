@@ -1,0 +1,33 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
+= Chartbeat Analytics
+
+Chartbeat Analytics plugin for Akamai Adaptive Media Player http://support.chartbeat.com/docs/video.html, http://support.chartbeat.com/docs/api.html#video.
+
+The plugin can be enabled by providing the following configuration properties:
+
+[source, javascript]
+----
+var config = {
+  plugins: {
+    chartbeatanalytics : {
+      enabled:true,
+      resources: [{
+        src: "//static.chartbeat.com/js/chartbeat_video.js", type: "text/javascript"
+      }],
+      data: {
+        uID:8917,
+        domain:"foxnews.com",
+        useCanonical:true,
+        sections:"#{window.temp_section}",
+        authors:"auth1"
+      }
+    }
+    }
+};
+akamai.amp.AMP.create("amp", config);
+----
+
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

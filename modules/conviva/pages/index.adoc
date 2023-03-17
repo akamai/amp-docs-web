@@ -1,0 +1,47 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
+= Conviva
+
+Implementation of Conviva into AMP. The plugin can be implemented by providing a `conviva` object in the player config:
+
+[source, javascript]
+----
+
+var config = {
+  plugins: {
+    conviva : {
+      resources: [
+        {src: "#{paths.plugins}conviva/libs/conviva-pages-sdk-2.121.0.32738.min.js", type: "text/javascript", async: true},
+        {src: "#{paths.plugins}conviva/libs/conviva-html5native-impl.js", type: "text/javascript", async: true},
+        {src: "#{paths.plugins}conviva/Conviva.js", type: "text/javascript", async: true}
+      ],
+      customerKey: "cade858ca54db00906caf7ef170130b90a2f4efc",
+      serviceUrl: "https://turner-br-test.testonly.conviva.com",
+      metadata: {
+        //streamType and streamURL is set logically in the code
+        applicationName:"testApplicationName",
+        viewerId:"testViewerID",
+        assetName:"#{media.guid}",
+        deviceType:"testDeviceType",
+        cdnName:"AKAMAI",
+        playerName:"AMP #{player.mode} Player",
+        custom: {
+          contentType:"testContentType",
+          championship:"testChampionship",
+          sportGender:"testSportGender",
+          kruxID:"testKruxID",
+          season:"testSeason",
+          division:"testDivision",
+          appVersion:"testAppVersion",
+          turnerGUID:"testTurnerGUID"
+        }
+      }
+    }
+  }
+};
+akamai.amp.AMP.create("amp", config);
+----
+
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]

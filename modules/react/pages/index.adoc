@@ -1,0 +1,21 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
+= React
+
+React UI for Akamai Adaptive Media Player.
+
+== Getting Started
+
+* xref:1-overview.adoc[Overview]
+* xref:2-customization.adoc[Customization]
+
+== Components
+
+* xref:3-thumbnails.adoc[Thumbnails]
+* xref:4-hints.adoc[Hints]
+* xref:5-chapters.adoc[Chapters]
+
+:date: 20/2/2023
+:last-revision: 20/3/2023
+include::ROOT:partial$amp-additional-info.adoc[]
+

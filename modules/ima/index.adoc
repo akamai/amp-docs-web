@@ -1,8 +1,0 @@
-== IMA Ads
-
-Implementation of IMA Ads into AMP.
-
-[discrete]
-==== Getting Started
-
-* {@tutorial 1-overview}

@@ -1,4 +1,4 @@
-Implementation of Amazon Header Bidding in AMP.
+= Implementation of Amazon Header Bidding
 
 The plugin can be implemented by providing an `amazonbidder` object to the player config:
 

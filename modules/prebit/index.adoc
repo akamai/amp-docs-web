@@ -1,3 +1,0 @@
-== Prebid
-
-Prebid Header Bidding for Akamai Adaptive Media Player.

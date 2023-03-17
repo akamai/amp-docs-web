@@ -1,0 +1,90 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
+= Nielsen
+
+Implementation of Nielsen DCR/DTVR analytics into AMP. The plugin can be implemented by providing a `nielsen` object to the player config:
+
+== 1.Nielsen DCR configuration
+
+[source,javascript]
+----
+var config = {
+    plugins: {
+      nielsen: {
+              resources: [
+                {src: "//cdn-gl.imrworldwide.com/novms/js/2/ggcmb500.js", type: "text/javascript", async: true},
+                {src: "#{paths.plugins}nielsen/Nielsen.min.js", debug: "#{paths.plugins}nielsen/Nielsen.js", type: "text/javascript", async: true}
+              ],
+              data: {
+                apid: "T342DB3D0-XXYZ-47EC-8F2F-BF222FB0CA40",
+                sfcode: "dcr-cert",
+                apn: "Akamai Player",
+                nol_sdkDebug: "console"
+              },
+              events: {
+                video: {
+                  type: "content",
+                  assetName: "myassetName",
+                  length: "300",
+                  title: "myTitle",
+                  program: "myProgram",
+                  censuscategory: "myCensusCategory",
+                  assetid: "myAssetId",
+                  channelName: "myChannel",
+                  segB: "segmentB",
+                  segC: "segmentC",
+                  isfullepisode: "Y",
+                  crossId1: "Reference11",
+                  crossId2: "Reference22",
+                  airdate: "20161013 20:00:00",
+                  adloadtype: "2",
+                  mediaURL: "http://www.akamai.com/"
+                },
+                ad: {
+                  type: "midroll",
+                  assetid: "myMidrollAssetId"
+                }
+              }
+            }
+    }
+};
+
+akamai.amp.AMP.create("amp", config);
+----
+
+== 2.Nielsen DTVR configuration
+
+[source,javascript]
+----
+var config = {
+ plugins: {
+            nielsen: {
+              resources: [
+                {src: "//cdn-gl.imrworldwide.com/novms/js/2/ggcmb510.js", type: "text/javascript", async: true},
+                {src: "#{paths.plugins}nielsen/Nielsen.min.js", debug: "#{paths.plugins}nielsen/Nielsen.js", type: "text/javascript", async: true}
+              ],
+              data: {
+                apid: "T342DB3D0-71A5-47EC-8F2F-BF222FB0CA40",
+                sfcode: "cert",
+                apn: "Akamai Player",
+                nol_sdkDebug: "DEBUG",
+                nsdkv: "511",
+                dtvr: true
+              },
+              events: {
+                video: {
+                  type: "content",
+                  channelName: "Akamai Test",
+                  adModel: "1"
+                }
+              }
+            }
+          },
+};
+
+akamai.amp.AMP.create("amp", config);
+----
+
+:date: 16/03/2023
+:last-revision: 16/03/2023
+include::ROOT:partial$amp-additional-info.adoc[]

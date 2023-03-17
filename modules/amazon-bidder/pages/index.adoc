@@ -1,10 +1,13 @@
 include::ROOT:partial$amp-gobal-attributes.adoc[]
 
-== Yospaceanalytics
+= Amazon Bidding
 
-Implementation of Yospace into AMP.
+Amazon Publisher Service Header Bidder Plugin for Akamai Adaptive Media Player.
+
+== Getting Started
 
 * xref:1-overview.adoc[Overview]
+* xref:2-params.adoc[Params]
 
 :date: 20/2/2023
 :last-revision: 20/3/2023

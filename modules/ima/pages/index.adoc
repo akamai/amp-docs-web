@@ -1,0 +1,13 @@
+include::ROOT:partial$amp-gobal-attributes.adoc[]
+
+= IMA Ads
+
+Implementation of IMA Ads into AMP.
+
+* xref:1-overview.adoc[Overview]
+* xref:2-linear.adoc[Linear]
+* xref:3-advanced.adoc[Advanced]
+
+:date: 16/34/2023
+:last-revision: 16/34/2023
+include::ROOT:partial$amp-additional-info.adoc[]

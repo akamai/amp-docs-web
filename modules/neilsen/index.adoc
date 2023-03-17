@@ -1,7 +1,0 @@
-== Nielsen analytics
-
-Implementation of Nielsen analytics into AMP.
-
-==== Getting Started
-
-* {@tutorial 1-overview}

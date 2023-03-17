@@ -5,9 +5,8 @@ There are some special cases in which you might require requestAd, here is an ex
 
 Supposing that you want to trigger a single ad during a live stream based on whether user action or local time you can invoke the requestAd.
 
-[,nt]
+[source,javascript]
 ----
-
 function loadAd(event) {
 			  if (!amp.ads.getInProgress())
 					amp.ads.requestAd();
@@ -16,9 +15,8 @@ function loadAd(event) {
 
 If you want to play or change the adTagUrl dynamically you can use player parameterization, in which you bind a specific player value with a variable scoped on page level or app.
 
-[,nt]
+[source,javascript]
 ----
-
 //default adTag
 window.adTag = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&cust_params=sample_ar%3Dpremidpostpod&cmsid=496&vid=short_onecue&correlator="
 
