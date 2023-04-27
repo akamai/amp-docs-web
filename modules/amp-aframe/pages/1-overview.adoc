@@ -2,14 +2,14 @@
 
 Implementation of A-Frame 360 VR into AMP.
 
-AMP uses Aframe https://aframe.io/ WebVR Framework as main VR mechanism. This AMP plug-in allows the following video formats
+AMP uses Aframe https://aframe.io/ WebVR Framework as the main VR mechanism. This AMP plug-in allows the following video formats
 
 * `video/mp4`
 * `application/x-mpegURL` (HLS)
 * `application/dash+xml` (Dash)
 * `video/webm`
 
-NOTE: VR experience is limited to the following devices and browsers please check here for more information https://webvr.rocks/
+NOTE: VR experience is limited to the following devices and browsers. Please check here for more information https://webvr.rocks/
 
 The plugin can be implemented by providing a `aframe` object in the player config:
 
