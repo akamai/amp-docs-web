@@ -4,7 +4,7 @@ Media can be supplied to the player in one of two ways:
 
 . Set the {@link akamai.amp.Player#media} property of the AMP instance.
 +
-[,javascript]
+[source, javascript]
 ----
 amp.media = {
  src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
@@ -14,7 +14,7 @@ amp.media = {
 
 . Add a media property to the player's configuration object.
 +
-[,javascript]
+[source, javascript]
 ----
 var config = {
  media: {
@@ -28,10 +28,10 @@ var amp = akamai.amp.AMP.create("amp", config);
 ----
 
 In both cases, the object must adhere to the {@link akamai.amp.Media} interface.
-To ensure the best playback experience on all devices and platforms it is suggested that multiple stream formats be provided per media item.
+For the best playback experience on all devices and platforms, it is suggested that multiple stream formats be provided per media item.
 This can be done by using the `source` property instead of the `src` and `type` properties:
 
-[,javascript]
+[source, javascript]
 ----
 var config = {
 	media: {
@@ -48,3 +48,6 @@ var config = {
 };
 var amp = akamai.amp.AMP.create("amp", config);
 ----
+
+:last-revision: Mar/2023
+include::ROOT:partial$amp-additional-info.adoc[]

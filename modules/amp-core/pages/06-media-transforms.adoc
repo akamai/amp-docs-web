@@ -1,14 +1,14 @@
 = Using media transforms
 
-Sometimes there is a need to alter a media item before beginning playback. Some example of this could be:
+Sometimes there is a need to alter a media item before beginning playback. Some examples of this could be:
 
-* Request an authorization token to append to the stream url
-* A server side ad service which accepts some parameters then returns a dynamically generated stream url
-* A feed is provided by a third party service which does not match AMP's Media interface {@link akamai.amp.Media}
+* Request an authorization token to append to the stream URL
+* A server-side ad service that accepts some parameters and then returns a dynamically generated stream URL.
+* A feed is provided by a third-party service that does not match AMP's Media interface {@link akamai.amp.Media}
 
-A media transform can be any function that excepts a media object, and returns a media object:
+A media transform can be any function that excepts a media object and returns a media object:
 
-[,nt]
+[source,javascript]
 ----
 
 // synchronous transform
@@ -20,7 +20,7 @@ amp.addTransform(akamai.amp.TransformType.MEDIA, function (media) {
 
 A Promise can also be returned if the transform performs any asynchronous operations: returns a media object:
 
-[,nt]
+[source,javascript]
 ----
 
 // asynchronous transform
@@ -32,9 +32,9 @@ amp.addTransform(akamai.amp.TransformType.MEDIA, function (media) {
 });
 ----
 
-For advanced use cases a formal transform object can be provided, based on the {@link akamai.amp.Transform} interface. This can be any object that contains a property called `transform` which is a function:
+A formal transform object can be provided for advanced use cases, based on the {@link akamai.amp.Transform} interface. This can be any object that contains a property called `transform` which is a function:
 
-[,nt]
+[source,javascript]
 ----
 
 // asynchronous transform
@@ -49,9 +49,9 @@ amp.addTransform(akamai.amp.TransformType.MEDIA, {
 });
 ----
 
-Using a transform object allows for a priority to be set. Transforms with higher priorities are executed first. Additionally, transforms cascade allowing transformations to occur on both the downstream and upstream:
+Using a transform object allows for a priority to be set. Transforms with higher priorities are executed first. Additionally, the transforms cascade allows transformations to occur on both the downstream and upstream:
 
-[,nt]
+[source,javascript]
 ----
 
 // cascading transform
@@ -68,4 +68,7 @@ amp.addTransform(akamai.amp.TransformType.MEDIA, function (media, next) {
 });
 ----
 
-Calling the `next()` function suspends the transform and passes control to the next function in the list. When the other transforms have completed, the function resumes.
+Calling the `next()` function suspends the transform and passes control to the following function in the list. When the other transforms have been completed, the function resumes.
+
+:last-revision: Mar/2023
+include::ROOT:partial$amp-additional-info.adoc[]

@@ -1,6 +1,6 @@
 = Digital Rights Management (DRM)
 
-This tutorial shows how to properly configure DRM when using AMP.
+This tutorial shows how to configure DRM when using AMP properly.
 
 . Supported Providers.
 . Adding a Key.
@@ -20,7 +20,7 @@ AMP supports DRM content from the following providers:
 
 == 2. Adding a Key
 
-To enable DRM content in the player is required to provide both the source and a key for the source as shown in the following example:
+To enable DRM content, the player is required to provide both the source and a key for the start, as shown in the following example:
 
 [source,javascript]
 ----
@@ -41,7 +41,7 @@ var config = {
 
 == 3. Using Multiple Keys
 
-In some cases to support browsers that lack compatibilty of some drm providers, it is required to provide multiple keys. In order to do so multiple key objects should be provided:
+In some cases, it is required to provide multiple keys to support browsers that lack compatibility with some DRM providers. To do so, numerous key objects should be provided:
 
 [source,javascript]
 ----
@@ -65,7 +65,7 @@ var config = {
 
 == 4. Using Multiple Sources
 
-For more information on how to use multiple sources read {@tutorial 03-load-media}. When dealing with multiple sources, the keys for all sources should be provided in the keys object.
+For more information on how to use multiple sources, read {@tutorial 03-load-media}. When dealing with various sources, the keys for all sources should be provided in the keys object.
 
 [source,javascript]
 ----
@@ -103,7 +103,7 @@ var config = {
 
 == 5. Custom Request Headers
 
-Some license requests require custom headers or credentials. These headers can be provided by passing a `httpRequestHeaders` object as part of each key objects.
+Some license requests require custom headers or credentials. These headers can be provided by passing a `httpRequestHeaders` object as part of each key object.
 
 [source,javascript]
 ----
@@ -132,7 +132,7 @@ var config = {
 == 6. Using Custom Fairplay Handlers
 
 Some advanced use cases for FairPlay require special handling of the license request. Custom FairPlay handlers can be provided by passing the `fps` object as part of the config object.
-For example, to use an octet stream instead of the default form encoded message payload, the config might look like the next example:
+For example, to use an octet-stream instead of the default form encoded message payload, the config might look like the next example:
 
 [source,javascript]
 ----
@@ -170,7 +170,7 @@ var config = {
 };
 ----
 
-The full list of FairPlay overridable functions are:
+The complete list of FairPlay overridable functions are:
 
 [source,javascript]
 ----
@@ -194,3 +194,6 @@ var config = {
 	}
 }
 ----
+
+:last-revision: Mar/2023
+include::ROOT:partial$amp-additional-info.adoc[]

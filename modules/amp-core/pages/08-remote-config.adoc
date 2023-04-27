@@ -30,7 +30,7 @@ There are some scenarios where there is a need to load a player configuration fr
  };
 ----
 
-** Using AMP's Promise based request functionality:
+** Using AMP's Promise-based request functionality:
 
 [source,javascript]
 ----
@@ -62,7 +62,7 @@ There are some scenarios where there is a need to load a player configuration fr
 ----
 <script>
  function jsonp(config) {
-     // override page specific values
+     // override page-specific values
      config.media = {
          src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
          type: "video/mp4"
@@ -73,7 +73,7 @@ There are some scenarios where there is a need to load a player configuration fr
  <script src="config.js"></script>
 ----
 
-. Embed the configuration statically in the page using server side script:
+. Embed the configuration statically in the page using server-side script:
 
 ** config.json:
 
@@ -87,10 +87,13 @@ There are some scenarios where there is a need to load a player configuration fr
 [source,javascript]
 ----
  var config = <?php include("config.json"); ?>;
- // override page specific values
+ // override page-specific values
  config.media = {
      src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
      type: "video/mp4"
  };
  var amp = akamai.amp.AMP.create("amp", config);
 ----
+
+:last-revision: Mar/2023
+include::ROOT:partial$amp-additional-info.adoc[]

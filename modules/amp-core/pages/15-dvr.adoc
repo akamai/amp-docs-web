@@ -1,6 +1,6 @@
 = DVR
 
-This tutorial shows how to properly configure DVR playback on AMP.
+This tutorial shows how to configure DVR playback on AMP properly.
 
 . Pre-requisites
 . Enabling DVR mode
@@ -9,13 +9,13 @@ This tutorial shows how to properly configure DVR playback on AMP.
 
 == 1. Pre-requisites
 
-In order to leverage player's API the stream must have a valid sliding window regardless the format HLS or Dash, most of the live streams do not have this feature enabled by default and may depend on the CDN capabilities.
+To leverage the player's API, the stream must have a valid sliding window regardless of the format HLS, or Dash; most live streams do not have this feature enabled by default and may depend on the CDN capabilities.
 
 == 2. Enabling DVR mode
 
-AMP does provide a player API to properly handle the DVR stream playback, progress on the sliding window and a featured player UI.
+AMP does provide a player API to handle the DVR stream playback properly, progress on the sliding window, and a featured player UI.
 
-In order to enable DVR mode on AMP the `"temporalType"` attribute on the media configuration object should be set to `"dvr"` as follow.
+To enable DVR mode on AMP, the `"temporalType"` attribute on the media configuration object should be set to `"dvr"` as follow.
 
 [source,javascript]
 ----
@@ -35,8 +35,8 @@ var config = {
 
 The values for `temporalType` represent the following functionality:
 
-* `"vod"`: Used for most of finite streams, i.e. clips, movies, series.
-* `"live"`: Stream will be set on the edge and most of the player controls will be prohibited, i.e seeking, rewind, and forward jumping.
+* `"vod"`: Used for most finite streams, i.e., clips, movies, series.
+* `"live"`: Stream will be set on the edge, and most of the player controls will be prohibited, i.e. seeking, rewinding, and forward jumping.
 * `"dvr"`: Allows users to move through the sliding window during live streaming.
 
 NOTE: If the temporal type is not provided, the player will detect and choose between live and vod, but not for dvr.
@@ -55,7 +55,7 @@ akamai.amp.AMP.create("amp", config, function(event) {
 });
 ----
 
-If required the UTC timecode can be adjusted using startDate property, only for for browser native playback
+If required, the UTC timecode can be adjusted using startDate property only for for browser native playback
 
 [source, javascript]
 ----
@@ -64,3 +64,6 @@ config = {
 	startDate: Date.now()
 }
 ----
+
+:last-revision: Mar/2023
+include::ROOT:partial$amp-additional-info.adoc[]

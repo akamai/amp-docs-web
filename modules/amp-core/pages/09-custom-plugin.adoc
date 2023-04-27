@@ -2,10 +2,9 @@
 
 The player's functionality can be extended via custom plugins. The steps for creating and attaching a plugin are as follows:
 
-. Create a plugin factory function which will be called when it is time to create a new instance of the plugin. The factory
-function accepts two arguments: The instance of the player and the configuration object for the plugin. For example:
+. Create a plugin factory function when it is time to create a new instance of the plugin. The factory function accepts two arguments: The player's instance and the plugin's configuration object. For example:
 +
-[,javascript]
+[source, javascript]
 ----
 function createSamplePlugin(player, config, key) {
  return new Promise(function (resolve, reject) {
@@ -24,24 +23,24 @@ function createSamplePlugin(player, config, key) {
 }
 ----
 
-. Register the plugin with the AMP sdk by giving it a key and passing in the factory function:
+. Register the plugin with the AMP SDK by giving it a key and passing in the factory function:
 +
-[,javascript]
+[source, javascript]
 ----
 akamai.amp.AMP.registerPlugin("sample", createSamplePlugin);
 ----
 +
-By default the plugin will be available in all modes of the player. If the plugin only applies to
-certain modes of the player, for instance flash only, pass in the modes as the third argument:
+By default, the plugin will be available in all modes of the player. If the plugin only applies to
+certain modes of the player, for instance, flash only, pass in the modes as the third argument:
 +
-[,javascript]
+[source, javascript]
 ----
 akamai.amp.AMP.registerPlugin("sample", createSamplePlugin, ["flash"]);
 ----
 
 . Configure the plugin via the player's configuration by creating a property with the plugin's key in the plugins section:
 +
-[,javascript]
+[source, javascript]
 ----
 var config = {
  plugins: {
@@ -53,9 +52,9 @@ var config = {
 var amp = akamai.amp.AMP.create("akamai-media-player", config);
 ----
 +
-If the plugin does not need configuration options simply pass in a boolean:
+If the plugin does not need configuration options, simply pass in a boolean:
 +
-[,javascript]
+[source, javascript]
 ----
 var config = {
  plugins: {
@@ -67,7 +66,7 @@ var amp = akamai.amp.AMP.create("akamai-media-player", config);
 +
 Plugins can also be enabled and disabled via the `enabled` flag:
 +
-[,javascript]
+[source, javascript]
 ----
 var config = {
  plugins: {
@@ -81,7 +80,7 @@ var amp = akamai.amp.AMP.create("akamai-media-player", config);
 +
 If the plugin's code lives in a different file, it can also be loaded via the config:
 +
-[,javascript]
+[source, javascript]
 ----
 var config = {
  plugins: {
@@ -96,13 +95,16 @@ var config = {
 var amp = akamai.amp.AMP.create("akamai-media-player", config);
 ----
 
-. New API functions or properties exposes by the plugin can be accessed via the plugin's key after the ready event has fired:
+. New API functions or properties exposed by the plugin can be accessed via the plugin's key after the ready event has fired:
 +
-[,javascript]
+[source, javascript]
 ----
 var amp = akamai.amp.AMP.create("akamai-media-player", config, function () {
  amp.sample.testing();
 });
 ----
 
-For convenience AMP provides a Plugin base class which contain common functionality such as event dispatching. {@link akamai.amp.Plugin}
+AMP provides a Plugin base class containing common functionality, such as event dispatching for convenience. {@link akamai.amp.Plugin}
+
+:last-revision: Mar/2023
+include::ROOT:partial$amp-additional-info.adoc[]

@@ -1,14 +1,7 @@
-include::ROOT:partial$amp-gobal-attributes.adoc[]
-
 = Playlist
+:toc:
 
-This tutorial contains:
-1. Quick Reference
-2. Enabling the playlist plugin
-3. Configuring the playlist plugin
-4. Providing a playlist
-
-== 1. Quick Reference
+== Quick Reference
 
 The plugin can be used by providing a `playlist` object along an array of media objects in the player config.
 
@@ -37,7 +30,7 @@ var config = {
 akamai.amp.AMP.create("amp", config);
 ----
 
-== 2. Enabling the playlist plugin
+== Enabling the playlist plugin
 
 In order to enable the playlist plugin is needed to add a `playlist` configuration object to the player configuration and provide the required resources.
 
@@ -55,7 +48,7 @@ var config = {
 }
 ----
 
-== 3. Configuring the playlist plugin
+== Configuring the playlist plugin
 
 The amount of time between videos can be configured by providing an `interval` as part of the autoadvance configuration.
 
@@ -77,9 +70,21 @@ var config = {
 }
 ----
 
-== 4. Providing a playlist
+== Providing a playlist
 
-Finally, a playlist with multiple videos/streams can be provided by passing an array of `media` objects as part of the configuration object or using the player's `media` attribute:
+Finally, a playlist with multiple videos/streams can be provided by passing an array of `media` objects as part of the configuration object or using the player's `media` attribute.
+
+== Example
+
+=== Playlist basic
+++++
+<script async src="//jsfiddle.net/mikeguzman/om20hpL6/embed/"></script>
+++++
+
+=== Playlist with scroll list
+++++
+<iframe width="100%" height="300" src="//jsfiddle.net/mikeguzman/0jtnamsu/embedded/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+++++
 
 :date: 16/5/2023
 :last-revision: 16/5/2023

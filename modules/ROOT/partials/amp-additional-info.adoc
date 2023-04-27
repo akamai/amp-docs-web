@@ -1,3 +1,5 @@
 :support-email: amp-support@akamai.com
 
-NOTE: This guide was written on *{date}* and it's last revision was made on *{last-revision}*. If you need any additional support please contact us through our official support system: https://player.akamai.com/support/.
+[sidebar]
+Last modified: *{last-revision}*,
+https://player.akamai.com/support/[AMP Support].

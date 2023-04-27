@@ -4,3 +4,6 @@
 ----
 "${player.mode} Player"
 ----
+
+:last-revision: Mar/2023
+include::ROOT:partial$amp-additional-info.adoc[]

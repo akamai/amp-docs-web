@@ -3,10 +3,10 @@
 Embedding AMP in an HTML page is a three-step process:
 
 . Include the AMP JS script
-. Provide embed-time configuration (set the media to play and/or configure any features)
-. Instantiate the AMP object, associating it with a div on the page. The player will take on the size of the div in a responsive manner
+. Provide embed-time configuration (set the media to play and configure any features)
+. Instantiate the AMP object, associating it with a div on the page. The player will take on the div's size in a responsive manner.
 
-[source,javascript]
+[source, javascript]
 ----
 <html>
 	<head>
@@ -28,3 +28,6 @@ Embedding AMP in an HTML page is a three-step process:
 	</body>
 </html>
 ----
+
+:last-revision: Mar/2023
+include::ROOT:partial$amp-additional-info.adoc[]

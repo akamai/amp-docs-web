@@ -1,13 +1,13 @@
 = Fine Tuning
 
-This tutorial shows how to properly configure DVR playback on AMP.
+This tutorial shows how to configure DVR playback on AMP properly.
 
 . Fast Playback Startup
 . Playback Bitrate Ceiling
 
 == 1. Fast Playback Startup
 
-Startup time can be adjusted by lowering the initial rendition quality. Player's ABR mechanism performs upswitching for higher renditions if user agent bandwidth permits it.
+Startup time can be adjusted by lowering the initial rendition quality. The player's ABR mechanism performs up switching for higher renditions if user agent bandwidth permits it.
 
 [source,javascript]
 ----
@@ -24,13 +24,13 @@ Startup time can be adjusted by lowering the initial rendition quality. Player's
 
 Hls `startLevel` allows the following `number` type values:
 
-* `0` Starts from Lowest rendition available in the manifest.
+* `0` Starts from the Lowest rendition available in the manifest.
 * `-1` Player will start from rendition matching download bandwidth.
-* Upper values represents the available renditions in the manifest bitrate ladder, the higher the value is the better the initial quality is.
+* Upper values represents the available renditions in the manifest bitrate ladder; the higher the value is, the better the initial quality is.
 
 == 2. Playback Bitrate Ceiling
 
-Player allows limiting the maximum bitrate selectable by the ABR mechanism. This might be useful for scenarios like browser's memory flooding, small viewport players, live background playback and others...
+The player allows limiting the maximum bitrate selectable by the ABR mechanism. This might be useful for scenarios like browser's memory flooding, small viewport players, live background playback, and others.
 
 [source,javascript]
 ----
@@ -43,11 +43,14 @@ Player allows limiting the maximum bitrate selectable by the ABR mechanism. This
 	}
 ----
 
-Dash and Hls `maxBitrate` represents the bitrate ceiling value in bits per second `bps`, this can be adjusted through whether player configuration or runtime as follows.
+Dash and Hls `maxBitrate` represents the bitrate ceiling value in bits per second `bps`; this can be adjusted through player configuration or runtime.
 
 [source,javascript]
 ----
 amp.maxBitrate = 2000000 // 2.0 Mbps
 ----
 
-Player ignores the ceiling value when there is no matching renditions with the given value; user's manually select a rendition through player's quality selector or API.
+The player ignores the ceiling value when there are no matching renditions with the given value; the user's manually selects an arrangement through the player's quality selector or API.
+
+:last-revision: Mar/2023
+include::ROOT:partial$amp-additional-info.adoc[]

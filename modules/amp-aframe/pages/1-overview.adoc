@@ -1,4 +1,7 @@
-= Implementation of A-Frame 360 VR into AMP.
+= Overview
+
+Implementation of A-Frame 360 VR into AMP.
+
 AMP uses Aframe https://aframe.io/ WebVR Framework as main VR mechanism. This AMP plug-in allows the following video formats
 
 * `video/mp4`

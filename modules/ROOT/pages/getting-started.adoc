@@ -10,8 +10,8 @@ Akamai Media Player provides a turnkey media playback experience for online medi
 
 Demo site: https://player.akamai.com/demos/
 
-:date: 17/03/2023
-:last-revision: 17/03/2023
+:date: March/2023
+:last-revision: March/2023
 include::ROOT:partial$amp-additional-info.adoc[]
 
 

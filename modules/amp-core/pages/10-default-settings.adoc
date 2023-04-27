@@ -2,7 +2,7 @@
 
 The default value of the player's user settings can be set via the configuration object:
 
-[,javascript]
+[source, javascript]
 ----
 var config = {
 	settings: {
@@ -26,3 +26,6 @@ var config = {
 	}
 };
 ----
+
+:last-revision: Mar/2023
+include::ROOT:partial$amp-additional-info.adoc[]
