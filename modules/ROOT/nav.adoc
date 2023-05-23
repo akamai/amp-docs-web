@@ -18,7 +18,6 @@
 ** xref:amp-aframe:1-overview.adoc[Overview]
 ** xref:amp-aframe:2-customize.adoc[Customize]
 ** xref:amp-aframe:3-device-motion.adoc[Device Motion]
-** xref:amp-aframe:3-device-motion.adoc[]
 * xref:amp-chromecast:index.adoc[Chromecast]
 * xref:amp-playlist:index.adoc[Playlist]
 
