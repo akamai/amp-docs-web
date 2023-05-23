@@ -53,9 +53,9 @@
 ** xref:amp-ima:2-linear.adoc[Linear]
 ** xref:amp-ima:3-advanced.adoc[Advanced]
 * xref:amp-ima-dai:index.adoc[IMA DAI]
-* xref:amp-prebit:index.adoc[Prebit]
-** xref:amp-prebit:1-overview.adoc[Overview]
-** xref:amp-prebit:2-usp.adoc[Using Consent Management Module]
+* xref:amp-prebid:index.adoc[PrebidJS]
+** xref:amp-prebid:1-overview.adoc[Overview]
+** xref:amp-prebid:2-usp.adoc[Using Consent Management Module]
 * xref:amp-yospace:index.adoc[Yospace]
 
 .UI
