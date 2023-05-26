@@ -11,9 +11,9 @@ var config = {
   plugins: {
     conviva : {
       resources: [
-        {src: "#{paths.plugins}amp-conviva/libs/amp-conviva-pages-sdk-2.121.0.32738.min.js", type: "text/javascript", async: true},
-        {src: "#{paths.plugins}amp-conviva/libs/amp-conviva-html5native-impl.js", type: "text/javascript", async: true},
-        {src: "#{paths.plugins}amp-conviva/Conviva.js", type: "text/javascript", async: true}
+        {src: "#{paths.plugins}conviva/libs/conviva-core-sdk.min.js", type: "text/javascript", async: true},
+        {src: "#{paths.plugins}conviva/libs/conviva-html5-sdk.min.js", type: "text/javascript", async: true},
+        {src: "#{paths.plugins}conviva/Conviva.js", type: "text/javascript", async: true}
       ],
       customerKey: "cade858ca54db00906caf7ef170130b90a2f4efc",
       serviceUrl: "https://turner-br-test.testonly.conviva.com",
