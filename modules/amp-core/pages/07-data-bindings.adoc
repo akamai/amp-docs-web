@@ -1,7 +1,7 @@
 
 = Using data bindings
 
-The player continues to support very advanced and flexible parameterization. Substitutions in many configuration elements (usually for ads and analytics) continue to use the the syntax `#{variable}` or `${variable}`.
+The player continues to support very advanced and flexible parameterization. Substitutions in many configuration elements (usually for ads and analytics) continue to use the syntax `#{variable}` or `${variable}`.
 
 The following data values are accessible through player data bindings
 
@@ -59,7 +59,7 @@ config = {
     plugins: {
         analyticsPlugin: {
             heigth: "${player.videoHeight}", // Current video Heigth 
-            width: "${ads.currentAd.type}", // Current video Width
+            width: "${player.videoWidth}", // Current video Width
             ratio: "${player.videoWidth / player.videoHeight}" // The aspect ratio formula is width divided by height
         }
     }
@@ -69,7 +69,7 @@ See current https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.HTMLPla
 
 === Customer provided data 
 ==== Params (deprecated)
-Prior to v9, the player could hold parameters in a hash table called `params[]`. However, if a lookup occurred and the variable did not exist in `params[]`, the player would look in the DOM for the variable. 
+Prior to v9, the player could hold parameters in a hash table called `params[]`. However, if a lookup occurred and the variable did not exist in `params[]`, the player would look into the DOM for the variable. 
 
 In *v9*, we have removed the `params[]` array, because the ability to fallback to the DOM makes this array unnecessary.
 
