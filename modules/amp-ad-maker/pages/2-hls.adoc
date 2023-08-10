@@ -1,4 +1,4 @@
-= HSL
+= HLS Ad markers
 
 The Ad Marker plugin lets users get ad availability information from their HLS manifest.
 
