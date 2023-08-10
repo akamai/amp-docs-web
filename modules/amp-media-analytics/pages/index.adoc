@@ -2,20 +2,21 @@ include::ROOT:partial$amp-gobal-attributes.adoc[]
 
 = Akamai Media Analytics
 
+IMPORTANT: Akamai Media Analytics plugin is deprecated and will be removed in the next release. See https://community.akamai.com/customers/s/article/MediaDeliveryDisablingMediaAnalyticsinAdaptiveMediaPlayerAMP20230628174450[how to disable Media Analytics from AMP].
+
 This tutorial will show you how to properly implement Akamai Media Analytics using the AMPlayer Media Analytics Plugin.
 
-To check the final result, visit our <a href='https://player.akamai.com/demos/'>demo page</a>, under the "Measurement" section.
+To check the final result, visit our https://player.akamai.com/demos/[demo page], under the "Measurement" section.
 
 Steps:
 
-Create a <a href='https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/amp-web-media-analytics/akamai.amp.mediaanalytics.MediaAnalyticsConfig.html'>Media Analytics Config</a> object:
-
+Create a https://docs.player.akamai.com/static/amp-web-sdk/amp-web-media-analytics/akamai.amp.mediaanalytics.MediaAnalyticsConfig.html[Media Analytics Config object]:
 [source,javascript]
 ----
 var mediaanalytics = { }
 ----
 
-Include the <a href='https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/akamai.amp.PlayerResource.html'>Player Resource</a> objects array required to load the MA Library and Plugin. These values don't change.
+Include the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Resource.html[Player Resource] objects array required to load the MA Library and Plugin. These values don't change.
 
 [source,javascript]
 ----
@@ -55,7 +56,7 @@ var mediaanalytics = {
 ----
 
 A key-value object `dimensions` should be included to track any desired dimension.
-<a href='https://learn.akamai.com/en-us/webhelp/media-analytics/media-analytics-player-plug-in-data-reference-guide/GUID-A5A67382-C4CF-42B9-A73A-F3DDEB3731A0.html'>Here</a> is a list with the currently available MA dimensions.
+https://learn.akamai.com/en-us/webhelp/media-analytics/media-analytics-player-plug-in-data-reference-guide/GUID-A5A67382-C4CF-42B9-A73A-F3DDEB3731A0.html[Here] is a list with the currently available MA dimensions.
 
 [source,javascript]
 ----
@@ -75,7 +76,7 @@ var mediaanalytics = {
 
 If you have any custom dimension configured in your report pack you can use that one the same way, by adding a key for your custom dimension and its value. As an example, imagine we have configured the custom dimension “eventName” in our report pack, to report the current event being broadcasted. Here is how our dimensions object will look:
 
-Once you have properly configured your <a href='https://developer.akamai.com/tools/AdaptiveMediaPlayer/docs/web/amp-web-media-analytics/akamai.amp.mediaanalytics.MediaAnalyticsConfig.html'>Media Analytics Config</a> object add it to the plugins sections in your configuration object. Notice that the plugin name is "mediaanalytics".
+Once you have properly configured your https://docs.player.akamai.com/static/amp-web-sdk/amp-web-media-analytics/akamai.amp.mediaanalytics.MediaAnalyticsConfig.htmlp[Media Analytics Config] object add it to the plugins sections in your configuration object. Notice that the plugin name is "mediaanalytics".
 
 :date: 16/7/2023
 :last-revision: 16/7/2023
