@@ -35,13 +35,13 @@
 * xref:amp-moat:index.adoc[MOAT]
 * xref:amp-mrss:index.adoc[MRSS]
 * xref:amp-mux:index.adoc[MUX]
-* xref:amp-neilsen:index.adoc[Neilsen]
+* xref:amp-neilsen:index.adoc[Nielsen]
 * xref:amp-omniture:index.adoc[Omniture]
 * xref:amp-segment:index.adoc[Segment]
 
 .Ads
 * xref:amp-ad-maker:1-overview.adoc[Ad marker]
-** xref:amp-ad-maker:2-hls.adoc[HSL]
+** xref:amp-ad-maker:2-hls.adoc[HLS]
 ** xref:amp-ad-maker:3-dash.adoc[Dash]
 * xref:amp-amazon-bidder:index.adoc[Amazon Bidding]
 ** xref:amp-amazon-bidder:1-overview.adoc[Overview]
