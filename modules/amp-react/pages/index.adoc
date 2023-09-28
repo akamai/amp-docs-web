@@ -14,6 +14,7 @@ React UI for Akamai Adaptive Media Player.
 * xref:3-thumbnails.adoc[Thumbnails]
 * xref:4-hints.adoc[Hints]
 * xref:5-chapters.adoc[Chapters]
+* xref:6-share.adoc[Social Share]
 
 :date: 20/2/2023
 :last-revision: 20/3/2023
