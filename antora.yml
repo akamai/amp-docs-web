@@ -1,6 +1,6 @@
 name: amp-web-sdk
 title: AMP Web SDK
-version: 9.1.25
+version: 9.1.27
 start_page: getting-started.adoc
 asciidoc:
   attributes:
