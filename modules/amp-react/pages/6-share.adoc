@@ -32,7 +32,7 @@ Or through CSS adding the following rule on page styling.
 
 Player offers a built-in share panel and buttons along with callbacks which can be connected to customer's favorite social provider.
 
-Player offers `share` event callback to hook users choice, within in payload can be use to perform an action such like prompting a redirect to the social network url or show a custom overlay.  
+Player offers the `share` event callback to hook users choice, Additional information can be found within the payload to perform further actions such like prompting a redirect to the social network url or show a custom overlay.  
 [source,javascript]
 ----
 amp.addEventListener("share", function (event) {
@@ -68,7 +68,7 @@ NOTE: Ask your Akamai representative if need to add a new option.
 
 == Configuring social providers list
 
-If required, the list of providers listed in the share panel UI element can be modified whether to add certain options or remove unneeded options on `providers` array.
+If required, the list of providers listed in the share panel UI element can be modified either to add certain options or remove unneeded options on `providers` array.
 
 === Adding providers
 
