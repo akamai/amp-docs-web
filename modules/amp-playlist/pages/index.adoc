@@ -11,8 +11,8 @@ var config = {
   plugins: {
     playlist: {
       resources: [
-        { src: "${paths.plugins}amp-playlist/Playlist.min.js", debug: "${paths.plugins}amp-playlist/Playlist.js", type: "text/javascript" },
-        { src: "${paths.plugins}amp-playlist/Playlist.min.css", debug: "${paths.plugins}amp-playlist/Playlist.css", type: "text/css" }
+        { src: "${paths.plugins}playlist/Playlist.min.js", debug: "${paths.plugins}playlist/Playlist.js", type: "text/javascript" },
+        { src: "${paths.plugins}playlist/Playlist.min.css", debug: "${paths.plugins}playlist/Playlist.css", type: "text/css" }
       ],
       autoadvance: {
         enabled: true,
@@ -40,8 +40,8 @@ var config = {
   plugins: {
     playlist: {
       resources: [
-        { src: "${paths.plugins}amp-playlist/Playlist.min.js", debug: "${paths.plugins}amp-playlist/Playlist.js", type: "text/javascript" },
-        { src: "${paths.plugins}amp-playlist/Playlist.min.css", debug: "${paths.plugins}amp-playlist/Playlist.css", type: "text/css" }
+        { src: "${paths.plugins}playlist/Playlist.min.js", debug: "${paths.plugins}playlist/Playlist.js", type: "text/javascript" },
+        { src: "${paths.plugins}playlist/Playlist.min.css", debug: "${paths.plugins}playlist/Playlist.css", type: "text/css" }
       ]
     }
   },
@@ -58,8 +58,8 @@ var config = {
   plugins: {
     playlist: {
       resources: [
-        { src: "${paths.plugins}amp-playlist/Playlist.min.js", debug: "${paths.plugins}amp-playlist/Playlist.js", type: "text/javascript" },
-        { src: "${paths.plugins}amp-playlist/Playlist.min.css", debug: "${paths.plugins}amp-playlist/Playlist.css", type: "text/css" }
+        { src: "${paths.plugins}playlist/Playlist.min.js", debug: "${paths.plugins}playlist/Playlist.js", type: "text/javascript" },
+        { src: "${paths.plugins}playlist/Playlist.min.css", debug: "${paths.plugins}playlist/Playlist.css", type: "text/css" }
       ],
       autoadvance: {
         enabled: true,
@@ -88,4 +88,4 @@ Finally, a playlist with multiple videos/streams can be provided by passing an a
 
 :date: 16/5/2023
 :last-revision: 16/5/2023
-include::ROOT:partial$amp-additional-info.adoc[]
+include::ROOT:partial$additional-info.adoc[]
