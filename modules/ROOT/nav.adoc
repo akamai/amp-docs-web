@@ -58,11 +58,11 @@
 
 .UI
 * xref:amp-react:index.adoc[React]
-** xref:amp-react:1-overview.adoc[Overview]
-** xref:amp-react:2-customization.adoc[Customization]
-** xref:amp-react:3-thumbnails.adoc[Thumbnails]
-** xref:amp-react:4-hints.adoc[Hints]
-** xref:amp-react:5-chapters.adoc[Chapters]
+* xref:amp-react:2-customization.adoc[Customization]
+* xref:amp-react:3-thumbnails.adoc[Thumbnails]
+* xref:amp-react:4-hints.adoc[Hints]
+* xref:amp-react:5-chapters.adoc[Chapters]
+* xref:amp-react:6-share.adoc[Social Sharing]
 
 .Security
 * xref:amp-core:13-drm.adoc[DRM]

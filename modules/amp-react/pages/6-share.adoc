@@ -1,0 +1,111 @@
+= Social Sharing
+
+This tutorial shows how to integrate social sharing using AMP social buttons.
+
+== Getting started
+Social sharing is enabled by default in AMP player's UI for further usage. 
+
+If social sharing is not required it can be turned off through player config. See https://docs.player.akamai.com/static/amp-web-sdk/amp-web-react/akamai.amp.react.Share.html[Share Configuration] for more information
+
+[source,javascript]
+----
+var config = {
+    plugins: {
+        react: {
+            share: {
+                enabled: false,
+            }
+        }
+    }
+}
+----
+Or through CSS adding the following rule on page styling.
+
+[source,css]
+----
+.amp-share {
+    display: none;
+}
+----
+
+== How to use built-in social sharing UI
+
+Player offers a built-in share panel and buttons along with callbacks which can be connected to customer's favorite social provider.
+
+Player offers the `share` event callback to hook users choice, Additional information can be found within the payload to perform further actions such like prompting a redirect to the social network url or show a custom overlay.  
+[source,javascript]
+----
+amp.addEventListener("share", function (event) {
+    const provider = event.detail.provider
+
+    switch (provider.id) {
+        case 'facebook':
+            window.open("https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer", "_blank", "width=500,height=500") 
+        break;
+
+        default:
+            console.log(`Sorry, cannot found ${provider.label}.`);
+    }
+});
+
+
+----
+
+=== Available built-in options and graphics
+
+React plugin offers the following options.
+
+- Facebook
+- Twitter/X
+- TikTok
+- WhatsApp
+- Snapchat
+- Embed
+- Email
+- Other
+
+NOTE: Ask your Akamai representative if need to add a new option. 
+
+== Configuring social providers list
+
+If required, the list of providers listed in the share panel UI element can be modified either to add certain options or remove unneeded options on `providers` array.
+
+=== Adding providers
+
+[source,javascript]
+----
+var config = {
+    autoplay: true,
+    autoplayPolicy: "muted",
+    media: {
+        src: "https://mdtp-a.akamaihd.net/customers/akamai/video/VfE.mp4"
+    },
+    plugins: {
+        react: {
+            share: {
+                providers: ["facebook", "email", "embed", "twitter", "other"]
+            }
+        }
+    }
+}
+----
+
+=== Removing providers
+[source,javascript]
+----
+var config = {
+    autoplay: true,
+    autoplayPolicy: "muted",
+    media: {
+        src: "https://mdtp-a.akamaihd.net/customers/akamai/video/VfE.mp4"
+    },
+    plugins: {
+        react: {
+            share: {
+                providers: ["embed", "other"]
+            }
+        }
+    }
+}
+----
+
