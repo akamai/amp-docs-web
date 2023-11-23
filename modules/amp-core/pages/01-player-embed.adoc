@@ -1,10 +1,10 @@
-== Embedding AMP
+= Embedding AMP
 This tutorial shows the simplest way to embed AMP. To see a working demo please check our https://player.akamai.com/demos/[demo site].
 
 To Embed AMP in a HTML page is needed to:
 
 
-===== 1. Include the AMP JS script
+== 1. Include the AMP JS script
 If you are using the self-hosted model (distribution package), provide the URL to your amp.js file. If you are using the AMP's hosted model, you will need to provide your API Key and the desired version. Note: If you don't know your API Key yet please email your Akamai executive or amp-impl@akamai.com in order to provide one to you.
 
 The example below uses the hosted version.
@@ -20,7 +20,7 @@ The example below uses the hosted version.
 </html>
 ----
 
-===== 2. Prepare a configuration object
+== 2. Prepare a configuration object
 Please refer to akamai.amp.PlayerConfig for more information on the configuration object. In the next example, we're providing a akamai.amp.Media object that should play automatically when the player has finished loading content.
 
 [source, html]
@@ -43,7 +43,7 @@ Please refer to akamai.amp.PlayerConfig for more information on the configuratio
 </html>
 ----
 
-===== 3. Create the AMP object
+== 3. Create the AMP object
 Instantiate the AMP object and embed it in a div on the page by passing an id or handle as first argument. The player will take on the size of the div in a responsive manner.
 [source, html]
 ----
@@ -67,7 +67,7 @@ Instantiate the AMP object and embed it in a div on the page by passing an id or
 </html>
 ----
 
-== Adding AMP as an inline HTML object
+= Adding AMP as an inline HTML object
 The player can be embedded by adding the `class="amp-inline"` to the script tag and providing a configuration object using the attribute data-config.
 
 [source, html]
