@@ -1,13 +1,19 @@
 = Settings
 
-This tutorial shows how to set up the default value for the available user settings on AMP.
+This tutorial shows how to handle player user's settings.
 
-== Default Settings
+Player stores user's preferences in browser's local storage. 
+This allows AMP to remember and apply these preferences across sessions, enhancing user convenience and providing a personalized playback experience. By default player creates an initial set of preferences for captions fonts and colors, continuous playback and volume called `defaults`. 
+
+== Setting Defaults
+
 As explained in xref:amp-core:01-player-embed.adoc[Embedding AMP], AMP is configured by passing a configuration object that matches the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.PlayerConfig.html[akamai.amp.PlayerConfig]. 
-As it can be seen in the akamai.amp.PlayerConfig interface page it includes the member settings. The member settings is an instance of https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Settings.html[akamai.amp.Settings]. 
+As it can be seen in the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.PlayerConfig.html[akamai.amp.PlayerConfig] interface page it includes the member settings. The member settings is an instance of https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Settings.html[akamai.amp.Settings]. 
 It is used by AMP to track and set up the player user settings. In order to set up defaults, the Settings class includes the static attribute defaults that can be used to set a default volume and captions object.
 
-Currently AMP supports defaults for the following:
+IMPORTANT: Default user settings are created once and can be only be overridden by depleting user’s local storage item `akamai_amp`
+
+Currently AMP supports defaults for the following features:
 
 - Volume
 - Closed Captions
@@ -72,6 +78,26 @@ This value is reflected within the settings menu panel, and final user can toggl
 
 NOTE: This setting should not be confused with `autoplay` player feature mentioned in 
 xref:amp-core:04-autoplay.adoc[Autoplay] as this setting only works for subsequent playback and not the initial video loaded.
+
+== Change Settings
+When required developers can use https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Settings.html#change[amp.settings.change] method to  programmatically modify settings, adjusting captions styles, or updating user preferences on runtime.
+
+[source, javascript]
+----
+       akamai.amp.AMP.create("amp", config, event => {
+            amp = event.player;
+            const settings = { 
+                    captions: {
+                        visible: true,
+                        fontColor: "green",
+                    } 
+                }
+
+              amp.settings.change(settings)
+----
+
+
+
 
 :last-revision: Nov/2023
 include::ROOT:partial$amp-additional-info.adoc[]
