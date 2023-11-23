@@ -53,5 +53,5 @@ akamai.amp.AMP.create("amp", config).then(player => {
 });
 ----
 
-:last-revision: Mar/2023
+:last-revision: Nov/2023
 include::ROOT:partial$amp-additional-info.adoc[]
