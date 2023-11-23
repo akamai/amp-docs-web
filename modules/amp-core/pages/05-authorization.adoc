@@ -6,7 +6,7 @@ This tutorial page covers:
 * How to provide a token upfront.
 * Renewing the authorization token.
 
-==== URL-Appended Token Authorization or Edge token
+== URL-Appended Token Authorization or Edge token
 In scenarios when renewing the authorization token might not be necesary or will be handled manually, the authorization token can be passed along the stream url.
 
 [source, html]
@@ -16,7 +16,7 @@ http://my-stream-url.m3u8?hdnea=exp=1234567890~acl=/*~hmac=XXXXXXXXXXXXXXXXXXXXX
 https://my-stream-url.m3u8?hdnts=st=0123456789~exp=1234567890~acl=/*~hmac=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ----
 
-==== Handling the Authorize Event
+== Handling the Authorize Event
 In scenarios when the stream can't be authorized by including the authotization token in the URL, the autorization token can be provided by handling the `authorize` event. To do so, first, the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Media.html[akamai.amp.Media] object must include a status object with state blocked. 
 The next example shows both the configuration changes required and how to handle the authorize event.
 
@@ -42,7 +42,7 @@ akamai.amp.AMP.create("akamai-media-player", config).then(function (amp) {
 });
 ----
 
-==== Providing an Authorization Token Upfront
+== Providing an Authorization Token Upfront
 If the authorization needs to be provided upfront, the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Media.html[akamai.amp.Media] object must include an https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Authorization.html[akamai.amp.Authorization] object. The authorization object should include the token.
 
 [source, javascript]
@@ -59,7 +59,7 @@ var config = {
 akamai.amp.AMP.create("akamai-media-player", config);
 ----
 
-==== Renewing the authorization token
+== Renewing the authorization token
 It is common that the authorization tokens are invalidated after a defined period of time when working with protected streams. This happens to ensure that only the intended receivers have access to the stream. In these scenarios, the expiration attribute can be included in the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Authorization.html[akamai.amp.Authorization] object. This way the player will fire the authorize event at the given time.
 
 [source, javascript]
