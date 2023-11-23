@@ -1,4 +1,4 @@
-== Creating an instance of AMP
+= Creating an instance of AMP
 
 This tutorial shows the alternatives to access an AMP instance.
 
@@ -22,7 +22,7 @@ In some scenarios it might be required to use the created player instance, eithe
 * Using async/await.
 * Using an event listener.
 
-==== 1. Handling the AMP "Create" Promise
+== 1. Handling the AMP "Create" Promise
 When invoked, the function `akamai.amp.AMP.create` creates a promise. This promise will be resolved when the player is fully instantiated and ready to be used. In the example below it's shown how the newly created player can be accesed by passing a function expecting a single argument to the promise then method.
 
 [source, javascript]
@@ -43,7 +43,7 @@ akamai.amp.AMP.create("amp", config)
   });
 ----
 
-==== 2. Using Async/Await
+== 2. Using Async/Await
 As with any other promise async/await can be used in order to handle the resolution of the `akamai.amp.AMP.create` promise. Below there is a slightly modified version of the previous example using async/await.
 
 [source, javascript]
@@ -65,7 +65,7 @@ async function onload() {
 }
 ----
 
-==== 3. Using an Event Listener
+== 3. Using an Event Listener
 Event listeners are a third option to access the player instance. An event listener can be passed as the third argument to the create function. This listener will be executed when the ready event is fired. The code of our example, modified to use an event listener, can be seen below.
 [source, javascript]
 ----
