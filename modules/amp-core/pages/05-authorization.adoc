@@ -1,6 +1,24 @@
 = Token Protected Streams
+This tutorial page covers:
 
-Here is a basic example of how to step up AMP for use with tokenized streams:
+* URL-Appended Token Authorization (Edge token).
+* How to Handle the authorize Event.
+* How to provide a token upfront.
+* Renewing the authorization token.
+
+==== URL-Appended Token Authorization or Edge token
+In scenarios when renewing the authorization token might not be necesary or will be handled manually, the authorization token can be passed along the stream url.
+
+[source, html]
+----
+http://my-stream-url.m3u8?hdnea=exp=1234567890~acl=/*~hmac=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+https://my-stream-url.m3u8?hdnts=st=0123456789~exp=1234567890~acl=/*~hmac=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+----
+
+==== Handling the Authorize Event
+In scenarios when the stream can't be authorized by including the authotization token in the URL, the autorization token can be provided by handling the `authorize` event. To do so, first, the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Media.html[akamai.amp.Media] object must include a status object with state blocked. 
+The next example shows both the configuration changes required and how to handle the authorize event.
 
 [source, javascript]
 ----
@@ -13,19 +31,36 @@ var config = {
     }
   }
 };
-var amp = akamai.amp.AMP.create("akamai-media-player", config);
-amp.addEventListener("authorize", function () {
-  // do token generation/retrieval
-  amp.authorize({
-    token: "TOKEN_STRING",
-    // optional timestamp. If provided, the player will fire the
-    // "authorize" event when expiration has occurred
-    expiration: 1479319024356
+
+akamai.amp.AMP.create("akamai-media-player", config).then(function (amp) {
+  amp.addEventListener("authorize", function () {
+    // do token generation / retrieval
+    amp.authorize({
+      token: "TOKEN_STRING"
+    });
   });
 });
 ----
 
-If the authorization needs to be provided upfront, pass the token separately instead of appending it to the URL:
+==== Providing an Authorization Token Upfront
+If the authorization needs to be provided upfront, the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Media.html[akamai.amp.Media] object must include an https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Authorization.html[akamai.amp.Authorization] object. The authorization object should include the token.
+
+[source, javascript]
+----
+var config = {
+  media: {
+    src: "http://url-of-stream-without-token-appended"
+    authorization: {
+      token: "TOKEN_STRING"
+    }
+  }
+};
+
+akamai.amp.AMP.create("akamai-media-player", config);
+----
+
+==== Renewing the authorization token
+It is common that the authorization tokens are invalidated after a defined period of time when working with protected streams. This happens to ensure that only the intended receivers have access to the stream. In these scenarios, the expiration attribute can be included in the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Authorization.html[akamai.amp.Authorization] object. This way the player will fire the authorize event at the given time.
 
 [source, javascript]
 ----
@@ -36,14 +71,15 @@ var config = {
       token: "TOKEN_STRING",
       // optional timestamp. If provided the player will fire the
       // "authorize" event when expiration has occurred
-      expiration: 1479319024356
+      expiration: 1479319024356  
     }
   }
 };
-var amp = akamai.amp.AMP.create("akamai-media-player", config);
+
+akamai.amp.AMP.create("akamai-media-player", config);
 ----
 
-In cases where the expiration is unknown, `amp.authorize` can be called at any time, and the player will use the latest authorization block when reattaching the stream.
+In cases where the expiration is not known, `amp.authorize()` can be called at any time and the player will use the latest https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Authorization.htm[`authorization`] block when reattaching the stream.
 
-:last-revision: Mar/2023
+:last-revision: Nov/2023
 include::ROOT:partial$amp-additional-info.adoc[]
