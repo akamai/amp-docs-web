@@ -1,4 +1,4 @@
-== Autoplay
+= Autoplay
 This tutorial shows how to:
 
 * Configure AMP to start playing automatically.
@@ -29,7 +29,7 @@ var config = {
 akamai.amp.AMP.create("amp", config);
 ----
 
-==== Handling the `autoplayblocked` Event
+== Handling the `autoplayblocked` Event
 In the previous section it is shown how to use basic autoplay configuration. However this will work only in platforms that support unmuted playback. If the player encounters a platform that cannot autoplay, but an autoplay value of true is present in the config, an `autoplayblocked` event is dispatched. In the next example is shown how to handle the `autoplayblocked` event.
 
 [source, javascript]
@@ -79,7 +79,7 @@ var config = {
 akamai.amp.AMP.create("amp", config);
 ----
 
-Performing Autoplay Detection
+== Performing Autoplay Detection
 By default the player will run its autoplay detection routine the first time a player is created if the `autoplayPolicy` value is not none. In certain scenarios it may be beneficial to run the detection before creating the player. This can be achieved by explicitly calling https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.AutoplayThreshold.html#init[akamai.amp.AutoplayThreshold#init] and passing the policy to check as argument. In the following example the threshold for the 'default' policy is obtained.
 
 [source, javascript]
@@ -91,7 +91,7 @@ akamai.amp.AutoplayThreshold.init( { autoplayPolicy: 'default' } )
     console.log("The browser's autoplay threshold is", threshold);
   });
 ----
-==== Forcing Muted Playback
+== Forcing Muted Playback
 Finally, the player can also be configured to force muted/inline playback without attempting to detect the browser's capabilities as shown in the next example.
 
 [source, javascript]
