@@ -2,7 +2,7 @@
 
 Media can be supplied to the player in one of two ways:
 
-. Set the {@link akamai.amp.Player#media} property of the AMP instance.
+. Set the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Player.html#media[media] property of the AMP instance.
 +
 [source, javascript]
 ----
@@ -24,10 +24,12 @@ var config = {
      startTime: 0
  }
 };
-var amp = akamai.amp.AMP.create("amp", config);
+akamai.amp.AMP.create("amp", config).then(player => {
+ var amp = player
+});
 ----
 
-In both cases, the object must adhere to the {@link akamai.amp.Media} interface.
+In both cases, the object must adhere to the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Player.html#media[media] interface.
 For the best playback experience on all devices and platforms, it is suggested that multiple stream formats be provided per media item.
 This can be done by using the `source` property instead of the `src` and `type` properties:
 
@@ -38,15 +40,17 @@ var config = {
 		title: "VOD Sample",
 		poster: '../resources/images/hd_world.jpg',
 		source: [{
-			src: "http://multiplatform-f.akamaihd.net/z/multi/april11/hdworld/hdworld_,512x288_450_b,640x360_700_b,768x432_1000_b,1024x576_1400_m,1280x720_1900_m,1280x720_2500_m,1280x720_3500_m,.mp4.csmil/manifest.f4m",
-			type: "video/f4m"
+			src: "https://mdtp-a.akamaihd.net/customers/akamai/video/VfE.mp4",
+			type: "video/mp4"
 		}, {
-			src: "http://multiplatform-f.akamaihd.net/i/multi/april11/hdworld/hdworld_,512x288_450_b,640x360_700_b,768x432_1000_b,1024x576_1400_m,1280x720_1900_m,1280x720_2500_m,1280x720_3500_m,.mp4.csmil/master.m3u8",
+			src: "https://mdtp-a.akamaihd.net/vod/hls/BLENDER-BUNNY/master.m3u8",
 			type: "application/x-mpegURL"
 		}]
 	}
 };
-var amp = akamai.amp.AMP.create("amp", config);
+akamai.amp.AMP.create("amp", config).then(player => {
+ var amp = player
+});
 ----
 
 :last-revision: Mar/2023
