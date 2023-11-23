@@ -1,5 +1,5 @@
 == Embedding AMP
-This tutorial shows the simplest way to embed AMP. To see a working demo please check our demo page.
+This tutorial shows the simplest way to embed AMP. To see a working demo please check our https://player.akamai.com/demos/[demo site].
 
 To Embed AMP in a HTML page is needed to:
 
