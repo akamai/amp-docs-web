@@ -1,6 +1,34 @@
-= Settings defaults
+= Settings
 
-The default value of the player's user settings can be set via the configuration object:
+This tutorial shows how to set up the default value for the available user settings on AMP.
+
+== Default Settings
+As explained in xref:amp-core:01-player-embed.adoc[Embedding AMP], AMP is configured by passing a configuration object that matches the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.PlayerConfig.html[akamai.amp.PlayerConfig]. 
+As it can be seen in the akamai.amp.PlayerConfig interface page it includes the member settings. The member settings is an instance of https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Settings.html[akamai.amp.Settings]. 
+It is used by AMP to track and set up the player user settings. In order to set up defaults, the Settings class includes the static attribute defaults that can be used to set a default volume and captions object.
+
+Currently AMP supports defaults for the following:
+
+- Volume
+- Closed Captions
+- Autoplay (Continuous playback)
+
+=== 1. Volume
+By setting the attribute volume to a value between 0 and 1 you can set the default volume used by the player when loaded.
+
+[source, javascript]
+----
+var config = {
+	settings: {
+		defaults: {
+			volume: 0.5
+		}
+	}
+};
+----
+
+=== 2. Closed Captions
+By setting the attribute captions to an object matching the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.CaptionSettings.html[akamai.amp.CaptionSettings] interface you can set the default way the closed caption will be displayed by the player.
 
 [source, javascript]
 ----
@@ -27,5 +55,23 @@ var config = {
 };
 ----
 
-:last-revision: Mar/2023
+=== 3. Autoplay (Continuous playback)
+The autoplay flag is a setting key that dictates whether video content, should initiate playback automatically upon finishing the current video asset. 
+
+[source, javascript]
+----
+var config = {
+	settings: {
+		defaults: {
+			autoplay: false
+		}
+	}
+};
+----
+This value is reflected within the settings menu panel, and final user can toggle this on/off. 
+
+NOTE: This setting should not be confused with `autoplay` player feature mentioned in 
+xref:amp-core:04-autoplay.adoc[Autoplay] as this setting only works for subsequent playback and not the initial video loaded.
+
+:last-revision: Nov/2023
 include::ROOT:partial$amp-additional-info.adoc[]
