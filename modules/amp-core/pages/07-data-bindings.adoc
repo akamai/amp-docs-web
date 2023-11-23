@@ -14,8 +14,8 @@ The following data values are accessible through player data bindings
 ** DOM Variables
 ** JS Functions
 
-=== Player provided data
-==== Media
+== Player provided data
+=== Media
 This is a media object representation, it exposes the values of the current playing media or mrss feed in the video player. See the list of https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Media.html[Media] members. 
 Example
 
@@ -31,7 +31,7 @@ config = {
     }
 ----
 
-==== Ads
+=== Ads
 Player exposes contextual ad data during ad playback, ad members can be accessed through player data bindings but keep in mind that the ad should be active prior accessing its members. 
 Example.
 
@@ -49,7 +49,7 @@ config = {
 see  
 https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Ad.html[Ad contextual data]
 
-==== Player
+=== Player
 Player provided data such as `<video>` information.
 
 [source,javascript]
@@ -67,13 +67,13 @@ config = {
 
 See current https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.HTMLPlayer.html#absoluteCurrentTime[HTMLPlayer] members
 
-=== Customer provided data 
-==== Params (deprecated)
+== Customer provided data 
+=== Params (deprecated)
 Prior to v9, the player could hold parameters in a hash table called `params[]`. However, if a lookup occurred and the variable did not exist in `params[]`, the player would look into the DOM for the variable. 
 
 In *v9*, we have removed the `params[]` array, because the ability to fallback to the DOM makes this array unnecessary.
 
-=== Wide-open JS / DOM execution
+== Wide-open JS / DOM execution
 
 Anything variable with `#{ }` that does not meet `player.variable`, `media,variable`, or `ads.variable`, DOM lookup will occur. 
 
