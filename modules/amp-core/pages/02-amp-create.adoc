@@ -1,41 +1,87 @@
-= Creating an instance of AMP
+== Creating an instance of AMP
 
-To create an instance of AMP, use the function {@link akamai.amp.AMP.create}. You must pass the function to an HTML DOM element or a valid CSS selector to a DOM element:
+This tutorial shows the alternatives to access an AMP instance.
 
-[source, javascript]
-----
-var amp = akamai.amp.AMP.create("#amp");
-----
-
-Optionally you can pass a configuration object to function to set the player's default settings:
+As it is explained in our basic tutorial. The most basic way to create an AMP instance is by invoking the function `akamai.amp.AMP.create` with a HTML DOM element or a valid CSS selector to a DOM element as argument and optionally also passing a configuration object as a second argument to modify the player's default settings:
 
 [source, javascript]
 ----
 var config = {
-	media: {
-		src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
-		type: "video/mp4",
-		autoplay: true
-	}
+  media: {
+    src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
+    type: "video/mp4",
+    autoplay: true
+  }
 };
-var amp = akamai.amp.AMP.create("amp", config);
+akamai.amp.AMP.create("amp", config);
 ----
 
-Sometimes it is necessary to run additional code to set up the player. To ensure this code is run after the player is fully initialized, pass a function as the third argument:
+In some scenarios it might be required to use the created player instance, either for furter customization, event handling or error handling. To do so, there are three alternatives:
+
+* Handling it as a promise.
+* Using async/await.
+* Using an event listener.
+
+==== 1. Handling the AMP "Create" Promise
+When invoked, the function `akamai.amp.AMP.create` creates a promise. This promise will be resolved when the player is fully instantiated and ready to be used. In the example below it's shown how the newly created player can be accesed by passing a function expecting a single argument to the promise then method.
 
 [source, javascript]
 ----
 var config = {
-	media: {
-		src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
-		type: "video/mp4",
-		autoplay: true
-	}
+  media: {
+    src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
+    type: "video/mp4",
+    autoplay: true
+  }
 };
-var amp = akamai.amp.AMP.create("amp", config, function (event) {
-	console.log(event);
+akamai.amp.AMP.create("amp", config)
+  .then( function (player) {
+    console.log(player); // newly created AMP instance
+    player.addEventListener("mediachange", function (event) { // Now we can interact with the player instance
+      console.log(event);
+    });
+  });
+----
+
+==== 2. Using Async/Await
+As with any other promise async/await can be used in order to handle the resolution of the `akamai.amp.AMP.create` promise. Below there is a slightly modified version of the previous example using async/await.
+
+[source, javascript]
+----
+async function onload() {
+  var config = {
+    media: {
+      src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
+      type: "video/mp4",
+      autoplay: true
+    }
+  };
+  
+  var player = await akamai.amp.AMP.create("amp", config);
+  console.log(player);
+  player.addEventListener("mediachange", function (event) {
+    console.log(event);
+  });
+}
+----
+
+==== 3. Using an Event Listener
+Event listeners are a third option to access the player instance. An event listener can be passed as the third argument to the create function. This listener will be executed when the ready event is fired. The code of our example, modified to use an event listener, can be seen below.
+[source, javascript]
+----
+var config = {
+  media: {
+    src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
+    type: "video/mp4",
+    autoplay: true
+  }
+};
+
+akamai.amp.AMP.create("amp", config, function (event) {
+  var player = event.player;
+  console.log(player);
+  player.addEventListener("mediachange", function (event) { console.log(event); });
 });
 ----
-
-:last-revision: Mar/2023
+:last-revision: Nov/2023
 include::ROOT:partial$amp-additional-info.adoc[]
