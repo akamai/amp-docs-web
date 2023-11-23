@@ -1,33 +1,107 @@
-= Embedding AMP
+== Embedding AMP
+This tutorial shows the simplest way to embed AMP. To see a working demo please check our demo page.
 
-Embedding AMP in an HTML page is a three-step process:
+To Embed AMP in a HTML page is needed to:
 
-. Include the AMP JS script
-. Provide embed-time configuration (set the media to play and configure any features)
-. Instantiate the AMP object, associating it with a div on the page. The player will take on the div's size in a responsive manner.
 
-[source, javascript]
+===== 1. Include the AMP JS script
+If you are using the self-hosted model (distribution package), provide the URL to your amp.js file. If you are using the AMP's hosted model, you will need to provide your API Key and the desired version. Note: If you don't know your API Key yet please email your Akamai executive or amp-impl@akamai.com in order to provide one to you.
+
+The example below uses the hosted version.
+
+[source, html]
 ----
 <html>
-	<head>
-		<script src="amp.js"></script>
-	</head>
-	<body>
-		<div id="amp"></div>
-		<script>
-			var config = {
-				autoplay: true,
-				media: {
-					src: "http://projects.mediadev.edgesuite.net/customers/akamai/video/VfE.mp4",
-					type: "video/mp4"
-				}
-			};
-
-			var amp = akamai.amp.AMP.create("amp", config);
-		</script>
-	</body>
+  <head>
+    <script src="https://amp.akamaized.net/hosted/1.1/player.esi?apikey=MY_API_KEY&version=9.0.14"></script>
+  </head>
+  <body>
+  </body>
 </html>
 ----
 
-:last-revision: Mar/2023
+===== 2. Prepare a configuration object
+Please refer to akamai.amp.PlayerConfig for more information on the configuration object. In the next example, we're providing a akamai.amp.Media object that should play automatically when the player has finished loading content.
+
+[source, html]
+----
+<html>
+  <head>
+    <script src="https://amp.akamaized.net/hosted/1.1/player.esi?apikey=MY_API_KEY&version=9.1.14"></script>
+  </head>
+  <body>
+    <script>
+      var config = {
+        autoplay: true,
+        media: {
+          src: "my video URL.mp4",
+          type: "video/mp4"
+        }
+      };
+    </script>
+  </body>
+</html>
+----
+
+===== 3. Create the AMP object
+Instantiate the AMP object and embed it in a div on the page by passing an id or handle as first argument. The player will take on the size of the div in a responsive manner.
+[source, html]
+----
+<html>
+  <head>
+    <script src="https://amp.akamaized.net/hosted/1.1/player.esi?apikey=MY_API_KEY&version=9.0.14"></script>
+  </head>
+  <body>
+    <div id="amp"></div>
+    <script>
+      var config = {
+        autoplay: true,
+        media: {
+          src: "my video URL.mp4",
+          type: "video/mp4"
+        }
+      };
+      akamai.amp.AMP.create("amp", config);
+    </script>
+  </body>
+</html>
+----
+
+== Adding AMP as an inline HTML object
+The player can be embedded by adding the `class="amp-inline"` to the script tag and providing a configuration object using the attribute data-config.
+
+[source, html]
+----
+<html>
+  <head></head>
+  <body>
+    <script class="amp-inline" src="https://amp.akamaized.net/hosted/1.1/player.esi?apikey=MY_API_KEY&version=9.1.14" data-config='{"media":{"src":"my video URL.mp4"}}'></script>
+  </body>
+</html>
+----
+
+Multiple players can also be embedded on the same page by adding `class="amp-inline"` to any DOM element, along with data- attributes to configure each player instance. Take note that the attribute data-config is replaced by data-defaults, in the first script element.
+
+[source, html]
+----
+<html>
+  <head></head>
+  <body>
+    <script class="amp-inline" src="https://amp.akamaized.net/hosted/1.1/player.esi?apikey=MY_API_KEY&version=9.1.14" data-defaults='{"media":{"src":"VfE.mp4"}}'></script>
+    <div class="amp-inline" data-src="my video URL.mp4"></div>
+    <div
+      class="amp-inline"
+      id="player2"
+      data-autoplay="muted"
+      data-src="my video URL.mp4"
+      data-poster="my poster URL.jpg"
+      data-time="10"
+      data-width="318"
+      data-height="178">
+    </div>
+  </body>
+</html>
+----
+
+:last-revision: Nov/2023
 include::ROOT:partial$amp-additional-info.adoc[]
