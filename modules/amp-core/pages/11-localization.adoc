@@ -1,6 +1,16 @@
 = Localization
+This tutorial shows how to properly handle localization in AMP. 
 
-All of the text that appears in the player's UI is localized. The player provides three language sets: English, Spanish, and French.
+The tutorial will cover the following topics:
+
+- Setting up a language.
+- Extending available languages.
+- Available localized strings.
+
+All of the text that appears in the player's UI is localized.
+
+== 1. Setting up a language.
+The player provides three language sets: English, Spanish, and French.
 By default, the player will use the browser's language setting to determine which strings to display, but this can be overridden by
 passing a `language` value in the config (using ISO 639-1 language codes):
 
@@ -22,6 +32,7 @@ var config = {
 };
 ----
 
+2. Extending available languages.
 Additional language sets, as well as overrides to existing language sets, can be provided using the config's `locales` property:
 
 [source, javascript]
@@ -48,7 +59,7 @@ var config = {
 };
 ----
 
-The locales object can also be used to provide region-specific overrides/language sets ([BCP 47|https://tools.ietf.org/rfc/bcp/bcp47.txt]):
+The locales object can also be used to provide region-specific overrides/language sets https://tools.ietf.org/rfc/bcp/bcp47.txt[BCP 47]
 
 [source, javascript]
 ----
@@ -65,21 +76,118 @@ var config = {
 };
 ----
 
-It is sometimes helpful to see which message keys are associated with the player's on-screen text. To do this provide a [falsy|https://developer.mozilla.org/en-US/docs/Glossary/Falsy]
-value for the config's `language` property:
-
-[source, javascript]
-----
-var config = {
-	language: ""
-};
-----
+== 3. Available localized strings
 
 A complete list of available message keys can be found by querying the player's `l10n` property:
 
 [source, javascript]
 ----
 console.log(amp.l10n);
+----
+
+[source, javascript]
+----
+{
+  AD: "Ad",
+  CASUAL: "Casual",
+  CHI: "Chinese",
+  CLOSED_CAPTIONING: "Closed Captioning",
+  COLOR_BLACK: "Black",
+  COLOR_BLUE: "Blue",
+  COLOR_CYAN: "Cyan",
+  COLOR_GREEN: "Green",
+  COLOR_MAGENTA: "Magenta",
+  COLOR_RED: "Red",
+  COLOR_WHITE: "White",
+  COLOR_YELLOW: "Yellow",
+  CURRENT: "Current",
+  CURSIVE: "Cursive",
+  DE: "German",
+  DEU: "German",
+  EDGE_DEPRESSED: "Depressed",
+  EDGE_LEFT_SHADOW: "Left Drop Shadow",
+  EDGE_NONE: "None",
+  EDGE_RAISED: "Raised",
+  EDGE_RIGHT_SHADOW: "Right Drop Shadow",
+  EDGE_UNIFORM: "Uniform",
+  EN: "English",
+  ENG: "English",
+  ENTER_FULLSCREEN: "Toggle Fullscreen Mode",
+  ERROR: "Error",
+  ERROR_ABORTED: "Media Aborted",
+  ERROR_DECODE: "Decode Error",
+  ERROR_DEFAULT: "An error has occurred",
+  ERROR_NETWORK: "Network Error",
+  ERROR_SRC: "Source not supported",
+  ES: "Spanish",
+  EXIT_FULLSCREEN: "Exit Fullscreen Mode",
+  FR: "French",
+  FRA: "French",
+  FRE: "French",
+  FULLSCREEN: "Fullscreen",
+  GER: "German",
+  GO_LIVE: "GO LIVE",
+  IT: "Italian",
+  ITA: "Italian",
+  JA: "Japanese",
+  JPN: "Japanese",
+  JUMP_AHEAD: "Jump Ahead",
+  JUMP_BACK: "Jump Back",
+  KO: "Korean",
+  KOR: "Korean",
+  LIVE: "LIVE",
+  MONOSPACED_SANS_SERIF: "Monospaced Sans-Serif",
+  MONOSPACED_SERIF: "Monospaced Serif",
+  MUTE: "Mute",
+  OF: "of",
+  OPTION_BACKGROUND_COLOR: "Background Color",
+  OPTION_BACKGROUND_OPACITY: "Background Opacity",
+  OPTION_EDGE_COLOR: "Edge Color",
+  OPTION_EDGE_OPACITY: "Edge Opacity",
+  OPTION_EDGE_STYLE: "Character Edge Style",
+  OPTION_FONT_COLOR: "Font Color",
+  OPTION_FONT_FAMILY: "Font Family",
+  OPTION_FONT_OPACITY: "Font Opacity",
+  OPTION_FONT_SIZE: "Font Size",
+  OPTION_SCROLL_TYPE: "Scroll Type",
+  OPTION_WINDOW_COLOR: "Window Color",
+  OPTION_WINDOW_OPACITY: "Window Opacity",
+  PAUSE: "Pause",
+  PLAY: "Play",
+  PLAYBACK_RATE: "Playback Rate",
+  PREVIEW: "Preview",
+  PROPORTIONAL_SANS_SERIF: "Proportional Sans-Serif",
+  PROPORTIONAL_SERIF: "Proportional Serif",
+  QUALITY_AUTO: "Auto",
+  REPLAY: "Replay",
+  REWIND: "Rewind",
+  RU: "Russian",
+  RUS: "Russian",
+  SCROLL_PAINTON: "Paint-on",
+  SCROLL_POPOUT: "Pop-out",
+  SCROLL_ROLLON: "Roll-on",
+  SEEK: "Seek",
+  SEEK_TO: "Seek to",
+  SETTINGS: "Settings",
+  SETTINGS_AUDIO: "Audio",
+  SETTINGS_AUTOPLAY: "Autoplay",
+  SETTINGS_OPTIONS: "Options",
+  SETTINGS_QUALITY: "Quality",
+  SETTINGS_SPEED: "Speed",
+  SETTINGS_SUBTITLES: "Subtitles",
+  SHARE: "Share",
+  SLIDER: "Slider",
+  SMALL_CAPS: "Small Capitals",
+  SPA: "Spanish",
+  SPEED_NORMAL: "Normal",
+  STREAM_NOT_FOUND: "Stream not found",
+  TOGGLE_OFF: "Off",
+  UNKNOWN: "Unknown",
+  UNMUTE: "Unmute",
+  VOLUME: "Volume",
+  ZH: "Chinese",
+  ZHO: "Chinese"
+}
 ----
 
 The current list of localized text is also available to data bindings:
@@ -89,5 +197,15 @@ The current list of localized text is also available to data bindings:
 amp.evaluateBindings("#{l10n.MSG_OF}");
 ----
 
-:last-revision: Mar/2023
+It is sometimes helpful to see which message keys are associated with the player's on-screen text. To do this provide a https://developer.mozilla.org/en-US/docs/Glossary/Falsy[falsy]
+value for the config's `language` property:
+
+[source, javascript]
+----
+var config = {
+	language: ""
+};
+----
+
+:last-revision: Nov/2023
 include::ROOT:partial$amp-additional-info.adoc[]
