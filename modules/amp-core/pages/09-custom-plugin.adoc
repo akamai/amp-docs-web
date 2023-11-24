@@ -1,110 +1,269 @@
 = Creating Custom Plugins
+This tutorial show the proper way to extend the player functionality by
+creating custom a plugin.
 
-The player's functionality can be extended via custom plugins. The steps for creating and attaching a plugin are as follows:
+We will create a plugin for our fictional `Awesome Analytics` vendor. Awesome analytics will track:
 
-. Create a plugin factory function when it is time to create a new instance of the plugin. The factory function accepts two arguments: The player's instance and the plugin's configuration object. For example:
-+
-[source, javascript]
+* Playback started, sending an analytics id 
+* Playback completed, sending an analytics id and the stream duration.
+
+To reach the goal, the plugin will use the function `+track+` from the fictional `+awe+` object:
+
+The steps required to create our custom plugin are:
+
+. Creating a plugin object.
+. Creating a factory function.
+. Registering the factory function.
+. Configuring our custom awesome analytics plugin.
+. Loading a plugin script from an external file.
+. Using the plugin.
+
+== 1. Creating a plugin object
+
+The only strict requirement for an AMP plugin is to include the
+`+config+` attribute. However it makes no sense having a plugin that
+only holds its own configuration. The plugin must implement as well any
+functions that will be used to expand the AMP functionality.
+
+Following with our example we’ll include two functions: 
+
+* `+trackStart( )+` 
+* `+trackEnd(duration)+`
+
+So the Awesome Analytics plugin object will look like this:
+
+[source,javascript]
 ----
-function createSamplePlugin(player, config, key) {
- return new Promise(function (resolve, reject) {
-     console.log("Creating Sample Plugin", player, config, key);
-     if (true) {
-         resolve({
-             config: config,
-             testing: function () {
-                 console.log("Sample Plugin Public API Function: " + this.config.testing);
-             }
-         });
-     } else {
-         reject("An error occured creating the sample plugin.");
-     }
- });
+function createPluginObject( config ) {
+    return {
+        config: config,
+        trackStart : function( ) {
+            this.config.awe.track( this.config.trackId, {} )
+        },
+        trackEnd : function( duration ) {
+            this.config.awe.track( this.config.trackId, { duration : duration } )
+        }
+    }
 }
 ----
 
-. Register the plugin with the AMP SDK by giving it a key and passing in the factory function:
-+
-[source, javascript]
+Notice that since we defined that `+trackId+` will be part of our
+`+config+` object we can use it in our track functions.
+
+== 2. Creating a factory function
+
+In order to load any plugin AMP needs a factory function. The factory
+function will be called when it is time to create a new instance of the
+plugin. The factory function requires two arguments: The instance of the
+player and the configuration object for the plugin. Optionally, it can
+also receive a `+key+`.
+
+[source,javascript]
 ----
-akamai.amp.AMP.registerPlugin("sample", createSamplePlugin);
-----
-+
-By default, the plugin will be available in all modes of the player. If the plugin only applies to
-certain modes of the player, for instance, flash only, pass in the modes as the third argument:
-+
-[source, javascript]
-----
-akamai.amp.AMP.registerPlugin("sample", createSamplePlugin, ["flash"]);
+function createAwePlugin( player, config, key ) {
+    return new Promise( function ( resolve, reject ) {
+        if ( config.awe && config.trackId ) {
+            resolve( createPluginObject( config ) );
+        } else {
+            reject( "Config doesn't include awe object or track id" );
+        }
+    });
+}
 ----
 
-. Configure the plugin via the player's configuration by creating a property with the plugin's key in the plugins section:
-+
-[source, javascript]
+It’s worth mentioning that steps 1 & 2 were split for the sake of
+clarity. However it is not mandatory to have it this way. It is ok to
+create the plugin object directly in the factory function. i.e:
+
+[source,javascript]
 ----
-var config = {
- plugins: {
-     sample: {
-         testing: 1234
-     }
- }
-};
-var amp = akamai.amp.AMP.create("akamai-media-player", config);
-----
-+
-If the plugin does not need configuration options, simply pass in a boolean:
-+
-[source, javascript]
-----
-var config = {
- plugins: {
-     sample: true
- }
-};
-var amp = akamai.amp.AMP.create("akamai-media-player", config);
-----
-+
-Plugins can also be enabled and disabled via the `enabled` flag:
-+
-[source, javascript]
-----
-var config = {
- plugins: {
-     sample: {
-         enabled: true
-     }
- }
-};
-var amp = akamai.amp.AMP.create("akamai-media-player", config);
-----
-+
-If the plugin's code lives in a different file, it can also be loaded via the config:
-+
-[source, javascript]
-----
-var config = {
- plugins: {
-     sample: {
-         resources: [
-             {src: "sample.js", type: "text/javascript"}
-         ],
-         testing: 1234
-     }
- }
-};
-var amp = akamai.amp.AMP.create("akamai-media-player", config);
+function createAwePlugin( player, config, key ) {
+    return new Promise( function ( resolve, reject ) {
+        if ( config.awe && config.trackId ) {
+            resolve( {
+                config: config,
+                trackStart : function( ) {
+                    this.config.awe.track( this.config.trackId, {} )
+                },
+                trackEnd : function( duration ) {
+                    this.config.awe.track( this.config.trackId, { duration : duration } )
+                }
+            } );
+        } else {
+            reject( "Config doesn't include awe object or track id" );
+        }
+    });
+}
 ----
 
-. New API functions or properties exposed by the plugin can be accessed via the plugin's key after the ready event has fired:
-+
-[source, javascript]
+== 3. Registering the factory function
+
+Even though the factory function is ready, currently, AMP doesn’t know
+that "`Awesome Analytics`" exists. To make the awesome analytics plugin
+"`visible`" to AMP it’s needed to register the factory function by
+calling the function `+registerPlugin+` and passing as arguments a key
+for the plugin and the factory function.
+
+[source,javascript]
 ----
-var amp = akamai.amp.AMP.create("akamai-media-player", config, function () {
- amp.sample.testing();
+akamai.amp.AMP.registerPlugin( "awesomeanalytics", createAwePlugin);
+----
+
+== 4. Configuring Our Custom Awesome Analytics plugin.
+
+Before continuing with this step, please check the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.PluginConfig.html[akamai.amp.PluginConfig] interface. The configuration that will be
+passed to our plugin should match this interface.
+
+The minimum accepted configuration is a boolean. This will tell AMP to
+either enable or disable the plugin.
+
+[source,javascript]
+----
+var config = {
+    plugins: {
+        awesomeanalytics: true
+    }
+};
+akamai.amp.AMP.create("akamai-media-player", config);
+----
+
+It is important to notice that the plugin configuration section for
+"`Awesome Analytics`" matches the key used in step 3, therefore this key
+should follow the naming constraints of Java Script. As an example, the
+`+key = "123-Awe"+` cannot be used since the JS parser will be unable to
+parse it as a variable name.
+
+Even though it is possible to create a plugin that only requires the
+enabled/dissabled boolean, in most real world applications more
+information is required. For "`Awesome Analytics`", as an example, the
+plugin still needs a reference to the "`awe object`" and a "`trackId`".
+So a more realistic configuration will look like:
+
+[source,javascript]
+----
+var config = {
+    plugins: {
+        awesomeanalytics: {
+            enabled: true,
+            trackId: '783e35e2-d98e-11ea-87d0-0242ac130003',
+            awe: static_awe
+        }
+    }
+};
+akamai.amp.AMP.create("akamai-media-player", config);
+----
+
+Finally we can skip the `+enabled+` flags since plugins are enabled by
+default. This leaves us with the following configuration:
+
+[source,javascript]
+----
+var config = {
+    plugins: {
+        awesomeanalytics: {
+            trackId: '783e35e2-d98e-11ea-87d0-0242ac130003',
+            awe: static_awe
+        }
+    }
+};
+akamai.amp.AMP.create("akamai-media-player", config);
+----
+
+== 5. Loading a plugin script from an external file
+
+More often than not, in a real world plugin implementation, the actual
+plugin is a complex piece of software that already lives in a separate
+JS script. This means that the AMP plugin will only work as a facade for
+the "`real plugin`". We can see this in our example. So far we’ve asumed
+that the `+static_awe+` object exists somewhere in our `+DOM+`, however,
+we haven’t specified how it is loaded or handled.
+
+AMP allows "`AMP Plugins`" to load any required script ( Usually the
+core of the plugin ) from an external file by using the attribute
+`+resources+`. At this point it is important to take a look at the
+following pages in our documentation: 
+
+* https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.PlayerConfig.html[akamai.amp.PlayerConfig]
+* https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Config.html[akamai.amp.Config] 
+* https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Resource.html[akamai.amp.Resource]
+
+The resource object should match the https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Resource.html[akamai.amp.Resource]
+interface and include a `+src+` and `+type+`. Below there’s an example
+of a `+resource+` object.
+
+[source,javascript]
+----
+var config = {
+    plugins: {
+        awesomeanalytics: {
+            resources: [
+                {
+                    src: "//awesome_analytcss_server/awesomeanalytics.js", //url to my "real plugin script"
+                    type: "text/javascript" // JS type so it is load as an script
+                }
+            ],
+            trackId: '783e35e2-d98e-11ea-87d0-0242ac130003',
+        }
+    }
+};
+akamai.amp.AMP.create("akamai-media-player", config);
+----
+
+Since now the `+static_awe+` object will be available after
+`+awesomeanalytics.js+` is fully loaded, we can update our factory
+function and remove the `+awe+` object as part of the expected
+configuration. Here is the updated version:
+
+[source,javascript]
+----
+function createAwePlugin( player, config, key ) {
+    return new Promise( function ( resolve, reject ) {
+        if ( static_awe && config.trackId ) {
+            resolve( {
+                config: config,
+                trackStart : function( ) {
+                    static_awe.track( this.config.trackId, {} )
+                },
+                trackEnd : function( duration ) {
+                    static_awe.track( this.config.trackId, { duration : duration } )
+                }
+            } );
+        } else {
+            reject( "Config doesn't include track id or awesomeanalytics.js hasn't loaded yet" );
+        }
+    });
+}
+----
+
+== 6. Using the Plugin
+
+Now that we have successfuly loaded "`awesomeanalytics.js`" and created
+and registered our plugin, it is time to implement the plugin desired
+behaviour. To do so we’ll add event listeners for the desired events. To
+know more about events please check https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Events.html[akamai.amp.Events]. 
+Here is
+the example code:
+
+[source,javascript]
+----
+akamai.amp.AMP.create("akamai-media-playeramps", config).then((amp) => {
+    amp.addEventListener(akamai.amp.Events.STARTED, (event) => {
+        amp.awesomeanalytics.trackStart()
+    });
+    
+    amp.addEventListener(akamai.amp.Events.ENDED, (event) => {
+        amp.awesomeanalytics.trackEnd( amp.media.duration )
+    });
 });
 ----
 
-AMP provides a Plugin base class containing common functionality, such as event dispatching for convenience. {@link akamai.amp.Plugin}
+Notice that we accessed our plugin by using the key `+awesomeanalytics+`
+(the one defined in step 3). As it can be seen in the example both
+functions `+trackStart+` and `+trackEnd+` are available.
 
-:last-revision: Mar/2023
+'''''
+
+NOTE: For convenience AMP provides a Plugin base class which contains common functionality such as event dispatching. Please check https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Plugin.html[akamai.amp.Plugin].
+
+:last-revision: Nov/2023
 include::ROOT:partial$amp-additional-info.adoc[]
