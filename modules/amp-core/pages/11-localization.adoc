@@ -32,7 +32,7 @@ var config = {
 };
 ----
 
-2. Extending available languages.
+== 2. Extending available languages.
 Additional language sets, as well as overrides to existing language sets, can be provided using the config's `locales` property:
 
 [source, javascript]
