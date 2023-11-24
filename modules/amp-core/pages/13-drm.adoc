@@ -16,7 +16,6 @@ AMP supports DRM content from the following providers:
 * Widevine
 * PlayReady
 * FairPlay
- +
 
 == 2. Adding a Key
 
@@ -65,7 +64,7 @@ var config = {
 
 == 4. Using Multiple Sources
 
-For more information on how to use multiple sources, read {@tutorial 03-load-media}. When dealing with various sources, the keys for all sources should be provided in the keys object.
+For more information on how to use multiple sources, read xref:amp-core:03-load-media.adoc[Load Media]. When dealing with various sources, the keys for all sources should be provided in the keys object.
 
 [source,javascript]
 ----
@@ -195,5 +194,5 @@ var config = {
 }
 ----
 
-:last-revision: Mar/2023
+:last-revision: Nov/2023
 include::ROOT:partial$amp-additional-info.adoc[]
