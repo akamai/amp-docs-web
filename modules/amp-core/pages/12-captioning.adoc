@@ -11,8 +11,6 @@ The topics covered on this page are:
  ** 3.2 Hand-picking text tracks.
 * 4 Custom rendering.
 * 5 Using cue point transformation.
- +
- +
 
 == 1. Adding Captions
 
@@ -50,14 +48,13 @@ var config = {
 
 For further information please check:
 
-* {@link akamai.amp.Track}
-* {@link akamai.amp.Media}
-* {@link akamai.amp.PlayerConfig}
- +
+* https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Track.html[akamai.amp.Track]
+* https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.Media.html[akamai.amp.Media]
+* https://docs.player.akamai.com/static/amp-web-sdk/akamai.amp.PlayerConfig.html[akamai.amp.PlayerConfig]
 
 == 2. Adding Captions for Multiple Languages
 
-Tracks for individual languages can be set using the `srclang` property of the track items with an ISO 639-1 language code. The player will choose the track based on the player's `language` setting (see {@tutorial 11-localization} for more details):
+Tracks for individual languages can be set using the `srclang` property of the track items with an ISO 639-1 language code. The player will choose the track based on the player's `language` setting (see xref:amp-core:11-localization.adoc[Localization] for more details):
 
 [source, javascript]
 ----
@@ -79,8 +76,6 @@ var config = {
   }
 };
 ----
-
-{blank} +
 
 == 3. Using Embedded Captions
 
@@ -127,8 +122,6 @@ var config = {
 };
 ----
 
-{blank} +
-
 == 4. Custom Rendering
 
 Certain scenarios require specific handling of the caption rendering. AMP provides two rendering engines for captions:
@@ -147,8 +140,6 @@ var config = {
 };
 ----
 
-{blank} +
-
 == 5. Using Cue Point Transformation
 
 Sometimes there is a need to alter a cue point before rendering it on-screen. This can be accomplished by using the transform API. Similar to media transforms, each cue can be run through a function to alter its contents:
@@ -164,8 +155,8 @@ amp.addTransform(akamai.amp.TransformType.CUE_CHANGE, function (cues) {
 ----
 
 ____
-For more information on media transforms, please check {@tutorial 06-media-transforms}.
+For more information on media transforms, please check xref:amp-core:06-media-transforms.adoc[Media Transform].
 ____
 
-:last-revision: Mar/2023
+:last-revision: Nov/2023
 include::ROOT:partial$amp-additional-info.adoc[]
