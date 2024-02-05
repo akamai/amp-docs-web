@@ -1,8 +1,18 @@
 include::ROOT:partial$amp-gobal-attributes.adoc[]
 
 = Conviva
+This tutorial shows how to properly use Conviva alongside AMP.
 
-Implementation of Conviva into AMP. The plugin can be implemented by providing a `conviva` object in the player config:
+The topics covered in this page are:
+
+. Getting started with AMP.
+
+. Using Debug Mode (Gateway Endpoint) 
+
+. Adding Additional Metadata
+
+== 1. Getting started
+Implementation of Conviva sdk 4.7.x into AMP. The plugin can be implemented by providing a `conviva` object in the player config:
 
 [source, javascript]
 ----
@@ -11,36 +21,145 @@ var config = {
   plugins: {
     conviva : {
       resources: [
-        {src: "#{paths.plugins}conviva/libs/conviva-core-sdk.min.js", type: "text/javascript", async: true},
-        {src: "#{paths.plugins}conviva/libs/conviva-html5-sdk.min.js", type: "text/javascript", async: true},
-        {src: "#{paths.plugins}conviva/Conviva.js", type: "text/javascript", async: true}
+              { src: "#{paths.plugins}conviva/libs/conviva-core-sdk.js", type: "text/javascript" },
+              { src: "#{paths.plugins}conviva/libs/conviva-html5native-impl.js", type: "text/javascript" },
+              { src: "#{paths.plugins}conviva/Conviva.min.js", debug: "#{paths.plugins}conviva/Conviva.js", type: "text/javascript" }
       ],
-      customerKey: "cade858ca54db00906caf7ef170130b90a2f4efc",
-      serviceUrl: "https://turner-br-test.testonly.conviva.com",
+      customerKey: "abc123456xyz",
+      serviceUrl: "https://customer-test.testonly.conviva.com",
       metadata: {
-        //streamType and streamURL is set logically in the code
-        applicationName:"testApplicationName",
-        viewerId:"testViewerID",
-        assetName:"#{media.guid}",
-        deviceType:"testDeviceType",
-        cdnName:"AKAMAI",
-        playerName:"AMP #{player.mode} Player",
-        custom: {
-          contentType:"testContentType",
-          championship:"testChampionship",
-          sportGender:"testSportGender",
-          kruxID:"testKruxID",
-          season:"testSeason",
-          division:"testDivision",
-          appVersion:"testAppVersion",
-          turnerGUID:"testTurnerGUID"
-        }
-      }
+              "Conviva.applicationName": "testApplicationName",
+              "Conviva.viewerId": "testViewerID",
+              "Conviva.assetName": "#{media.title}",
+              contentType: "testContentType",
+              championship: "testChampionship",
+              sportGender: "testSportGender",
+              kruxID: "testKruxID",
+              season: "testSeason",
+              division: "testDivision",
+              appVersion: "testAppVersion",
+              turnerGUID: "testTurnerGUID"
+            },
+            adMetadata: {
+              'c3.ad.id': "#{ads.currentAd.id}",
+              'c3.ad.system': "#{ads.currentAd.metadata.getAdSystem()}",
+              'c3.ad.position': "#{ads.currentAd.type}",
+              'c3.ad.creativeId': "#{ads.currentAd.metadata.getCreativeId()}"
+            },
+            deviceMetadata: {
+              'DeviceModel': "M2"
+            }
     }
   }
 };
+
 akamai.amp.AMP.create("amp", config);
 ----
+== 2. Using Debug Mode
+
+During the development process, it may be necessary to enable Conviva test mode. This can be achieved by providing a `serviceUrl` and setting the debug flag within the plugin's configuration block. However, it's crucial to remove both properties when deploying this plugin in a production environment.
+
+[source, javascript]
+----
+conviva : {
+      resources: [
+              { src: "#{paths.plugins}conviva/libs/conviva-core-sdk.js", type: "text/javascript" },
+              { src: "#{paths.plugins}conviva/libs/conviva-html5native-impl.js", type: "text/javascript" },
+              { src: "#{paths.plugins}conviva/Conviva.min.js", debug: "#{paths.plugins}conviva/Conviva.js", type: "text/javascript" }
+      ],
+      customerKey: "abc123456xyz",
+      debug: true,
+      serviceUrl: "https://customer-test.testonly.conviva.com"
+}
+----
+
+== 3. Adding Metadata
+
+This section provides step-by-step instructions for adding metadata to conviva metrics. The following metadata types are supported within Conviva plugin for AMP
+
+* Content
+* Ads
+* Custom
+* Device Information
+
+=== 3.1 Content Metadata
+
+Content metadata can be configured through the plugins' configuration block, specifically within the `metadata` section.
+
+[source, javascript]
+----
+var config = {
+  plugins: {
+    conviva : {
+      resources: [
+              { src: "#{paths.plugins}conviva/libs/conviva-core-sdk.js", type: "text/javascript" },
+              { src: "#{paths.plugins}conviva/libs/conviva-html5native-impl.js", type: "text/javascript" },
+              { src: "#{paths.plugins}conviva/Conviva.min.js", debug: "#{paths.plugins}conviva/Conviva.js", type: "text/javascript" }
+      ],
+      customerKey: "abc123456xyz",
+      metadata: {
+              "Conviva.applicationName": "testApplicationName",
+              "Conviva.viewerId": "testViewerID",
+              "Conviva.assetName": "#{media.title}"
+      }  
+   }}
+  }
+----
+
+=== 3.2 Ads Metadata
+
+Ads break metadata can be configured through the plugins' configuration block, specifically within the `adMetadata` section.
+AMP already establishes ad metadata values; therefore, utilize this object to complement the player's ad information.
+
+[source, javascript]
+----
+conviva: {
+      resources: [
+              { src: "#{paths.plugins}conviva/libs/conviva-core-sdk.js", type: "text/javascript" },
+              { src: "#{paths.plugins}conviva/libs/conviva-html5native-impl.js", type: "text/javascript" },
+              { src: "#{paths.plugins}conviva/Conviva.min.js", debug: "#{paths.plugins}conviva/Conviva.js", type: "text/javascript" }
+      ],
+      customerKey: "abc123456xyz",
+      adMetadata: {
+              'c3.ad.system': "#{ads.currentAd.metadata.getAdSystem()}",
+              'c3.ad.position': "#{ads.currentAd.type}",
+              'c3.ad.creativeId': "#{ads.currentAd.metadata.getCreativeId()}"
+            }
+  }
+----
+
+=== 3.3 Custom Metadata
+
+Custom metadata can be configured through the plugins' configuration block, whether for ads or content, utilizing either the `metadata` or `adMetadata` section.
+
+[source, javascript]
+----
+conviva: {
+ metadata: {
+              contentType: "testContentType",
+              season: "testSeason",
+              division: "testDivision",
+            },
+            adMetadata: {
+              'c3.ad.system': "GDFP",
+              testValue: "test"
+            }
+}
+----
+
+=== 3.4 Device Information
+
+AMP already sets device metadata values. When additional device information is required, it can be configured through the plugins' configuration block, utilizing the `deviceMetadata` section.
+
+[source, javascript]
+----
+conviva: {
+            deviceMetadata: {
+             'DeviceModel': "M2"
+            }
+}
+----
+
 
 :date: 20/2/2023
 :last-revision: 20/3/2023
