@@ -2,12 +2,163 @@ include::ROOT:partial$amp-gobal-attributes.adoc[]
 
 = Google Analytics
 
-Implementation of Google Analytics into AMP.
+This tutorial shows how to properly use Google Analytics 4 gtag tagging framework alongside AMP.
 
-- xref:1-overview.adoc[Overview]
-- xref:2-custom.adoc[Custom Events Tracking]
-- xref:3-gtag.adoc[Google Analytics 4]
+The topics covered in this page are:
+
+* Getting started with AMP.
+
+* Adding metadata
+
+* Filtering tracking events
+
+* Using custom events
+
+== Getting Started
+
+Universal Analytics support has been removed in favor of Google Analytics 4, starting in AMP 9.1.30 you can instruct AMP to report data throughout gtag.js or gtag through Tag Manager.
+
+[source,javascript]
+----
+var config = {
+  plugins: {
+    googleanalytics: {
+            resources: [
+              { src: "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX", type: "text/javascript", async: true },
+              { src: "#{paths.plugins}googleanalytics/Googleanalytics.js", type: "text/javascript", async: true }
+            ],
+            trackingId: "G-XXXXXXX",
+            disablePageView: true,
+            metadata: {
+              ads: {
+                ad_title: "#{ads.currentAd.title}",
+                non_interaction: true
+              },
+              content: {
+                video_title: "#{media.title}",
+                video_id: "#{media.guid}",
+                non_interaction: true
+              }
+          }
+      }
+  }
+};
+----
+
+== Metadata
+
+Starting in version 9.1.30 and onwards, custom key-value pair metadata is categorized into two distinct types: 'video' and 'ads.' This categorization allows for the inclusion of specific information but not limited to video assets and advertisements associated with video playback.
+
+* 'video': This category is designated for metadata pertaining to the video asset itself. It encompasses essential details such as title, duration, resolution, genre, release date, and relevant tags or categories.
+
+* 'ads': The 'ads' category is reserved for metadata concerning advertisements linked to video content. It includes information such as ad type, duration, advertiser, and any targeting criteria.
+
+== Tracking Events
+
+Below is a list of events use within Google Analytics 4 plugin for AMP
+
+[options="header"]
+|==============================
+| Name                  | Type | Additional Metadata
+|  "ad_break_start"     | Ads | position
+|  "ad_break_end"       | Ads | position
+|  "ad_loaded"          | Ads | position
+|  "ad_pod_started"     | Ads | position
+|  "ad_pod_ended"       | Ads | position
+|  "ad_error"           | Ads | message, code, position
+|  "ad_paused"          | Ads | position
+|  "ad_resume"          | Ads | position
+|  "ad_clicked"         | Ads | position
+|  "ad_buffering_start" | Ads | position
+|  "ad_buffering_end"   | Ads | position
+|  "ad_playing"         | Ads | position
+|  "playback_session_started" | Playback | 
+|  "playback_session_ended"   | Playback | 
+|  "started"                  | Playback | 
+|  "error"                    | Playback | message, errorCode
+|  "ended"                    | Playback | 
+|  "playing"                  | Playback | 
+|  "paused"                   | Playback | 
+|  "resume"                   | Playback | 
+|  "play_request"             | Playback | 
+|  "autoplay"                 | Playback | autoplay
+|  "volume_change"            | Playback | volume level
+|  "buffering_start"          | Playback | 
+|  "buffering_end"            | Playback | 
+|  "bitrate_switch"           | Playback | bitrate
+|  "seek_start"               | Playback | 
+|  "seek_end"                 | Playback | 
+|  "milestone_25"             | Playback | milestone value
+|  "milestone_50"             | Playback | milestone value
+|  "milestone_75"             | Playback | milestone value
+|  "caption_selected" | Playback | language, kind
+|  "captioning_on"    | Playback | language, kind
+|  "captioning_off"   | Playback | language, kind
+|==============================
+
+=== Events Filtering 
+By default plugin tracks all events, If required customer can pick the default events by setting up the `allowedEvents` via plugin config.
+
+[source,javascript]
+----
+var config = {
+  plugins: {
+    googleanalytics: {
+            resources: [
+              { src: "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX", type: "text/javascript", async: true },
+              { src: "#{paths.plugins}googleanalytics/Googleanalytics.js", type: "text/javascript", async: true }
+            ],
+            trackingId: "G-XXXXXXX",
+            disablePageView: true,
+            allowedEvents: ["playback_session_started", "playback_session_ended"], // Instructs player to track these events only
+            metadata: {
+              content: {
+                video_title: "#{media.title}",
+                video_id: "#{media.guid}"
+              }
+          }
+      }
+  }
+};
+----
+
+== Custom Events
+Google Analytics Plugin for AMP supports a wide variarity of events, those events need to be mapped into `googleanalytics` config object, next you will need to fire such event by using `trackEvent` method as follows.
+
+[source,javascript]
+----
+var config = {
+  plugins: {
+    googleanalytics: {
+            resources: [
+              { src: "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX", type: "text/javascript", async: true },
+              { src: "#{paths.plugins}googleanalytics/Googleanalytics.js", type: "text/javascript", async: true }
+            ],
+            trackingId: "G-XXXXXXX",
+            disablePageView: true,
+            metadata: {
+              content: {
+                video_title: "#{media.title}",
+                video_id: "#{media.guid}",
+                non_interaction: true
+              }
+          }
+      }
+  }
+};
+
+akamai.amp.AMP.create("amp", config, function(event) {
+ amp = event.player;
+});
+
+// Call trackEvent, optional metadata can be sent as the third argument   
+amp.googleanalytics.trackEvent("video_test_event", "content", { test: "value" })
+
+//The following is a network output from above statement 
+// en=video_test_event&_ee=1&ep.video_title=VOD%20Sample&ep.non_interaction=true&ep.test=value
+
+----
 
 :date: 20/2/2023
-:last-revision: 20/3/2023
+:last-revision: 29/2/2024
 include::ROOT:partial$amp-additional-info.adoc[]
