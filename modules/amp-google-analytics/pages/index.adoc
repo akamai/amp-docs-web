@@ -14,6 +14,8 @@ The topics covered in this page are:
 
 * Using custom events
 
+* Event Alias
+
 == Getting Started
 
 Universal Analytics support has been removed in favor of Google Analytics 4, starting in AMP 9.1.30 you can instruct AMP to report data throughout gtag.js or gtag through Tag Manager.
@@ -159,6 +161,37 @@ amp.googleanalytics.trackEvent("video_test_event", "content", { test: "value" })
 
 ----
 
+== Event Alias
+If necessary, events can be consolidated into a single event to streamline the data gathering process on the analytics end.
+As a result, the event name (`en`) will adopt the value specified by the `alias` property within the player configuration object. Meanwhile, the playback event can be found within the `event_type` custom dimension within the same call.
+
+[source,javascript]
+----
+googleanalytics: {
+            resources: [
+              { src: "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX", type: "text/javascript", async: true },
+              { src: "#{paths.plugins}googleanalytics/Googleanalytics.js", type: "text/javascript", async: true }
+            ],
+            trackingId: "G-XXXXXX",
+            alias: "akamai_video_player",
+            metadata: {
+              ads: {
+                ad_title: "#{ads.currentAd.title}",
+                non_interaction: true
+              },
+              content: {
+                video_title: "#{media.title}",
+                video_id: "#{media.guid}",
+                non_interaction: true
+              }
+            }
+          }
+
+// Analytics call payload 
+// en=akamai_video_player&_ee=1&ep.event_type=started&ep.video_title=VOD%20Sample&ep.non_interaction=true
+
+----
+
 :date: 20/2/2023
-:last-revision: 29/2/2024
+:last-revision: 13/03/2024
 include::ROOT:partial$amp-additional-info.adoc[]
