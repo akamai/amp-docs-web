@@ -1,0 +1,101 @@
+= Low Latency
+
+This tutorial shows how to setup Ultra low latency streaming in AMP Web SDK.
+
+. Presentation formats
+. HLS setup
+. MPEG-Dash setup
+
+== 1. Live streaming presentations
+
+Player is compatible with the following low latency presentation protocols:
+
+* LL-HLS (Low Latency HTTP Live Streaming) 
+* MPEG-DASH (Dynamic Adaptive Streaming over HTTP) with Chunked Transfer Encoding
+
+
+== 2. HLS setup
+
+AMP provides support for low-latency HLS playback techniques, utilizing partial-based segment playback and preload hints. Additionally, AMP leverages hls library for low-latency live streams utilizing LL-HLS for MSE-based user agents.
+
+[source,javascript]
+----
+const config = {
+		autoplay: true,
+		autoplayPolicy: "muted",
+		media: {
+		    src: "https://low-latency-demo.akamaized.net/live/media0/demonab/hls/demonab.m3u8"
+		},
+		hls: {
+                    data: {
+                        lowLatencyMode: true
+                    }
+		}
+}
+---- 
+
+Moreover, if desired latency can be adjusted by providing the following HLS settings:
+
+* `liveMaxLatencyDuration`: The maximum permissible delay from the live edge, expressed in seconds.
+
+* `liveSyncDuration`: Defines how far back in time the playback can be relative to the live edge of the stream. This number is expressed in seconds. 
+
+[source,javascript]
+----
+hls: {
+    data: {
+        lowLatencyMode: true,
+        liveMaxLatencyDuration: 3,
+        liveSyncDuration: 2
+    }
+}
+---- 
+
+== 3. MPEG-DASH setup
+
+The player enables low-latency playback through progressive fragment playback with HTTP chunked-based transfer. Additionally, AMP utilizes dash.js for low-latency live streams using MPEG-DASH.
+
+[source,javascript]
+----
+const config = {
+	autoplay: true,
+	autoplayPolicy: "muted",
+	media: {
+		src: "https://akamaibroadcasteruseast.akamaized.net/cmaf/live/657078/akasource/out.mpd"
+	},
+	dash: {
+		settings: {
+			streaming: {
+				lowLatencyEnabled: true
+			}
+		}
+	}
+}
+----
+
+Both `liveDelay` and `playbackRate` values are adjustable to optimize performance and results.
+
+* `liveDelay`: The maximum permissible delay from the live edge, expressed in seconds.
+
+* `playbackRate`: Playback speed percentage to catch up the live edge if the viewer falls behind.
+
+
+[source,javascript]
+----
+dash: {
+	settings: {
+		streaming: {
+			lowLatencyEnabled: true,
+			delay: {
+                liveDelay: 2
+            },
+            liveCatchup: {
+                playbackRate: 0.5
+            }
+        }
+    }
+}
+----
+
+:last-revision: May/2024
+include::ROOT:partial$amp-additional-info.adoc[]
