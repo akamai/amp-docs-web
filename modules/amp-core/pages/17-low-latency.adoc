@@ -1,6 +1,6 @@
 = Low Latency
 
-This tutorial shows how to setup Ultra low latency streaming in AMP.
+This tutorial shows how to setup Ultra low latency streaming in AMP Web SDK.
 
 . Presentation formats
 . HLS setup
