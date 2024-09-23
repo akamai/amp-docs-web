@@ -7,22 +7,18 @@ In order to add custom 3-D elements you will need to use `aframe` API in order t
 ----
 
 var config = {
-  plugins: {
-    aframe: {
-      resources: [
-	{ src: "//aframe.io/releases/1.6.0/aframe.min.js", debug: "//aframe.io/releases/1.6.0/aframe.min.js", type: "text/javascript", async: true },
-        { src: "${paths.plugins}aframe/Aframe.min.js", debug: "${paths.plugins}aframe/Aframe.js", type: "text/javascript", async: true },
-        { src: "${paths.plugins}aframe/Aframe.min.css", debug: "${paths.plugins}aframe/Aframe.css", type: "text/css", async: true }
-      ],
-      data: {
-        rotation: "0 270 0",
-        strict: false
-      },
-      mouse: {
-        speed: 2
-      }
-    }
-  }
+	autoplay: "muted",
+	plugins: {
+		aframe: {
+			resources: [
+				{ src: "//aframe.io/releases/1.6.0/aframe.min.js", debug: "//aframe.io/releases/1.6.0/aframe.min.js", type: "text/javascript", async: true },
+				{ src: "${paths.plugins}aframe/Aframe.min.js", debug: "${paths.plugins}aframe/Aframe.js", type: "text/javascript", async: true },
+				{ src: "${paths.plugins}aframe/Aframe.min.css", debug: "${paths.plugins}aframe/Aframe.css", type: "text/css", async: true }
+				],
+			rotation: "0 270 0",
+			vrmode: true
+			}
+   		}
 };
 
 akamai.amp.AMP.create("#akamai-media-player", config);
