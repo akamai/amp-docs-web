@@ -17,18 +17,17 @@ The plugin can be implemented by providing a `aframe` object in the player confi
 ----
 
 var config = {
-autoplay: "muted",
-			plugins: {
-				aframe: {
-					resources: [
-						{ src: "//aframe.io/releases/1.6.0/aframe.min.js", debug: "//aframe.io/releases/1.6.0/aframe.min.js", type: "text/javascript", async: true },
-						{ src: "${paths.plugins}aframe/Aframe.min.js", debug: "${paths.plugins}aframe/Aframe.js", type: "text/javascript", async: true },
-						{ src: "${paths.plugins}aframe/Aframe.min.css", debug: "${paths.plugins}aframe/Aframe.css", type: "text/css", async: true }
-					],
-					rotation: "0 270 0",
-					vrmode: true
-				}
-			}
+	autoplay: "muted",
+	plugins: {
+		aframe: {
+			resources: [
+				{ src: "//aframe.io/releases/1.6.0/aframe.min.js", debug: "//aframe.io/releases/1.6.0/aframe.min.js", type: "text/javascript", async: true },
+				{ src: "${paths.plugins}aframe/Aframe.min.js", debug: "${paths.plugins}aframe/Aframe.js", type: "text/javascript", async: true },
+				{ src: "${paths.plugins}aframe/Aframe.min.css", debug: "${paths.plugins}aframe/Aframe.css", type: "text/css", async: true }],
+	rotation: "0 270 0",
+	vrmode: true
+	}
+   }
 };
 akamai.amp.AMP.create("amp", config);
 ----
