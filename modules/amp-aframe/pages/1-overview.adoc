@@ -26,7 +26,7 @@ var config = {
       ],
       data: {
         rotation: "0 270 0",
-        strict: true
+        strict: false
       },
       mouse: {
         speed: 2
