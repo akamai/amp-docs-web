@@ -20,7 +20,7 @@ var config = {
   plugins: {
     aframe: {
       resources: [
-        {src: "//amp-aframe.io/releases/1.6.0/amp-aframe.min.js",debug:"//amp-aframe.io/releases/1.6.0/amp-aframe.js", type: "text/javascript", async: true},
+				{ src: "//aframe.io/releases/1.6.0/aframe.min.js", debug: "//aframe.io/releases/1.6.0/aframe.min.js", type: "text/javascript", async: true },
         {src: "${paths.plugins}aframe/Aframe.min.js", debug: "${paths.plugins}aframe/Aframe.js", type: "text/javascript", async: true},
         {src: "${paths.plugins}aframe/Aframe.min.css", debug: "${paths.plugins}aframe/Aframe.css", type: "text/css", async: true}
       ],
