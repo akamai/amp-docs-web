@@ -5,7 +5,7 @@ Deliver high-quality, responsive media playback into your web pages and applicat
 
 == Copyright and License
 
-Copyright © 2023 Akamai Technologies, Inc. All rights reserved
+Copyright © 2024 Akamai Technologies, Inc. All rights reserved
 
 == Authors
 
