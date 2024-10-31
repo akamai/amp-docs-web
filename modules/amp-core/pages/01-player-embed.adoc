@@ -68,7 +68,7 @@ Please refer to akamai.amp.PlayerConfig for more information on the configuratio
 ----
 
 === 1.3 Instantiate the AMP Player
-Instantiate the AMP object and embed it in a div on the page by passing an id or handle as first argument. The player will take on the size of the div in a responsive manner.
+Instantiate the AMP object and embed it in a `<div>` on the page by passing an ID or handle as the first argument. The player will adapt to the size of the `<div>` responsively. This requires using the `create()` method; see the following xref:02-amp-create.adoc[documentation] for more information.
 [source, html]
 ----
 <html>
