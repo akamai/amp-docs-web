@@ -1,5 +1,5 @@
 .Playback
-* xref:amp-core:01-player-embed.adoc[Embedding AMP]
+* xref:amp-core:01-player-embed.adoc[Getting Started Web SDK]
 * xref:amp-core:02-amp-create.adoc[Create]
 * xref:amp-core:03-load-media.adoc[Load Media]
 * xref:amp-core:04-autoplay.adoc[Auto Play]
