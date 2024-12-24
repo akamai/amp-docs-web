@@ -37,7 +37,7 @@ var config = {
     ima: {
       resources: [
         {src: "//imasdk.googleapis.com/js/sdkloader/ima3.js", debug: "//imasdk.googleapis.com/js/sdkloader/ima3_debug.js", type: "text/javascript", async: true},
-        {src: "${paths.plugins}amp-ima/Ima.min.js", debug: "${paths.plugins}amp-ima/Ima.js", type: "text/javascript", async: true}
+        {src: "${paths.plugins}ima/Ima.min.js", debug: "${paths.plugins}ima/Ima.js", type: "text/javascript", async: true}
       ]
     }
   }
@@ -56,7 +56,7 @@ var config = {
     ima: {
       resources: [
         {src: "//imasdk.googleapis.com/js/sdkloader/ima3.js", debug: "//imasdk.googleapis.com/js/sdkloader/ima3_debug.js", type: "text/javascript", async: true},
-        {src: "${paths.plugins}amp-ima/Ima.min.js", debug: "${paths.plugins}amp-ima/Ima.js", type: "text/javascript", async: true}
+        {src: "${paths.plugins}ima/Ima.min.js", debug: "${paths.plugins}ima/Ima.js", type: "text/javascript", async: true}
       ],
       adTagUrl: '//pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&cust_params=sample_ar%3Dpremidpostpod&cmsid=496&vid=short_onecue&correlator=1608588488752',
     }
@@ -76,7 +76,7 @@ var config = {
     ima: {
       resources: [
         {src: "//imasdk.googleapis.com/js/sdkloader/ima3.js", debug: "//imasdk.googleapis.com/js/sdkloader/ima3_debug.js", type: "text/javascript", async: true},
-        {src: "${paths.plugins}amp-ima/Ima.min.js", debug: "${paths.plugins}amp-ima/Ima.js", type: "text/javascript", async: true}
+        {src: "${paths.plugins}ima/Ima.min.js", debug: "${paths.plugins}ima/Ima.js", type: "text/javascript", async: true}
       ],
       adTagUrl: {
         params: {
@@ -114,7 +114,7 @@ var config = {
     ima: {
       resources: [
         {src: "//imasdk.googleapis.com/js/sdkloader/ima3.js", debug: "//imasdk.googleapis.com/js/sdkloader/ima3_debug.js", type: "text/javascript", async: true},
-        {src: "${paths.plugins}amp-ima/Ima.min.js", debug: "${paths.plugins}amp-ima/Ima.js", type: "text/javascript", async: true}
+        {src: "${paths.plugins}ima/Ima.min.js", debug: "${paths.plugins}ima/Ima.js", type: "text/javascript", async: true}
       ],
       adTagUrl: '//pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=xml_vmap1&unviewed_position_start=1&cust_params=sample_ar%3Dpremidpostpod&cmsid=496&vid=short_onecue&correlator=1608588488752',
       disableCompanionAds: false,
