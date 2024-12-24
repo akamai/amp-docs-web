@@ -25,7 +25,7 @@ var config = {
 		ima: {
       		resources: [
         		{src: "//imasdk.googleapis.com/js/sdkloader/ima3.js", debug: "//imasdk.googleapis.com/js/sdkloader/ima3_debug.js", type: "text/javascript", async: true},
-        		{src: "${paths.plugins}amp-ima/Ima.min.js", debug: "${paths.plugins}amp-ima/Ima.js", type: "text/javascript", async: true}
+        		{src: "${paths.plugins}ima/Ima.min.js", debug: "${paths.plugins}ima/Ima.js", type: "text/javascript", async: true}
       		],
 		adTagUrl: "#{window.adTag}",
 		vpaidMode: "enabled"
