@@ -64,38 +64,48 @@ const config = {
 		src: "https://akamaibroadcasteruseast.akamaized.net/cmaf/live/657078/akasource/out.mpd"
 	},
 	dash: {
-		settings: {
-			streaming: {
-				lowLatencyEnabled: true
-			}
-		}
+		lowLatencyMode: true,
+		liveDelay: 3
 	}
 }
 ----
 
-Both `liveDelay` and `playbackRate` values are adjustable to optimize performance and results.
-
-* `liveDelay`: The maximum permissible delay from the live edge, expressed in seconds.
-
-* `playbackRate`: Playback speed percentage to catch up the live edge if the viewer falls behind.
-
+Alternatively, the client can enable low-latency playback by adjusting the player's default configuration settings.
 
 [source,javascript]
 ----
-dash: {
-	settings: {
-		streaming: {
-			lowLatencyEnabled: true,
-			delay: {
-                liveDelay: 2
-            },
-            liveCatchup: {
-                playbackRate: 0.5
-            }
-        }
-    }
+const config = {
+	autoplay: true,
+	autoplayPolicy: "muted",
+	media: {
+		src: "https://akamaibroadcasteruseast.akamaized.net/cmaf/live/657078/akasource/out.mpd"
+	},
+	dash: {
+		settings: {
+			streaming: {
+				delay: {
+	                		liveDelay: 3
+	            	},
+		        liveCatchup: {
+			        enabled: true,
+			        maxDrift: 0,
+			        playbackRate: {
+			          min: -0.1,
+			          max: 0.1
+			        }
+     			}
+	        }
+	    }
+	}
 }
 ----
 
-:last-revision: May/2024
+Both `liveDelay` and `liveCatchup` values are adjustable to optimize performance and results.
+
+* `liveDelay`: The maximum permissible delay from the live edge, expressed in seconds.
+
+* `liveCatchup`: This setting in Dash.js helps the player stay close to the live edge by managing playback drift during live streaming.
+
+
+:last-revision: Jan/2025
 include::ROOT:partial$amp-additional-info.adoc[]
