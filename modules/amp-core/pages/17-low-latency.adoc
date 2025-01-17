@@ -104,7 +104,7 @@ Both `liveDelay` and `liveCatchup` values are adjustable to optimize performance
 
 * `liveDelay`: The maximum permissible delay from the live edge, expressed in seconds.
 
-* `liveCatchup`: This setting in Dash.js helps the player stay close to the live edge by managing playback drift during live streaming.
+* `liveCatchup`: This setting in Dash.js helps the player maintain proximity to the live edge by effectively managing playback drift during live streaming.
 
 
 :last-revision: Jan/2025
