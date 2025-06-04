@@ -24,6 +24,6 @@ var config = {
 akamai.amp.AMP.create("amp", config);
 ----
 
-:date: 16/49/2023
-:last-revision: 16/49/2023
+:date: 16/4/2023
+:last-revision: 16/4/2023
 include::ROOT:partial$amp-additional-info.adoc[]
