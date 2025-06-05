@@ -8,6 +8,6 @@ Implementation of IMA Ads into AMP.
 * xref:2-linear.adoc[Linear]
 * xref:3-advanced.adoc[Advanced]
 
-:date: 16/34/2023
-:last-revision: 16/34/2023
+:date: 16/4/2023
+:last-revision: 16/4/2023
 include::ROOT:partial$amp-additional-info.adoc[]
