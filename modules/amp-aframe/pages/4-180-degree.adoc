@@ -1,0 +1,77 @@
+
+= Implementing 180° Playback via AMP Player
+:toc:
+:toclevels: 3
+
+== 1. Prerequisites
+* **AMP Player** with plugin support (`akamai.amp.Plugin`).
+* **A-Frame library** (must be included either via AMP’s `resources` config or manually).
+* 180° video assets in either:
+** *Monoscopic format* (`mono`) – single frame covering 180°.
+** *Side-by-side stereoscopic format* (`sidebyside`) – left/right frames for each eye.
+
+== 2. Key Configuration Parameters
+The configuration is based on `AframeConfig`:
+
+* `renderer`: Defines the playback mode.
+** `"mono"` → 180° monoscopic video
+** `"sidebyside"` → 180° stereoscopic video
+* `halfViewMode`: `true` to restrict user navigation to *180° front view* only.
+* `strict`: If `false` (default), forces 360|180 playback regardless of media category. If `true`, respects media categories (e.g., `180`, `stereo`).
+* `rotation`: Sets the initial orientation (default `"0 180 0"`).
+
+Optional parameters:
+* `vrmode`: `false` to disable VR device mode.
+* `vr-dome`: Configures a fallback equirectangular background (sky dome).
+* `vr-controls`: Customize controls theme and auto-hide behavior.
+
+== 3. Example Implementation
+
+[source,js]
+----
+const player = amp('videoElementId', {
+  plugins: {
+    aframe: {
+      resources: [
+        "https://aframe.io/releases/1.6.0/aframe.min.js"
+      ],
+      renderer: "sidebyside",   // or "mono"
+      halfViewMode: true,       // lock to 180°
+      strict: true,             // respect media metadata
+      rotation: "0 180 0",
+      components: {
+        "vr-dome": {
+          enabled: true,
+          src: "path/to/background-360.jpg",
+          crossorigin: "anonymous"
+        },
+        "vr-controls": {
+          enabled: true,
+          autoHide: true,
+          theme: {
+            background: "#000",
+            progressBar: "#f00"
+          }
+        },
+        touch: { enabled: true }
+      }
+    }
+  }
+});
+----
+
+== 4. Workflow
+. Initialize AMP with plugin `aframe`.
+. Set `renderer` to `"mono"` or `"sidebyside"` depending on asset type.
+. Enable `halfViewMode` to restrict to 180°.
+. Configure optional dome & controls for a polished VR experience.
+. Test on desktop and mobile — if `vrmode` is enabled, AMP will use the device’s VR/WebXR capabilities.
+
+== 5. Best Practices
+* Always provide a *poster image* (for `audio`/background modes).
+* Use *optimized video assets* (reduce resolution where possible, since 180° VR video can be heavy).
+* Ensure *CORS headers* are correctly set if `crossorigin` is used.
+* Align AMP media categories with `strict=true` for automated mode selection.
+
+With this setup, your AMP Player will support immersive *180° playback*, either monoscopic or stereoscopic, integrated seamlessly into your A-Frame scene.
+
