@@ -9,7 +9,6 @@ These controls are rendered using WebGL components, ensuring compatibility with 
 This makes the controls both performant and portable, offering a consistent VR experience regardless of the hardware being used.
 
 == 1. Prerequisites
-* **AMP Player** with plugin support (`akamai.amp.Plugin`).
 * **A-Frame library** included as a dependency.
 * Access to the AMP A-Frame plugin configuration (`AframeConfigComponents`).
 
