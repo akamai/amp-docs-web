@@ -3,7 +3,6 @@
 :toc:
 :toclevels: 3
 
-== Introduction
 The VR Player Controls provide an interactive control bar that is dynamically built when a user enters VR mode or engages in a WebXR session. 
 These controls are rendered using WebGL components, ensuring compatibility with WebXR standards across multiple headset devices. 
 This makes the controls both performant and portable, offering a consistent VR experience regardless of the hardware being used.
