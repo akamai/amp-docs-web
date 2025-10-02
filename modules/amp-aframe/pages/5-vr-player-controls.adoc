@@ -20,7 +20,7 @@ The VR Controls component is based on `AframeVRControls`:
 ** `background`: Background color of the control bar (e.g., `#000`).
 ** `foreground`: The color code for the foreground elements such text and icons (e.g., `#000`).
 ** `window`: The color code for the window elements.
-** `windowOpacity`: The opacity level for the window elements (0 to 1).
+** `windowOpacity`: The opacity level for the window elements (0.0 to 1.0).
 ** `backgroundOpacity`: The opacity level for the icons background elements (0.0 – 1.0).
 ** `foregroundOpacity`: The opacity level for the foreground elements (0.0 – 1.0).
 
