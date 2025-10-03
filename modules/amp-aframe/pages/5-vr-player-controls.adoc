@@ -1,0 +1,104 @@
+
+= Configuring VR Player Controls
+:toc:
+:toclevels: 3
+
+The VR Player Controls provide an interactive control bar that is dynamically built when a user enters VR mode or engages in a WebXR session. 
+These controls are rendered using WebGL components, ensuring compatibility with WebXR standards across multiple headset devices. 
+This makes the controls both performant and portable, offering a consistent VR experience regardless of the hardware being used.
+
+== 1. Prerequisites
+* **A-Frame library** included as a dependency.
+* Access to the AMP A-Frame plugin configuration (`AframeConfigComponents`).
+
+== 2. Key Configuration Parameters
+The VR Controls component is based on `AframeVRControls`:
+
+* `enabled`: Enables or disables the VR controls UI. Default: `true`.
+* `autoHide`: Timeout timer in seconds that hides the controls automatically after a short delay of inactivity. Default: 5 seconds.
+* `theme`: Defines visual styles for the controls. Common options include:
+** `background`: Background color of the control bar (e.g., `#000`).
+** `foreground`: The color code for the foreground elements such text and icons (e.g., `#000`).
+** `window`: The color code for the window elements.
+** `windowOpacity`: The opacity level for the window elements (0.0 to 1.0).
+** `backgroundOpacity`: The opacity level for the icons background elements (0.0 – 1.0).
+** `foregroundOpacity`: The opacity level for the foreground elements (0.0 – 1.0).
+
+== 3. Example Implementation
+
+[source,js]
+----
+config = {
+        plugins: {
+          aframe: {
+            resources: [
+              { src: "//aframe.io/releases/1.7.1/aframe.min.js", debug: "//aframe.io/releases/1.7.1/aframe.js", type: "text/javascript" },
+              { src: "${paths.plugins}aframe/Aframe.min.js", debug: "${paths.plugins}aframe/Aframe.js", type: "text/javascript"},
+              { src: "${paths.plugins}aframe/Aframe.min.css", debug: "${paths.plugins}aframe/Aframe.css", type: "text/css", async: true }            ],
+            rotation: "0 0 0",
+            strict: true,
+            vrmode: true,
+            native: true,
+            components: {
+              'vr-controls': {
+                autoHide: 399999,
+                theme: {
+                  foreground: "#FFF",
+                  background: "#675f60",
+                  window: "#675f60",
+                  windowOpacity: 1,
+                  backgroundOpacity: 0.5,
+                  foregroundOpacity: 0.8
+                }
+              }
+            }
+        }
+        },
+        autoplay: false,
+        media: {
+          src: "path-to-video.mp4"
+        }
+      };
+
+      akamai.amp.AMP.create("akamai-media-player", config, function (event) {
+        amp = event.player;
+      });
+----
+
+== 4. VR Dome Setup
+The VR Dome provides a panoramic 360° or 180° background sphere that is built when entering VR mode or engaging in a WebXR session. 
+It is rendered as a WebGL-based sky dome, ensuring smooth integration with WebXR pipelines and compatibility with multiple headset devices. 
+This component is particularly useful for immersive environments where a static or dynamic equirectangular texture surrounds the user’s field of view.
+
+=== 4.1. Configuration Parameters
+The VR Dome component is based on `AframeVRDome`:
+
+* `enabled`: Enables or disables the VR dome. If `false`, no dome is rendered. Default: `true`.
+* `src`: The absolute or relative path/URL to the 360° equirectangular image used as the dome texture (e.g., `.jpg`, `.png`, `.ktx2`).
+* `crossorigin`: Value for the HTML `crossorigin` attribute applied when fetching `src`. 
+  Common values: `"anonymous"` or `"use-credentials"`. Enables proper CORS handling.
+
+=== 4.2. Example
+
+[source,js]
+----
+config = {  
+ plugins: {
+    aframe: {
+      components: {
+        "vr-dome": {
+          src: "path-to-panorama-360.jpg",
+          crossorigin: "anonymous"
+        }
+    }
+}
+
+akamai.amp.AMP.create("akamai-media-player", config, function (event) {
+  amp = event.player;
+});
+----
+
+== 5. Best Practices
+* Set *opacity* carefully so controls are visible without blocking too much of the VR scene.
+
+By configuring VR player controls with these parameters, you can provide a consistent, user-friendly interface that enhances navigation and usability in immersive 180° and 360° playback experiences.

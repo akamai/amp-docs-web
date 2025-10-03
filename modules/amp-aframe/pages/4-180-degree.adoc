@@ -1,0 +1,60 @@
+
+= Implementing 180° Playback via AMP Player
+:toc:
+:toclevels: 3
+
+== 1. Prerequisites
+* **A-Frame library** (must be included either via AMP’s `resources` config or manually).
+* 180° video assets in:
+** *Side-by-side stereoscopic format* (`sidebyside`) – left/right frames for each eye.
+
+== 2. Configuration Parameters
+The configuration is based on `AframeConfig`:
+
+* `renderer`: Defines the playback mode.
+** `"mono"` → monoscopic video (360°)
+** `"sidebyside"` → stereoscopic video (180° or 360°)
+* `halfViewMode`: `true` to restrict user navigation to *180° front view* only.
+* `strict`: If `false` (default), forces 360 mono playback regardless of media category. If `true`, respects media categories (e.g., `180`, `stereo`).
+* `rotation`: Sets the initial orientation (default `"0 180 0"`).
+
+Optional parameters:
+
+* `vrmode`: `false` to disable VR device mode.
+* `vr-dome`: Configures a fallback equirectangular background (sky dome).
+* `vr-controls`: Customize controls theme and auto-hide behavior.
+
+== 3. Example Implementation
+
+[source,js]
+----
+config = {
+        plugins: {
+          aframe: {
+            resources: [
+              { src: "//aframe.io/releases/1.7.1/aframe.min.js", debug: "//aframe.io/releases/1.7.1/aframe.js", type: "text/javascript" },
+              { src: "${paths.plugins}aframe/Aframe.min.js", debug: "${paths.plugins}aframe/Aframe.js", type: "text/javascript"},
+              { src: "${paths.plugins}aframe/Aframe.min.css", debug: "${paths.plugins}aframe/Aframe.css", type: "text/css" }            ],
+            rotation: "0 0 0",
+            renderer: akamai.amp.aframe.RenderMode.SIDE_BY_SIDE,
+            native: true
+         }
+        },
+        autoplay: false,
+        media: {
+          src: "path-to-180-video"
+        }
+      };
+
+      akamai.amp.AMP.create("akamai-media-player", config, function (event) {
+        amp = event.player;
+      });
+----
+
+== 4. Best Practices
+* Use optimized video assets or ABR (HLS-Dash) to deliver a high quality playback 4K/8k.
+* Ensure *CORS headers* are correctly set if `crossorigin` is used.
+* Align AMP media categories with `strict=true` for automated mode selection.
+
+With this setup, your AMP Player will support immersive *180° playback*, either monoscopic or stereoscopic, integrated seamlessly into your A-Frame scene.
+
