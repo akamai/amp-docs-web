@@ -19,6 +19,8 @@
 ** xref:amp-aframe:1-overview.adoc[Overview]
 ** xref:amp-aframe:2-customize.adoc[Customize]
 ** xref:amp-aframe:3-device-motion.adoc[Device Motion]
+** xref:amp-aframe:4-180-degree.adoc[180 Immersive]
+** xref:amp-aframe:5-vr-player-controls.adoc[VR Controls]
 * xref:amp-chromecast:index.adoc[Chromecast]
 * xref:amp-playlist:index.adoc[Playlist]
 
